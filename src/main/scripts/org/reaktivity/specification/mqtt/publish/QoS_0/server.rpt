@@ -34,6 +34,6 @@ write [0x20 0x02]           # fixed header
       [0x00]                # connect flags = none
       [0x00]                # reason code
 
-read  [0x30 0xA]            # fixed header
+read  [0x30 0xC]            # fixed header
       [0x00 0x03] "a/b"     # topic filter
       "message"             # payload
