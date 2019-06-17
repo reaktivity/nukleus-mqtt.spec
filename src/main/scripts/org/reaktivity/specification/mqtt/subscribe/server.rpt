@@ -39,5 +39,6 @@ read  [0x82 0xB]            # fixed header
       [0x00 0x03] "a/b"     # topic filter
       [0x00]                # subscription opts = QoS 0
 
-write [0x90 0x04]            # fixed header
-      [0x00]                 # reason code
+write [0x90 0x02]           # fixed header
+      [0x00]                # property length
+      [0x00]                # reason code
