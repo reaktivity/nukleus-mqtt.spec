@@ -24,18 +24,18 @@ connected
 write [0x10 0x10]           # fixed header
       [0x00 0x04] "MQTT"    # protocol name
       [0x05]                # protocol version
-      [0x02]                # connect flags (requests clean start; bits 7-1: username, password, will retain, will QoS, will flag, clean start)
-      [0x00 0x3C]           # keep alive (60 seconds)
+      [0x02]                # connect flags = clean start
+      [0x00 0x3C]           # keep alive = 60s
       [0x00 0x04] "abcd"    # clientID
 
 read [0x20 0x02]            # fixed header
-     [0x00]                 # connect acknowledge flags (verifies new session)
+     [0x00]                 # connect flags = none
      [0x00]                 # reason code
 
 write [0x82 0xB]            # fixed header
-      [0x00 0x09 0x00]      # variable header (two byte packetID & property length)
+      [0x00 0x01 0x00]      # packetID = 1
       [0x00 0x03] "a/b"     # topic filter
-      [0x00]                # subscription opts (send retained msgs @ subscription time, QoS of 0)
+      [0x00]                # subscription opts = QoS 0
 
 read [0x90 0x04]            # fixed header
      [0x00]                 # reason code
