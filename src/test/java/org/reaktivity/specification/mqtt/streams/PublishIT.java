@@ -38,10 +38,10 @@ public class PublishIT
 
     @Test
     @Specification({
-            "${scripts}QoS_0/client",
-            "${scripts}QoS_0/server"})
+            "${scripts}at.most.once/client",
+            "${scripts}at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void publishQoS0() throws Exception
+    public void publishAtMostOnce() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
