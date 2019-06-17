@@ -23,7 +23,6 @@ accept ${serverTransport}
 accepted
 connected
 
-# CONNECT packet
 read  [0x10 0x10]           # fixed header
       [0x00 0x04] "MQTT"    # protocol name
       [0x05]                # protocol version

@@ -38,8 +38,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}connection/client_connect",
-            "${scripts}connection/server_connack"})
+            "${scripts}connection/client",
+            "${scripts}connection/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void connect() throws Exception
     {
