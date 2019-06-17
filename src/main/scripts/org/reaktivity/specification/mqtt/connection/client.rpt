@@ -24,10 +24,10 @@ connected
 write [0x10 0x10]           # fixed header
       [0x00 0x04] "MQTT"    # protocol name
       [0x05]                # protocol version
-      [0x02]                # connect flags
-      [0x00 0x3C]           # keep alive
+      [0x02]                # connect flags (requests clean start; bits 7-1: username, password, will retain, will QoS, will flag, clean start)
+      [0x00 0x3C]           # keep alive (60 seconds)
       [0x00 0x04] "abcd"    # clientID
 
 read [0x20 0x02]            # fixed header
-     [0x02]                 # connect flags
+     [0x00]                 # connect acknowledge flags (verifies new session)
      [0x00]                 # reason code
