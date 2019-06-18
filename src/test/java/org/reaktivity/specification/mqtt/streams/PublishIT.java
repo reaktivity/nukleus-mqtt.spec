@@ -30,7 +30,7 @@ import org.kaazing.k3po.junit.rules.K3poRule;
 public class PublishIT
 {
     private final K3poRule k3po = new K3poRule()
-            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt/publish/");
+            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt/publish");
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     @Rule
@@ -38,8 +38,8 @@ public class PublishIT
 
     @Test
     @Specification({
-            "${scripts}at.most.once/client",
-            "${scripts}at.most.once/server"})
+            "${scripts}/at.most.once/client",
+            "${scripts}/at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void publishAtMostOnce() throws Exception
     {

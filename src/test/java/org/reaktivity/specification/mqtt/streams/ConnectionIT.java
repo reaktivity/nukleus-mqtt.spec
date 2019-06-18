@@ -30,7 +30,7 @@ import org.kaazing.k3po.junit.rules.K3poRule;
 public class ConnectionIT
 {
     private final K3poRule k3po = new K3poRule()
-            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt/");
+            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt");
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     @Rule
@@ -38,8 +38,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}connection/client",
-            "${scripts}connection/server"})
+            "${scripts}/connection/client",
+            "${scripts}/connection/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void connect() throws Exception
     {
