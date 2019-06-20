@@ -23,6 +23,11 @@ scope mqtt
         int32 maxPacketSize;
         int16 topicAliasMax;
         int16 receiveMax;
+        int8 requestRespInfo;
+        int8 requestProblemInfo;
+        list<mqtt::MqttUserProperty> userProperties;
+        string authMethod;
+        mqtt::MqttBinary authData;
     }
 
     struct MqttSubscribeInfo {
@@ -33,6 +38,16 @@ scope mqtt
     struct MqttTopicFormat {
         string topic;
         int8 subscriptionOptions;
+    }
+
+    struct MqttBinary {
+        int16 length;
+        octets[length] bytes;
+    }
+
+    struct MqttUserProperty {
+        string key;
+        string value;
     }
 
     scope control
