@@ -49,7 +49,7 @@ scope mqtt
         }
 
         struct MqttEndEx {
-            int8 reasonCode;
+            list<string> topics;
         }
     }
 }
