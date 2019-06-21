@@ -43,6 +43,27 @@ scope mqtt
         string clientID;
     }
 
+    struct MqttConnackConfig
+    {
+            int8 sessionPresent;
+            int32 sessionExpiry;
+            int16 receiveMax;
+            int8 maxQoS;
+            int8 retainAvailable;
+            int32 maxPacketSize;
+            string assignedClientID;
+            int16 topicAliasMax;
+            string reasonStr;
+            list<mqtt::MqttUserProperty> userProperties;
+            int8 wildcardAvailable;
+            int8 subIdAvailable;
+            int8 sharedSubAvailable;
+            string respInfo;
+            string serverRef;
+            string authMethod;
+            mqtt::MqttBinary authData;
+    }
+
     struct MqttSubscribeInfo
     {
         int16 packetID;
@@ -71,7 +92,7 @@ scope mqtt
     union MqttPacketFormat switch (mqtt::MqttPacketType)
     {
         case CONNECT: mqtt::MqttConnectConfig;
-        case CONNACK: mqtt::MqttConnectConfig;
+        case CONNACK: mqtt::MqttConnackConfig;
         case SUBSCRIBE: mqtt::MqttSubscribeInfo;
         case SUBACK: list<int8> reasonCodes;
         case UNSUBSCRIBE: list<string> topics;
