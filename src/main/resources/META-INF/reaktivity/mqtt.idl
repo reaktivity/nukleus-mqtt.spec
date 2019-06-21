@@ -81,6 +81,12 @@ scope mqtt
         int8 subscriptionOptions;
     }
 
+    struct MqttUnsubscribePacket
+    {
+        list<string> topics;
+        list<mqtt::MqttUserProperty> userProperties;
+    }
+
     struct MqttPublishPacket
     {
         int8 flags;
@@ -95,11 +101,16 @@ scope mqtt
         mqtt::MqttBinary payload;
     }
 
+    struct MqttReasonCode
+    {
+        uint8 reasonCode;
+    }
+
     struct MqttSubAckPacket
     {
         string reasonStr;
         list<mqtt::MqttUserProperty> userProperties;
-        list<int8> reasonCodes;
+        list<mqtt::MqttReasonCode> reasonCodes;
     }
 
     union MqttPacketFormat switch (uint8)
@@ -109,7 +120,7 @@ scope mqtt
         case 3: mqtt::MqttPublishPacket publish;
         case 8: mqtt::MqttSubscribeInfo subscribe;
         case 9: mqtt::MqttSubAckPacket suback;
-        case 10: list<string> topics;
+        case 10: mqtt::MqttUnsubscribePacket unsubscribe;
         case 11: mqtt::MqttSubAckPacket unsuback;
     }
 
