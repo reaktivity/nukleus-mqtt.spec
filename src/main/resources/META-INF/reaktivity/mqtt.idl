@@ -27,15 +27,6 @@ scope mqtt
         PUBLISH
     }
 
-    struct MqttConnectConfig
-    {
-        int8 flags;
-        mqtt::MqttBasicConnectSettings settings;
-        int8 requestRespInfo;
-        int8 requestProblemInfo;
-        string clientID;
-    }
-
     struct MqttBasicConnectSettings
     {
         int16 keepAlive;
@@ -46,6 +37,15 @@ scope mqtt
         string authMethod;
         mqtt::MqttBinary authData;
         list<mqtt::MqttUserProperty> userProperties;
+    }
+
+    struct MqttConnectConfig
+    {
+        int8 flags;
+        mqtt::MqttBasicConnectSettings settings;
+        int8 requestRespInfo;
+        int8 requestProblemInfo;
+        string clientID;
     }
 
     struct MqttConnackConfig
@@ -89,14 +89,21 @@ scope mqtt
         mqtt::MqttBinary payload;
     }
 
+    struct MqttSubAckPacket
+    {
+        string reasonStr;
+        list<mqtt:MqttUserProperty> userProperties;
+        list<int8> reasonCodes;
+    }
+
     union MqttPacketFormat switch (mqtt::MqttPacketType)
     {
         case CONNECT: mqtt::MqttConnectConfig connect;
         case CONNACK: mqtt::MqttConnackConfig connack;
         case SUBSCRIBE: mqtt::MqttSubscribeInfo subscribe;
-        case SUBACK: list<int8> reasonCodes;
+        case SUBACK: mqtt::MqttSubAckPacket suback;
         case UNSUBSCRIBE: list<string> topics;
-        case UNSUBACK: list<int8> reasonCodes;
+        case UNSUBACK: mqtt::MqttSubAckPacket unsuback;
         case PUBLISH: mqtt::MqttPublishPacket publish;
     }
 
