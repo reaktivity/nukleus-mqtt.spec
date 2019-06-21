@@ -30,38 +30,37 @@ scope mqtt
     struct MqttConnectConfig
     {
         int8 flags;
+        mqtt::MqttBasicConnectSettings settings;
+        int8 requestRespInfo;
+        int8 requestProblemInfo;
+        string clientID;
+    }
+
+    struct MqttBasicConnectSettings
+    {
         int16 keepAlive;
         int32 sessionExpiry;
         int32 maxPacketSize;
         int16 topicAliasMax;
         int16 receiveMax;
-        int8 requestRespInfo;
-        int8 requestProblemInfo;
-        list<mqtt::MqttUserProperty> userProperties;
         string authMethod;
         mqtt::MqttBinary authData;
-        string clientID;
+        list<mqtt::MqttUserProperty> userProperties;
     }
 
     struct MqttConnackConfig
     {
-            int8 sessionPresent;
-            int32 sessionExpiry;
-            int16 receiveMax;
-            int8 maxQoS;
-            int8 retainAvailable;
-            int32 maxPacketSize;
-            string assignedClientID;
-            int16 topicAliasMax;
-            string reasonStr;
-            list<mqtt::MqttUserProperty> userProperties;
-            int8 wildcardAvailable;
-            int8 subIdAvailable;
-            int8 sharedSubAvailable;
-            string respInfo;
-            string serverRef;
-            string authMethod;
-            mqtt::MqttBinary authData;
+        mqtt::MqttBasicConnectSettings settings;
+        int8 sessionPresent;
+        int8 maxQoS;
+        int8 retainAvailable;
+        string assignedClientID;
+        string reasonStr;
+        int8 wildcardAvailable;
+        int8 subIdAvailable;
+        int8 sharedSubAvailable;
+        string respInfo;
+        string serverRef;
     }
 
     struct MqttSubscribeInfo
@@ -86,6 +85,7 @@ scope mqtt
         mqtt::MqttBinary correlationData;
         list<mqtt::MqttUserProperty> userProperties;
         string contentType;
+        int32 payloadFormatIndicator;
         mqtt::MqttBinary payload;
     }
 
