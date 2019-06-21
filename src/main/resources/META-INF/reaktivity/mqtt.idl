@@ -16,6 +16,17 @@
 
 scope mqtt
 {
+    enum MqttPacketType
+    {
+        CONNECT,
+        CONNACK,
+        SUBSCRIBE,
+        SUBACK,
+        UNSUBSCRIBE,
+        UNSUBACK,
+        PUBLISH
+    }
+
     struct MqttConnectConfig
     {
         int8 flags;
@@ -44,23 +55,28 @@ scope mqtt
         int8 subscriptionOptions;
     }
 
-    struct MqttPublishInfo
+    struct MqttPublishPacket
     {
-        int8 qos;
-        int8 retain;
-        int8 dup;
+        int8 flags;
         int16 packetID;
         int32 messageExpiry;
         int16 topicAlias;
         string responseTopic;
         mqtt::MqttBinary correlationData;
         list<mqtt::MqttUserProperty> userProperties;
+        string contentType;
+        mqtt::MqttBinary payload;
     }
 
-    struct MqttMessageFormat
+    union MqttPacketFormat switch (mqtt::MqttPacketType)
     {
-        string contentFormat;
-        mqtt::MqttBinary payload;
+        case CONNECT: mqtt::MqttConnectConfig;
+        case CONNACK: mqtt::MqttConnectConfig;
+        case SUBSCRIBE: mqtt::MqttSubscribeInfo;
+        case SUBACK: list<int8> reasonCodes;
+        case UNSUBSCRIBE: list<string> topics;
+        case UNSUBACK: list<int8> reasonCodes;
+        case PUBLISH: mqtt::MqttPublishPacket;
     }
 
     struct MqttBinary
@@ -84,20 +100,20 @@ scope mqtt
     {
         struct MqttBeginEx
         {
-            mqtt::MqttConnectConfig connectionInfo;
-            mqtt::MqttSubscribeInfo subscriptions;
+            mqtt::MqttPacketType packetType;
+            mqtt::MqttPacketFormat content;
         }
 
         struct MqttDataEx
         {
-            mqtt::MqttConnectConfig connectionInfo;
-            mqtt::MqttPublishInfo properties;
-            mqtt::MqttMessageFormat message;
+            mqtt::MqttPacketType packetType;
+            mqtt::MqttPacketFormat content;
         }
 
         struct MqttEndEx
         {
-            list<string> topics;
+            mqtt::MqttPacketType packetType;
+            mqtt::MqttPacketFormat content;
         }
     }
 }
