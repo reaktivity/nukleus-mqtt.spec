@@ -18,11 +18,11 @@ scope mqtt
 {
     struct MqttBasicConnectSettings
     {
-        int16 keepAlive;
-        int32 sessionExpiry;
-        int32 maxPacketSize;
-        int16 topicAliasMax;
-        int16 receiveMax;
+        uint16 keepAlive;
+        uint32 sessionExpiry = 0;
+        uint32 maxPacketSize;
+        uint16 topicAliasMax = 0;
+        uint16 receiveMax = 65535;
         string authMethod;
         mqtt::MqttBinary authData;
         list<mqtt::MqttUserProperty> userProperties;
@@ -32,8 +32,8 @@ scope mqtt
     {
         int8 flags;
         mqtt::MqttBasicConnectSettings settings;
-        int8 requestRespInfo;
-        int8 requestProblemInfo;
+        int8 requestRespInfo = 0;
+        int8 requestProblemInfo = 1;
         string clientID;
         mqtt::MqttWillSettings willSettings;
         string username;
@@ -44,9 +44,9 @@ scope mqtt
     {
         int8 qos;
         int8 retain;
-        int32 willDelayInterval;
+        uint32 willDelayInterval = 0;
         int8 payloadFormatIndicator;
-        int32 messageExpiry;
+        uint32 messageExpiry;
         string contentType;
         string responseTopic;
         mqtt::MqttBinary correlationData;
@@ -58,20 +58,20 @@ scope mqtt
     {
         mqtt::MqttBasicConnectSettings settings;
         int8 sessionPresent;
-        int8 maxQoS;
-        int8 retainAvailable;
+        int8 maxQoS = 2;
+        int8 retainAvailable = 1;
         string assignedClientID;
         string reasonStr;
-        int8 wildcardAvailable;
-        int8 subIdAvailable;
-        int8 sharedSubAvailable;
+        int8 wildcardAvailable = 1;
+        int8 subIdAvailable = 1;
+        int8 sharedSubAvailable = 1;
         string respInfo;
         string serverRef;
     }
 
     struct MqttSubscribeInfo
     {
-        int16 packetID;
+        uint16 packetID;
         list<mqtt::MqttTopicFormat> topics;
     }
 
@@ -90,14 +90,15 @@ scope mqtt
     struct MqttPublishPacket
     {
         int8 flags;
-        int16 packetID;
-        int32 messageExpiry;
-        int16 topicAlias;
+        uint16 packetID;
+        string topic;
+        uint32 messageExpiry;
+        uint16 topicAlias;
         string responseTopic;
         mqtt::MqttBinary correlationData;
         list<mqtt::MqttUserProperty> userProperties;
         string contentType;
-        int32 payloadFormatIndicator;
+        uint32 payloadFormatIndicator;
         mqtt::MqttBinary payload;
     }
 
