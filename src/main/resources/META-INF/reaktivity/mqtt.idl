@@ -16,17 +16,6 @@
 
 scope mqtt
 {
-    enum MqttPacketType
-    {
-        CONNECT,
-        CONNACK,
-        SUBSCRIBE,
-        SUBACK,
-        UNSUBSCRIBE,
-        UNSUBACK,
-        PUBLISH
-    }
-
     struct MqttBasicConnectSettings
     {
         int16 keepAlive;
@@ -92,24 +81,24 @@ scope mqtt
     struct MqttSubAckPacket
     {
         string reasonStr;
-        list<mqtt:MqttUserProperty> userProperties;
+        list<mqtt::MqttUserProperty> userProperties;
         list<int8> reasonCodes;
     }
 
-    union MqttPacketFormat switch (mqtt::MqttPacketType)
+    union MqttPacketFormat switch (uint8)
     {
-        case CONNECT: mqtt::MqttConnectConfig connect;
-        case CONNACK: mqtt::MqttConnackConfig connack;
-        case SUBSCRIBE: mqtt::MqttSubscribeInfo subscribe;
-        case SUBACK: mqtt::MqttSubAckPacket suback;
-        case UNSUBSCRIBE: list<string> topics;
-        case UNSUBACK: mqtt::MqttSubAckPacket unsuback;
-        case PUBLISH: mqtt::MqttPublishPacket publish;
+        case 1: mqtt::MqttConnectConfig connect;
+        case 2: mqtt::MqttConnackConfig connack;
+        case 3: mqtt::MqttPublishPacket publish;
+        case 8: mqtt::MqttSubscribeInfo subscribe;
+        case 9: mqtt::MqttSubAckPacket suback;
+        case 10: list<string> topics;
+        case 11: mqtt::MqttSubAckPacket unsuback;
     }
 
     struct MqttBinary
     {
-        int16 length;
+        uint16 length;
         octets[length] bytes;
     }
 
@@ -128,19 +117,19 @@ scope mqtt
     {
         struct MqttBeginEx
         {
-            mqtt::MqttPacketType packetType;
+            uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
 
         struct MqttDataEx
         {
-            mqtt::MqttPacketType packetType;
+            uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
 
         struct MqttEndEx
         {
-            mqtt::MqttPacketType packetType;
+            uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
     }
