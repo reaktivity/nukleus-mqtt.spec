@@ -35,6 +35,23 @@ scope mqtt
         int8 requestRespInfo;
         int8 requestProblemInfo;
         string clientID;
+        mqtt::MqttWillSettings willSettings;
+        string username;
+        mqtt::MqttBinary password;
+    }
+
+    struct MqttWillSettings
+    {
+        int8 qos;
+        int8 retain;
+        int32 willDelayInterval;
+        int8 payloadFormatIndicator;
+        int32 messageExpiry;
+        string contentType;
+        string responseTopic;
+        mqtt::MqttBinary correlationData;
+        string topic;
+        mqtt::MqttBinary payload;
     }
 
     struct MqttConnackConfig
