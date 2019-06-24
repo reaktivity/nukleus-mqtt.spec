@@ -16,64 +16,6 @@
 
 scope mqtt
 {
-    union MqttConnectFormat switch (uint8)
-    {
-        case 1: mqtt::MqttConnectConfig connect;
-        case 2: mqtt::MqttConnackConfig connack;
-    }
-
-    struct MqttSettings
-    {
-        uint16 keepAlive;
-        uint32 sessionExpiry = 0;
-        uint32 maxPacketSize;
-        uint16 topicAliasMax = 0;
-        uint16 receiveMax = 65535;
-        string authMethod;
-        mqtt::MqttBinary authData;
-        list<mqtt::MqttUserProperty> userProperties;
-        mqtt::MqttConnectFormat additionalSettings;
-    }
-
-    struct MqttConnectConfig
-    {
-        int8 flags;
-        int8 requestRespInfo = 0;
-        int8 requestProblemInfo = 1;
-        string clientID;
-        mqtt::MqttWillSettings willSettings;
-        string username;
-        mqtt::MqttBinary password;
-    }
-
-    struct MqttConnackConfig
-    {
-        int8 sessionPresent;
-        int8 maxQoS = 2;
-        int8 retainAvailable = 1;
-        string assignedClientID;
-        string reasonStr;
-        int8 wildcardAvailable = 1;
-        int8 subIdAvailable = 1;
-        int8 sharedSubAvailable = 1;
-        string respInfo;
-        string serverRef;
-    }
-
-    struct MqttWillSettings
-    {
-        int8 qos;
-        int8 retain;
-        uint32 willDelayInterval = 0;
-        int8 payloadFormatIndicator;
-        uint32 messageExpiry;
-        string contentType;
-        string responseTopic;
-        mqtt::MqttBinary correlationData;
-        string topic;
-        mqtt::MqttBinary payload;
-    }
-
     struct MqttSubscribeInfo
     {
         uint16 packetID;
@@ -94,17 +36,25 @@ scope mqtt
 
     struct MqttPublishPacket
     {
-        int8 flags;
-        uint16 packetID;
+        uint16 packetId;
         string topic;
         uint32 messageExpiry;
-        uint16 topicAlias;
-        string responseTopic;
-        mqtt::MqttBinary correlationData;
-        list<mqtt::MqttUserProperty> userProperties;
+        mqtt::ResponseTopicFormat respTopicInfo;
+        list<mqtt::MqttUserProperty> properties;
         string contentType;
-        uint32 payloadFormatIndicator;
-        mqtt::MqttBinary payload;
+        mqtt::MqttPayloadFormat payloadFormat;
+    }
+
+    struct MqttResponseTopicFormat
+    {
+        string responseTopic;
+        mqtt::MqttBinary correlation;
+    }
+
+    enum MqttPayloadFormat
+    {
+        BINARY,
+        TEXT
     }
 
     struct MqttReasonCode
@@ -119,14 +69,23 @@ scope mqtt
         list<mqtt::MqttReasonCode> reasonCodes;
     }
 
-    union MqttPacketFormat switch (uint8)
+    union MqttEndPacketFormatEx switch (uint8)
     {
-        case 3: mqtt::MqttPublishPacket publish;
-        case 8: mqtt::MqttSubscribeInfo subscribe;
-        case 9: mqtt::MqttSubAckPacket suback;
         case 10: mqtt::MqttUnsubscribePacket unsubscribe;
         case 11: mqtt::MqttSubAckPacket unsuback;
     }
+
+    union MqttBeginPacketFormatEx switch (uint8)
+    {
+        case 8: mqtt::MqttSubscribeInfo subscribe;
+        case 9: mqtt::MqttSubAckPacket suback;
+    }
+
+    union MqttDataPacketFormatEx switch (uint8)
+    {
+        case 3: mqtt::MqttPublishPacket publish;
+    }
+
 
     struct MqttBinary
     {
@@ -149,22 +108,18 @@ scope mqtt
     {
         struct MqttBeginEx
         {
-            mqtt::MqttSettings settings;
-            uint8 packetType;
-            mqtt::MqttPacketFormat content;
+            string clientId;
+            mqtt::MqttBeginPacketFormatEx content;
         }
 
         struct MqttDataEx
         {
-            mqtt::MqttSettings settings;
-            uint8 packetType;
-            mqtt::MqttPacketFormat content;
+            mqtt::MqttDataPacketFormatEx content;
         }
 
         struct MqttEndEx
         {
-            uint8 packetType;
-            mqtt::MqttPacketFormat content;
+            mqtt::MqttEndPacketFormatEx content;
         }
     }
 }

@@ -27,10 +27,10 @@ import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
-public class UnsubscribeIT
+public class StreamIT
 {
     private final K3poRule k3po = new K3poRule()
-            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt/unsubscribe");
+            .addScriptRoot("scripts", "org/reaktivity/specification/nukleus/streams");
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     @Rule
@@ -38,13 +38,14 @@ public class UnsubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/client",
-            "${scripts}/server"})
+            "${scripts}/subscribe/client",
+            "${scripts}/subscribe/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void subscribe() throws Exception
+    public void connect() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
+
 }
