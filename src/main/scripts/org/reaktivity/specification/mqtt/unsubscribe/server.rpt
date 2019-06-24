@@ -41,7 +41,7 @@ read  [0x82 0xB]            # fixed header
       [0x00]                # subscription opts = QoS 0
 
 write [0x90 0x02]           # fixed header
-      [0x00]                # property length
+      [0x00]                # properties = none
       [0x00]                # reason code
 
 read  [0xA2 0x06]           # fixed header
