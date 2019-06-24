@@ -14,10 +14,10 @@
 # under the License.
 #
 
-connect await ROUTED_SERVER
+connect await ROUTED_CLIENT
         "nukleus://streams/mqtt#0"
-  option nukleus:window 8192
-  option nukleus:transmission "duplex"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
 
 write nukleus:begin.ext ${mqtt:beginEx()
                               .build()}

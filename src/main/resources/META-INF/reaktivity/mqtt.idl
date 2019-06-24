@@ -22,7 +22,7 @@ scope mqtt
         case 2: mqtt::MqttConnackConfig connack;
     }
 
-    struct MqttBasicConnectSettings
+    struct MqttSettings
     {
         uint16 keepAlive;
         uint32 sessionExpiry = 0;
@@ -32,19 +32,32 @@ scope mqtt
         string authMethod;
         mqtt::MqttBinary authData;
         list<mqtt::MqttUserProperty> userProperties;
-        mqtt::MqttConnectFormat additionalProperties;
+        mqtt::MqttConnectFormat additionalSettings;
     }
 
     struct MqttConnectConfig
     {
         int8 flags;
-        mqtt::MqttBasicConnectSettings settings;
         int8 requestRespInfo = 0;
         int8 requestProblemInfo = 1;
         string clientID;
         mqtt::MqttWillSettings willSettings;
         string username;
         mqtt::MqttBinary password;
+    }
+
+    struct MqttConnackConfig
+    {
+        int8 sessionPresent;
+        int8 maxQoS = 2;
+        int8 retainAvailable = 1;
+        string assignedClientID;
+        string reasonStr;
+        int8 wildcardAvailable = 1;
+        int8 subIdAvailable = 1;
+        int8 sharedSubAvailable = 1;
+        string respInfo;
+        string serverRef;
     }
 
     struct MqttWillSettings
@@ -59,21 +72,6 @@ scope mqtt
         mqtt::MqttBinary correlationData;
         string topic;
         mqtt::MqttBinary payload;
-    }
-
-    struct MqttConnackConfig
-    {
-        mqtt::MqttBasicConnectSettings settings;
-        int8 sessionPresent;
-        int8 maxQoS = 2;
-        int8 retainAvailable = 1;
-        string assignedClientID;
-        string reasonStr;
-        int8 wildcardAvailable = 1;
-        int8 subIdAvailable = 1;
-        int8 sharedSubAvailable = 1;
-        string respInfo;
-        string serverRef;
     }
 
     struct MqttSubscribeInfo
@@ -151,12 +149,14 @@ scope mqtt
     {
         struct MqttBeginEx
         {
+            mqtt::MqttSettings;
             uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
 
         struct MqttDataEx
         {
+            mqtt::MqttSettings;
             uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
