@@ -16,6 +16,12 @@
 
 scope mqtt
 {
+    union MqttConnectFormat switch (uint8)
+    {
+        case 1: mqtt::MqttConnectConfig connect;
+        case 2: mqtt::MqttConnackConfig connack;
+    }
+
     struct MqttBasicConnectSettings
     {
         uint16 keepAlive;
@@ -26,6 +32,7 @@ scope mqtt
         string authMethod;
         mqtt::MqttBinary authData;
         list<mqtt::MqttUserProperty> userProperties;
+        mqtt::MqttConnectFormat additionalProperties;
     }
 
     struct MqttConnectConfig
@@ -116,8 +123,6 @@ scope mqtt
 
     union MqttPacketFormat switch (uint8)
     {
-        case 1: mqtt::MqttConnectConfig connect;
-        case 2: mqtt::MqttConnackConfig connack;
         case 3: mqtt::MqttPublishPacket publish;
         case 8: mqtt::MqttSubscribeInfo subscribe;
         case 9: mqtt::MqttSubAckPacket suback;
