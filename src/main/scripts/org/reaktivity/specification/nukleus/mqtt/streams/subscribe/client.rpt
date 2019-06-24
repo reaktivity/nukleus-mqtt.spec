@@ -29,12 +29,3 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .build()}
 
 read closed
-
-read notify BEGIN_COMPLETED
-
-connect await BEGIN_COMPLETED
-        "nukleus://streams/amqp#0"
-        option nukleus:window 8192
-        option nukleus:transmission "half-duplex"
-
-connected
