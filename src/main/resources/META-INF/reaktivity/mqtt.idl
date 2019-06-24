@@ -149,14 +149,14 @@ scope mqtt
     {
         struct MqttBeginEx
         {
-            mqtt::MqttSettings;
+            mqtt::MqttSettings settings;
             uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
 
         struct MqttDataEx
         {
-            mqtt::MqttSettings;
+            mqtt::MqttSettings settings;
             uint8 packetType;
             mqtt::MqttPacketFormat content;
         }
