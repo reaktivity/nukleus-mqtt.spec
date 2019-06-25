@@ -105,18 +105,18 @@ scope mqtt
 
     scope stream
     {
-        struct MqttBeginEx
+        struct MqttBeginEx extends core::stream::Extension
         {
             string clientId;
             mqtt::MqttBeginPacketFormatEx packetType;
         }
 
-        struct MqttDataEx
+        struct MqttDataEx extends core::stream::Extension
         {
             mqtt::MqttDataPacketFormatEx packetType;
         }
 
-        struct MqttEndEx
+        struct MqttEndEx extends core::stream::Extension
         {
             mqtt::MqttEndPacketFormatEx packetType;
         }
