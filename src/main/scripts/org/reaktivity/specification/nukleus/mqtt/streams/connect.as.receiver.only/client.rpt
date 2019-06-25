@@ -20,7 +20,7 @@ connect await ROUTED_CLIENT
          option nukleus:transmission "duplex"
 
 write nukleus:begin.ext ${mqtt:beginEx()
-                              .typedId(nukleus:id("mqtt")
+                              .typedId(nukleus:id("mqtt"))
                               .clientId("mango")
                               .packetType(8)
                               .topic("a/b", 0)
@@ -29,7 +29,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
 write close
 
 read nukleus:begin.ext ${mqtt:beginEx()
-                             .typedId(nukleus:id("mqtt")
+                             .typedId(nukleus:id("mqtt"))
                              .clientId("mango")
                              .packetType(9)
                              .reason(0)

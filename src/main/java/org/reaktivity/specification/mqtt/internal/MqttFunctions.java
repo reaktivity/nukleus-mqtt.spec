@@ -13,3 +13,19 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
+package org.reaktivity.specification.http.internal;
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.agrona.MutableDirectBuffer;
+import org.agrona.concurrent.UnsafeBuffer;
+import org.kaazing.k3po.lang.el.Function;
+import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
+
+public final class MqttFunctions
+{
+
+}

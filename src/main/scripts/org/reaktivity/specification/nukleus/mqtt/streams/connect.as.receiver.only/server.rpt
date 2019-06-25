@@ -23,7 +23,7 @@ accept ${serverTransport}
 accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
-                             .typedId(nukleus:id("mqtt")
+                             .typedId(nukleus:id("mqtt"))
                              .clientId("mango")
                              .clientId("mango")
                              .packetType(8)
@@ -33,7 +33,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
 read closed
 
 write nukleus:begin.ext ${mqtt:beginEx()
-                              .typedId(nukleus:id("mqtt")
+                              .typedId(nukleus:id("mqtt"))
                               .clientId("mango")
                               .packetType(9)
                               .reason(0)
