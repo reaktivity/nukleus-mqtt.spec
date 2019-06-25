@@ -21,12 +21,18 @@ connect await ROUTED_CLIENT
 
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typedId(nukleus:id("mqtt")
+                              .clientId("mango")
+                              .packetType(8)
+                              .topic("a/b", 0)
                               .build()}
 
 write close
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typedId(nukleus:id("mqtt")
+                             .clientId("mango")
+                             .packetType(9)
+                             .reason(0)
                              .build()}
 
 read closed

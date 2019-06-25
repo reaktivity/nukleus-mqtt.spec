@@ -64,9 +64,8 @@ scope mqtt
 
     struct MqttSubAckPacket
     {
-        string reasonStr;
-        list<mqtt::MqttUserProperty> userProperties;
         list<mqtt::MqttReasonCode> reasonCodes;
+        list<mqtt::MqttUserProperty> userProperties;
     }
 
     union MqttBeginPacketFormatEx switch (uint8)
