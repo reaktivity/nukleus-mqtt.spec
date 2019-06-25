@@ -31,6 +31,7 @@ public class StreamIT
 {
     private final K3poRule k3po = new K3poRule()
             .addScriptRoot("scripts", "org/reaktivity/specification/nukleus/mqtt/streams");
+
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     @Rule
