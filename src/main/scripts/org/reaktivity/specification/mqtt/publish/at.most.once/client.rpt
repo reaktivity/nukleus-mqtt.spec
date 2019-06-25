@@ -33,6 +33,6 @@
       [0x00]                 # connect flags = none
       [0x00]                 # reason code
 
- write [0x30 0xC]            # fixed header
+ write [0x30 0x0C]           # fixed header
        [0x00 0x03] "a/b"     # topic filter
        "message"             # payload

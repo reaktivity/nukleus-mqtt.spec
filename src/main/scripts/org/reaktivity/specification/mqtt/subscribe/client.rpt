@@ -33,7 +33,7 @@ read [0x20 0x02]            # fixed header
      [0x00]                 # connect flags = none
      [0x00]                 # reason code
 
-write [0x82 0xB]            # fixed header
+write [0x82 0x0B]           # fixed header
       [0x00 0x01 0x00]      # packetID = 1
       [0x00 0x03] "a/b"     # topic filter
       [0x00]                # subscription opts = QoS 0
