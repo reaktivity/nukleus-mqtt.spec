@@ -27,7 +27,7 @@
        [0x02]                # connect flags = clean start
        [0x00 0x3c]           # keep alive = 60s
        [0x00]                # properties = none
-       [0x00 0x04] "abcd"    # clientID
+       [0x00 0x04] "abcd"    # clientId
 
  read [0x20 0x02]            # fixed header
       [0x00]                 # connect flags = none

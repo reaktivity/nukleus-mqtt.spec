@@ -14,25 +14,23 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
-
-accept ${serverTransport}
-  option nukleus:window 8192
-  option nukleus:transmission "half-duplex"
-
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .build()}
-connected
-
-read closed
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
 
 write nukleus:begin.ext ${mqtt:beginEx()
+                              .clientId("mango")
+                              .packetType(8)
                               .build()}
 
 write close
 
-accepted
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .clientId("mango")
+                             .packetType(9)
+                             .build()}
+
+read closed
 
 connected

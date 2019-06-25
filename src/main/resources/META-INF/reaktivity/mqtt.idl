@@ -39,7 +39,7 @@ scope mqtt
         uint16 packetId;
         string topic;
         uint32 messageExpiry;
-        mqtt::ResponseTopicFormat respTopicInfo;
+        mqtt::MqttResponseTopicFormat respTopicInfo;
         list<mqtt::MqttUserProperty> properties;
         string contentType;
         mqtt::MqttPayloadFormat payloadFormat;
@@ -69,12 +69,6 @@ scope mqtt
         list<mqtt::MqttReasonCode> reasonCodes;
     }
 
-    union MqttEndPacketFormatEx switch (uint8)
-    {
-        case 10: mqtt::MqttUnsubscribePacket unsubscribe;
-        case 11: mqtt::MqttSubAckPacket unsuback;
-    }
-
     union MqttBeginPacketFormatEx switch (uint8)
     {
         case 8: mqtt::MqttSubscribeInfo subscribe;
@@ -86,6 +80,11 @@ scope mqtt
         case 3: mqtt::MqttPublishPacket publish;
     }
 
+    union MqttEndPacketFormatEx switch (uint8)
+    {
+        case 10: mqtt::MqttUnsubscribePacket unsubscribe;
+        case 11: mqtt::MqttSubAckPacket unsuback;
+    }
 
     struct MqttBinary
     {
@@ -109,17 +108,17 @@ scope mqtt
         struct MqttBeginEx
         {
             string clientId;
-            mqtt::MqttBeginPacketFormatEx content;
+            mqtt::MqttBeginPacketFormatEx packetType;
         }
 
         struct MqttDataEx
         {
-            mqtt::MqttDataPacketFormatEx content;
+            mqtt::MqttDataPacketFormatEx packetType;
         }
 
         struct MqttEndEx
         {
-            mqtt::MqttEndPacketFormatEx content;
+            mqtt::MqttEndPacketFormatEx packetType;
         }
     }
 }
