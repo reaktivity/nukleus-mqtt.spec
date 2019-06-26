@@ -172,7 +172,7 @@
         <version>0.8.2</version>
         <configuration>
           <excludes>
-            <exclude>org/reaktivity/specification/mqtt/internal/types/**/*.class</exclude>
+            <exclude>org/reaktivity/specification/mqtt/**/*.class</exclude>
           </excludes>
           <rules>
             <rule>
