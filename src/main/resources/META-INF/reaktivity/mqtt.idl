@@ -99,7 +99,6 @@ scope mqtt
     {
         struct MqttBeginEx extends core::stream::Extension
         {
-            mqtt::MqttRole role;
             string clientId;
             mqtt::MqttSubscribeInfo subscriptionDetails;
             list<mqtt::MqttTopicFormat> topics;
