@@ -94,7 +94,7 @@
         <artifactId>nukleus-maven-plugin</artifactId>
         <version>${nukleus.plugin.version}</version>
         <configuration>
-          <scopeNames>core mqtt</scopeNames>
+          <scopeNames>mqtt</scopeNames>
           <packageName>org.reaktivity.specification.mqtt.internal.types</packageName>
         </configuration>
         <executions>

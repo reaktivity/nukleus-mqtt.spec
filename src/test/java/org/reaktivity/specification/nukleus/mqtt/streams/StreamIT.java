@@ -42,7 +42,7 @@ public class StreamIT
             "${scripts}/connect.as.receiver.only/client",
             "${scripts}/connect.as.receiver.only/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void connect() throws Exception
+    public void shouldSubscribe() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");

@@ -21,7 +21,10 @@ import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 
+import org.reaktivity.specification.mqtt.internal.types.*;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
 
 public final class MqttFunctions
 {
@@ -29,6 +32,18 @@ public final class MqttFunctions
     public static MqttBeginExBuilder beginEx()
     {
         return new MqttBeginExBuilder();
+    }
+
+    @Function
+    public static MqttDataExBuilder dataEx()
+    {
+        return new MqttDataExBuilder();
+    }
+
+    @Function
+    public static MqttEndExBuilder endEx()
+    {
+        return new MqttEndExBuilder();
     }
 
     public static final class MqttBeginExBuilder
@@ -78,9 +93,10 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttBeginExBuilder packetType(
-           int packetType)
+        public MqttBeginExBuilder role(
+           String role)
         {
+            beginExRW.role(p -> p.set(MqttRole.valueOf(role)));
             return this;
         }
 
@@ -89,6 +105,110 @@ public final class MqttFunctions
             final MqttBeginExFW beginEx = beginExRW.build();
             final byte[] array = new byte[beginEx.sizeof()];
             beginEx.buffer().getBytes(beginEx.offset(), array);
+            return array;
+        }
+    }
+
+    public static final class MqttDataExBuilder
+    {
+        private final MqttDataExFW.Builder dataExRW;
+
+        private MqttDataExBuilder()
+        {
+            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
+            this.dataExRW = new MqttDataExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
+        }
+
+        public MqttDataExBuilder typeId(
+           int typeId)
+        {
+            dataExRW.typeId(typeId);
+            return this;
+        }
+
+        public MqttDataExBuilder topic(
+           String topic)
+        {
+            dataExRW.topic(topic);
+            return this;
+        }
+
+        public MqttDataExBuilder messageExpiry(
+           long msgExp)
+        {
+            dataExRW.messageExpiry(msgExp);
+            return this;
+        }
+
+        public MqttDataExBuilder contentType(
+           String contentType)
+        {
+            dataExRW.contentType(contentType);
+            return this;
+        }
+
+        public MqttDataExBuilder payloadFormat(
+           String format)
+        {
+            dataExRW.payloadFormat(p -> p.set(MqttPayloadFormat.valueOf(format)));
+            return this;
+        }
+
+        public MqttDataExBuilder respTopicInfo(
+                String topic,
+                String correlationData)
+        {
+            dataExRW.respTopicInfo(r -> r.topic(topic)
+                    .correlationInfo(c -> c.bytes(b -> b.set(correlationData.getBytes()))));
+            return this;
+        }
+
+
+        public byte[] build()
+        {
+            final MqttDataExFW dataEx = dataExRW.build();
+            final byte[] array = new byte[dataEx.sizeof()];
+            dataEx.buffer().getBytes(dataEx.offset(), array);
+            return array;
+        }
+    }
+
+    public static final class MqttEndExBuilder
+    {
+        private final MqttEndExFW.Builder endExRW;
+
+        private MqttEndExBuilder()
+        {
+            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
+            this.endExRW = new MqttEndExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
+        }
+
+        public MqttEndExBuilder typeId(
+           int typeId)
+        {
+            endExRW.typeId(typeId);
+            return this;
+        }
+
+        public MqttEndExBuilder topic(
+           String topic)
+        {
+            endExRW.topicsItem(t -> t.value(topic));
+            return this;
+        }
+
+        public MqttEndExBuilder reason(
+           int reason)
+        {
+            endExRW.reasonCodesItem(b -> b.reasonCode(reason));
+            return this;
+        }
+
+        public byte[] build()
+        {
+            final MqttEndExFW endEx = endExRW.build();
+            final byte[] array = new byte[endEx.sizeof()];
+            endEx.buffer().getBytes(endEx.offset(), array);
             return array;
         }
     }

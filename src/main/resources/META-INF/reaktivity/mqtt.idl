@@ -46,8 +46,14 @@ scope mqtt
 
     struct MqttResponseTopicFormat
     {
-        string responseTopic;
-        mqtt::MqttBinary correlation;
+        string topic;
+        mqtt::MqttBinary correlationInfo;
+    }
+
+    enum MqttRole
+    {
+        SENDER,
+        RECEIVER
     }
 
     enum MqttPayloadFormat
@@ -67,23 +73,6 @@ scope mqtt
         list<mqtt::MqttUserProperty> userProperties;
     }
 
-    union MqttBeginPacketFormatEx switch (uint8)
-    {
-        case 8: mqtt::MqttSubscribeInfo subscribe;
-        case 9: mqtt::MqttSubAckPacket suback;
-    }
-
-    union MqttDataPacketFormatEx switch (uint8)
-    {
-        case 3: mqtt::MqttPublishPacket publish;
-    }
-
-    union MqttEndPacketFormatEx switch (uint8)
-    {
-        case 10: mqtt::MqttUnsubscribePacket unsubscribe;
-        case 11: mqtt::MqttSubAckPacket unsuback;
-    }
-
     struct MqttBinary
     {
         uint16 length;
@@ -96,6 +85,11 @@ scope mqtt
         string value;
     }
 
+    struct MqttString
+    {
+        string value;
+    }
+
     scope control
     {
 
@@ -105,21 +99,30 @@ scope mqtt
     {
         struct MqttBeginEx extends core::stream::Extension
         {
+            mqtt::MqttRole role;
             string clientId;
             mqtt::MqttSubscribeInfo subscriptionDetails;
             list<mqtt::MqttTopicFormat> topics;
             list<mqtt::MqttReasonCode> reasonCodes;
-            list<mqtt::MqttUserProperty> userProperties;
+            list<mqtt::MqttUserProperty> properties;
         }
 
         struct MqttDataEx extends core::stream::Extension
         {
-            mqtt::MqttDataPacketFormatEx packetType;
+            uint16 packetId;
+            string topic;
+            uint32 messageExpiry;
+            string contentType;
+            mqtt::MqttPayloadFormat payloadFormat;
+            mqtt::MqttResponseTopicFormat respTopicInfo;
+            list<mqtt::MqttUserProperty> properties;
         }
 
         struct MqttEndEx extends core::stream::Extension
         {
-            mqtt::MqttEndPacketFormatEx packetType;
+            list<mqtt::MqttString> topics;
+            list<mqtt::MqttReasonCode> reasonCodes;
+            list<mqtt::MqttUserProperty> userProperties;
         }
     }
 }
