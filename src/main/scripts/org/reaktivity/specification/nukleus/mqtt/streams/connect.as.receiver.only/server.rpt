@@ -25,14 +25,14 @@ accepted
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .clientId("mango")
-                             .packetType(8)
+                             .packetId(1)
                              .topic("a/b", 0)
                              .build()}
 
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
                               .clientId("mango")
-                              .packetType(9)
+                              .packetId(1)
                               .reason(0)
                               .build()}
 

@@ -42,24 +42,44 @@ public final class MqttFunctions
         }
 
         public MqttBeginExBuilder typeId(
-                int typeId
-        )
+           int typeId)
         {
             beginExRW.typeId(typeId);
             return this;
         }
 
         public MqttBeginExBuilder clientId(
-                String clientId
-        )
+           String clientId)
         {
             beginExRW.clientId(clientId);
             return this;
         }
 
-        public MqttBeginExBuilder packetType(
-                int packetType
+        public MqttBeginExBuilder topic(
+           String topic,
+           int options)
+        {
+            beginExRW.topicsItem(a -> a.topic(topic).options(options));
+            return this;
+        }
+
+        public MqttBeginExBuilder packetId(
+           int packetId
         )
+        {
+            beginExRW.subscriptionDetails(b -> b.packetId(packetId));
+            return this;
+        }
+
+        public MqttBeginExBuilder reason(
+           int reason)
+        {
+            beginExRW.reasonCodesItem(b -> b.reasonCode(reason));
+            return this;
+        }
+
+        public MqttBeginExBuilder packetType(
+           int packetType)
         {
             return this;
         }

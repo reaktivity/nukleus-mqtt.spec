@@ -18,14 +18,13 @@ scope mqtt
 {
     struct MqttSubscribeInfo
     {
-        uint16 packetID;
-        list<mqtt::MqttTopicFormat> topics;
+        uint16 packetId;
     }
 
     struct MqttTopicFormat
     {
         string topic;
-        int8 subscriptionOptions;
+        uint8 options;
     }
 
     struct MqttUnsubscribePacket
@@ -107,7 +106,10 @@ scope mqtt
         struct MqttBeginEx extends core::stream::Extension
         {
             string clientId;
-            mqtt::MqttBeginPacketFormatEx packetType;
+            mqtt::MqttSubscribeInfo subscriptionDetails;
+            list<mqtt::MqttTopicFormat> topics;
+            list<mqtt::MqttReasonCode> reasonCodes;
+            list<mqtt::MqttUserProperty> userProperties;
         }
 
         struct MqttDataEx extends core::stream::Extension
