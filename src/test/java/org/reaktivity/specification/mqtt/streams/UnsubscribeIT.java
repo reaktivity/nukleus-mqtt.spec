@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package org.reaktivity.specification.mqtt;
+package org.reaktivity.specification.mqtt.streams;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.rules.RuleChain.outerRule;
@@ -27,10 +27,10 @@ import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
-public class ConnectionIT
+public class UnsubscribeIT
 {
     private final K3poRule k3po = new K3poRule()
-            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt");
+            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt/unsubscribe");
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     @Rule
@@ -38,14 +38,13 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}/connection/client",
-            "${scripts}/connection/server"})
+            "${scripts}/client",
+            "${scripts}/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void connect() throws Exception
+    public void subscribe() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
-
 }

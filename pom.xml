@@ -42,8 +42,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <checkstyle.config.location>src/conf/checkstyle/configuration.xml</checkstyle.config.location>
     <checkstyle.suppressions.location>src/conf/checkstyle/suppressions.xml</checkstyle.suppressions.location>
-    <jacoco.coverage.ratio>1.00</jacoco.coverage.ratio>
-    <jacoco.missed.count>0</jacoco.missed.count>
+    <jacoco.coverage.ratio>0</jacoco.coverage.ratio>
+    <jacoco.missed.count>53</jacoco.missed.count>
     <junit.version>4.12</junit.version>
 
     <k3po.version>3.0.0-alpha-101</k3po.version>
@@ -171,9 +171,6 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.2</version>
         <configuration>
-          <excludes>
-            <exclude>org/reaktivity/specification/mqtt/**/*.class</exclude>
-          </excludes>
           <rules>
             <rule>
               <element>BUNDLE</element>
