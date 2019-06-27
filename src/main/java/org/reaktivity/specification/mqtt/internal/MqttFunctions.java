@@ -245,6 +245,14 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttEndExBuilder userProperty(
+                String key,
+                String value)
+        {
+            endExRW.userPropertiesItem(p -> p.key(key).value(value));
+            return this;
+        }
+
         public byte[] build()
         {
             final MqttEndExFW endEx = endExRW.build();

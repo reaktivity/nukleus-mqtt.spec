@@ -146,6 +146,30 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldEncodeMqttEndExAsUnsubscribeWithUserProperty()
+    {
+        final byte[] array = MqttFunctions.endEx()
+                .typeId(0)
+                .topic("a/b")
+                .userProperty("key", "value")
+                .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
+
+        mqttEndEx.topics().forEach(topic ->
+        {
+            assertEquals("a/b", topic.value().asString());
+        });
+
+        mqttEndEx.userProperties().forEach(p ->
+        {
+            assertEquals("key", p.key().asString());
+            assertEquals("value", p.value().asString());
+        });
+    }
+
+    @Test
     public void shouldEncodeMqttEndExAsUnsuback()
     {
         final byte[] array = MqttFunctions.endEx()
