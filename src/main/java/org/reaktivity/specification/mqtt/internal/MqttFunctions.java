@@ -22,12 +22,19 @@ import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 
 import org.reaktivity.specification.mqtt.internal.types.*;
+import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
 
 public final class MqttFunctions
 {
+    @Function
+    public static MqttRouteExBuilder routeEx()
+    {
+        return new MqttRouteExBuilder();
+    }
+
     @Function
     public static MqttBeginExBuilder beginEx()
     {
@@ -44,6 +51,25 @@ public final class MqttFunctions
     public static MqttEndExBuilder endEx()
     {
         return new MqttEndExBuilder();
+    }
+
+    public static final class MqttRouteExBuilder
+    {
+        private final MqttRouteExFW.Builder routeExRW;
+
+        private MqttRouteExBuilder()
+        {
+            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
+            this.routeExRW = new MqttRouteExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
+        }
+
+        public byte[] build()
+        {
+            final MqttRouteExFW routeEx = routeExRW.build();
+            final byte[] array = new byte[routeEx.sizeof()];
+            routeEx.buffer().getBytes(routeEx.offset(), array);
+            return array;
+        }
     }
 
     public static final class MqttBeginExBuilder
