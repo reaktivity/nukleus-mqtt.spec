@@ -63,6 +63,13 @@ public final class MqttFunctions
             this.routeExRW = new MqttRouteExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
         }
 
+        public MqttRouteExBuilder role(
+                String role)
+        {
+            routeExRW.role(p -> p.set(MqttRole.valueOf(role)));
+            return this;
+        }
+
         public byte[] build()
         {
             final MqttRouteExFW routeEx = routeExRW.build();
