@@ -14,30 +14,24 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
-
-accept ${serverTransport}
-        option nukleus:window 8192
-        option nukleus:transmission "duplex"
-
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .clientId("mango")
-                             .packetId(1)
-                             .topic("a/b", 0)
-                             .build()}
-
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .clientId("mango")
-                              .packetId(1)
-                              .reason(0)
-                              .build()}
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
 
 connected
 
-read closed
+write nukleus:data.ext ${mqtt:dataEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .packetId(2)
+                              .topic("a/b")
+                              .messageExpiry(15)
+                              .contentType("message")
+                              .payloadFormat("TEXT")
+                              .respTopicInfo("a/b", "info")
+                              .build()}
+
+read "hello"
 
 write close
+

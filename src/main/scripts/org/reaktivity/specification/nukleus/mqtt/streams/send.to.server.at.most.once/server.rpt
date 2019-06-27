@@ -22,22 +22,18 @@ accept ${serverTransport}
 
 accepted
 
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .clientId("mango")
-                             .packetId(1)
-                             .topic("a/b", 0)
-                             .build()}
-
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .clientId("mango")
-                              .packetId(1)
-                              .reason(0)
-                              .build()}
-
 connected
 
-read closed
+read nukleus:data.ext ${mqtt:dataEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .packetId(2)
+                              .topic("a/b")
+                              .messageExpiry(15)
+                              .contentType("message")
+                              .payloadFormat("TEXT")
+                              .respTopicInfo("a/b", "info")
+                              .build()}
+
+write "hello"
 
 write close

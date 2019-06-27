@@ -93,12 +93,12 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttBeginExBuilder role(
+        /*public MqttBeginExBuilder role(
            String role)
         {
             beginExRW.role(p -> p.set(MqttRole.valueOf(role)));
             return this;
-        }
+        }*/
 
         public byte[] build()
         {
@@ -123,6 +123,14 @@ public final class MqttFunctions
            int typeId)
         {
             dataExRW.typeId(typeId);
+            return this;
+        }
+
+        public MqttDataExBuilder packetId(
+                int packetId
+        )
+        {
+            dataExRW.packetId(packetId);
             return this;
         }
 

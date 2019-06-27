@@ -38,6 +38,18 @@ write nukleus:begin.ext ${mqtt:beginEx()
 
 connected
 
+write nukleus:data.ext ${mqtt:dataEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .packetId(2)
+                              .topic("a/b")
+                              .messageExpiry(15)
+                              .contentType("message")
+                              .payloadFormat("TEXT")
+                              .respTopicInfo("a/b", "info")
+                              .build()}
+
+write "hello"
+
 read closed
 
 write close
