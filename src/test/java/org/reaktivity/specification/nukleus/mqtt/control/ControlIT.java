@@ -26,7 +26,8 @@ import org.junit.rules.Timeout;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
-public class ControlIT {
+public class ControlIT
+{
 
     private final K3poRule k3po = new K3poRule()
             .addScriptRoot("scripts", "org/reaktivity/specification/nukleus/mqtt/control");
@@ -38,8 +39,8 @@ public class ControlIT {
 
     @Test
     @Specification({
-            "route/server/nukleus",
-            "route/server/controller"
+            "${scripts}/route/server/nukleus",
+            "${scripts}/route/server/controller"
     })
     public void shouldRouteServer() throws Exception
     {
@@ -48,11 +49,35 @@ public class ControlIT {
 
     @Test
     @Specification({
-            "route/client/nukleus",
-            "route/client/controller"
+            "${scripts}/route/client/nukleus",
+            "${scripts}/route/client/controller"
     })
     public void shouldRouteClient() throws Exception
     {
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+            "unroute/server/nukleus",
+            "unroute/server/controller"
+    })
+    public void shouldUnrouteServer() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+            "unroute/client/nukleus",
+            "unroute/client/controller"
+    })
+    public void shouldUnrouteClient() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 

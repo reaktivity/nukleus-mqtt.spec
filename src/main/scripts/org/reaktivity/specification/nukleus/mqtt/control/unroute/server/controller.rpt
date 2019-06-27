@@ -14,30 +14,29 @@
 # under the License.
 #
 
-property nukleiRG010101C ${nuklei:directory("target/nukleus-itests").controlCapacity(1024, 1024)}
+property newServerRouteId ${nukleus:newServerRouteId("mqtt#0", "target#0")} # external
 
-property controlRG010101C ${nukleiRG010101C.control()}
+property nukleiUR020001C ${nuklei:directory("target/nukleus-itests").controlCapacity(1024, 1024)}
 
-connect "agrona://stream/bidirectional"
-        option agrona:reader ${agrona:broadcastReceiver(controlRG010101C.controller)}
-        option agrona:writer ${agrona:manyToOneWriter(controlRG010101C.nukleus)}
+property controlUR020001C ${nukleiUR020001C.control()}
+
+property routeAuthorization 0x0000_000000000000L
+
+connect await ROUTED_SERVER
+        "agrona://stream/bidirectional"
+        option agrona:reader ${agrona:broadcastReceiver(controlUR020001C.controller)}
+        option agrona:writer ${agrona:manyToOneWriter(controlUR020001C.nukleus)}
 
 connected
 
-write 0x00000001
-write ${controlRG010101C.nextCorrelationId()}
+write 0x00000002
+write ${controlUR020001C.nextCorrelationId()}
 write ${core:string("mqtt")}
-write [0x01]
-write 0L
-write ${core:string("mqtt#0")}
-write ${core:string("target#0")}
+write ${newServerRouteId}
 write flush
 
-read 0x40000001
-read ${controlRG010101C.correlationId()}
-read (long:newClientRouteId)
-
-read notify ROUTED_CLIENT
+read 0x40000002
+read ${controlUR020001C.correlationId()}
 
 close
 closed

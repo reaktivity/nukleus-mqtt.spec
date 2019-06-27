@@ -33,8 +33,7 @@ write [0x00]
 write ${routeAuthorization}
 write ${core:string("mqtt#0")}
 write ${core:string("target#0")}
-write ${http:routeEx()
-            .build()}
+
 write flush
 
 read 0x40000001
