@@ -26,6 +26,7 @@ import org.agrona.concurrent.UnsafeBuffer;
 import org.junit.Before;
 import org.junit.Test;
 import org.kaazing.k3po.lang.internal.el.ExpressionContext;
+
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
@@ -69,9 +70,9 @@ public class MqttFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
 
-        assertEquals(mqttBeginEx.role().toString(), "RECEIVER");
-        assertEquals(mqttBeginEx.clientId().asString(), "abcd");
-        assertEquals(mqttBeginEx.packetId(), 1);
+        assertEquals("RECEIVER", mqttBeginEx.role().toString());
+        assertEquals("abcd", mqttBeginEx.clientId().asString());
+        assertEquals(1, mqttBeginEx.packetId());
         mqttBeginEx.topics().forEach(topic ->
         {
             assertEquals("a/b", topic.topic().asString());
