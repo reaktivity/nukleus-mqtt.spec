@@ -14,4 +14,30 @@
 # under the License.
 #
 
+property nukleiRG010101N ${nuklei:directory("target/nukleus-itests").controlCapacity(1024, 1024)}
 
+property controlRG010101N ${nukleiRG010101N.controlNew()}
+
+connect "agrona://stream/bidirectional"
+        option agrona:reader ${agrona:manyToOneReader(controlRG010101N.nukleus)}
+        option agrona:writer ${agrona:broadcastTransmitter(controlRG010101N.controller)}
+
+connected
+
+read 0x00000001
+read (long:correlationIdRG010101N)
+read ${core:string("mqtt")}
+read [0x01]
+read [0..8] # authorization
+read ${core:string("mqtt#0")}
+read ${core:string("target#0")}
+read ${http:routeEx()
+           .build()}
+
+write 0x40000001
+write ${correlationIdRG010101N}
+write ${nukleus:newClientRouteId("mqtt#0", "target#0")}
+write flush
+
+close
+closed
