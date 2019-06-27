@@ -16,32 +16,10 @@
 
 scope mqtt
 {
-    struct MqttSubscribeInfo
-    {
-        uint16 packetId;
-    }
-
     struct MqttTopicFormat
     {
         string topic;
         uint8 options;
-    }
-
-    struct MqttUnsubscribePacket
-    {
-        list<string> topics;
-        list<mqtt::MqttUserProperty> userProperties;
-    }
-
-    struct MqttPublishPacket
-    {
-        uint16 packetId;
-        string topic;
-        uint32 messageExpiry;
-        mqtt::MqttResponseTopicFormat respTopicInfo;
-        list<mqtt::MqttUserProperty> properties;
-        string contentType;
-        mqtt::MqttPayloadFormat payloadFormat;
     }
 
     struct MqttResponseTopicFormat
@@ -65,12 +43,6 @@ scope mqtt
     struct MqttReasonCode
     {
         uint8 reasonCode;
-    }
-
-    struct MqttSubAckPacket
-    {
-        list<mqtt::MqttReasonCode> reasonCodes;
-        list<mqtt::MqttUserProperty> userProperties;
     }
 
     struct MqttBinary
@@ -101,7 +73,7 @@ scope mqtt
         {
             mqtt::MqttRole role;
             string clientId;
-            mqtt::MqttSubscribeInfo subscriptionDetails;
+            uint16 packetId;
             list<mqtt::MqttTopicFormat> topics;
             list<mqtt::MqttReasonCode> reasonCodes;
             list<mqtt::MqttUserProperty> properties;

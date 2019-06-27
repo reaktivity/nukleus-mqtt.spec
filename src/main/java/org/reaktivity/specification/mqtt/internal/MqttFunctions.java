@@ -82,7 +82,7 @@ public final class MqttFunctions
            int packetId
         )
         {
-            beginExRW.subscriptionDetails(b -> b.packetId(packetId));
+            beginExRW.packetId(packetId);
             return this;
         }
 
