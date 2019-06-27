@@ -21,6 +21,7 @@ connect await ROUTED_CLIENT
 
 write nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
+                             .role("RECEIVER")
                              .clientId("mango")
                              .packetId(1)
                              .topic("a/b", 0)
@@ -28,6 +29,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
 
 read nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
+                              .role("SENDER")
                               .clientId("mango")
                               .packetId(1)
                               .reason(0)
