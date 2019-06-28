@@ -20,6 +20,8 @@ property controlRG010001C ${nukleiRG010001C.control()}
 
 property routeAuthorization 0x0000_000000000000L
 
+property topicFilter "a/b"
+
 connect "agrona://stream/bidirectional"
         option agrona:reader ${agrona:broadcastReceiver(controlRG010001C.controller)}
         option agrona:writer ${agrona:manyToOneWriter(controlRG010001C.nukleus)}
@@ -33,6 +35,9 @@ write [0x00]
 write ${routeAuthorization}
 write ${core:string("mqtt#0")}
 write ${core:string("target#0")}
+write ${mqtt:routeEx()
+            .topic(topicFilter)
+            .build()}
 
 write flush
 

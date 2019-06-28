@@ -31,6 +31,9 @@ read [0x00]
 read [0..8] # authorization
 read ${core:string("mqtt#0")}
 read ${core:string("target#0")}
+read ${mqtt:routeEx()
+            .topic(topicFilter)
+            .build()}
 
 write 0x40000001
 write ${correlationIdRG010001N}
