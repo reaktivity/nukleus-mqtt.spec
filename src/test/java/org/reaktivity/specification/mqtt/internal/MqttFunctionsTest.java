@@ -45,6 +45,13 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldGetMapper()
+    {
+        MqttFunctions.Mapper mapper = new MqttFunctions.Mapper();
+        assertEquals("mqtt", mapper.getPrefixName());
+    }
+
+    @Test
     public void shouldEncodeMqttRouteEx()
     {
         final byte[] array = MqttFunctions.routeEx()

@@ -276,4 +276,9 @@ public final class MqttFunctions
             return "mqtt";
         }
     }
+
+    private MqttFunctions()
+    {
+        /* utility */
+    }
 }
