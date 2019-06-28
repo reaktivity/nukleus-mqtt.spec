@@ -65,7 +65,7 @@ public final class MqttFunctions
         }
 
         public MqttRouteExBuilder location(
-                String loc)
+           String loc)
         {
             routeExRW.location(p -> p.location(loc));
             return this;
@@ -161,7 +161,7 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder packetId(
-                int packetId
+           int packetId
         )
         {
             dataExRW.packetId(packetId);
@@ -197,8 +197,8 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder respTopicInfo(
-                String topic,
-                String correlationData)
+           String topic,
+           String correlationData)
         {
             dataExRW.respTopicInfo(r -> r.topic(topic)
                     .correlationInfo(c -> c.bytes(b -> b.set(correlationData.getBytes()))));
@@ -247,8 +247,8 @@ public final class MqttFunctions
         }
 
         public MqttEndExBuilder userProperty(
-                String key,
-                String value)
+           String key,
+           String value)
         {
             endExRW.userPropertiesItem(p -> p.key(key).value(value));
             return this;
