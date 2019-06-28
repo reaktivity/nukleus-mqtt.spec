@@ -41,7 +41,7 @@ public class PublishIT
             "${scripts}/at.most.once/client",
             "${scripts}/at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void publishAtMostOnce() throws Exception
+    public void shouldPublishAtMostOnce() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

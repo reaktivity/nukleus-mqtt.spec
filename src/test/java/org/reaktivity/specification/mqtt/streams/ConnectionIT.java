@@ -41,7 +41,7 @@ public class ConnectionIT
             "${scripts}/connection/client",
             "${scripts}/connection/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void connect() throws Exception
+    public void shouldConnect() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

@@ -41,7 +41,7 @@ public class UnsubscribeIT
             "${scripts}/client",
             "${scripts}/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void subscribe() throws Exception
+    public void shouldUnsubscribeFromOneTopic() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
