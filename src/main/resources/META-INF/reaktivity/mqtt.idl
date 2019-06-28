@@ -57,11 +57,6 @@ scope mqtt
         string value;
     }
 
-    struct MqttLocation
-    {
-        string location;
-    }
-
     struct MqttString
     {
         string value;
@@ -71,7 +66,7 @@ scope mqtt
     {
         struct MqttRouteEx
         {
-            mqtt::MqttLocation location;
+            string topic;
         }
     }
 
