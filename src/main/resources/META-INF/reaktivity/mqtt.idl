@@ -67,7 +67,6 @@ scope mqtt
         struct MqttRouteEx
         {
             mqtt::MqttRole role;
-            list<mqtt::MqttString> topics;
         }
     }
 
