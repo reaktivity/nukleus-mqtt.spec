@@ -86,7 +86,7 @@ public class ControlIT
             "${scripts}/route.ext/client/nukleus",
             "${scripts}/route.ext/client/controller"
     })
-    public void shouldRouteClientWithRouteExByOneTopic() throws Exception
+    public void shouldRouteClientWithExtentionWithOneTopic() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -98,7 +98,7 @@ public class ControlIT
             "${scripts}/route.ext/server/nukleus",
             "${scripts}/route.ext/server/controller"
     })
-    public void shouldRouteServerWithRouteExByOneTopic() throws Exception
+    public void shouldRouteServerWithExtentionWithOneTopic() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
