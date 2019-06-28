@@ -23,30 +23,30 @@ accept ${serverTransport}
 accepted
 connected
 
-read  [0x10 0x11]           # fixed header
-      [0x00 0x04] "MQTT"    # protocol name
-      [0x05]                # protocol version
-      [0x02]                # connect flags = clean start
-      [0x00 0x3C]           # keep alive = 60s
-      [0x00]                # properties = none
-      [0x00 0x04] "abcd"    # clientId
+read  [0x10 0x11]            # fixed header
+      [0x00 0x04] "MQTT"     # protocol name
+      [0x05]                 # protocol version
+      [0x02]                 # connect flags = clean start
+      [0x00 0x3C]            # keep alive = 60s
+      [0x00]                 # properties = none
+      [0x00 0x04] "abcd"     # clientId
 
-write [0x20 0x02]           # fixed header
-      [0x00]                # connect flags = none
-      [0x00]                # reason code
+write [0x20 0x02]            # fixed header
+      [0x00]                 # connect flags = none
+      [0x00]                 # reason code
 
 read  [0x82 0x0B]            # fixed header
-      [0x00 0x01 0x00]      # packetID = 1
-      [0x00 0x03] "a/b"     # topic filter
-      [0x00]                # subscription opts = QoS 0
+      [0x00 0x01 0x00]       # packetID = 1
+      [0x00 0x03] "a/b"      # topic filter
+      [0x00]                 # subscription opts = QoS 0
 
-write [0x90 0x02]           # fixed header
-      [0x00]                # properties = none
-      [0x00]                # reason code
+write [0x90 0x02]            # fixed header
+      [0x00]                 # properties = none
+      [0x00]                 # reason code
 
-read  [0xa2 0x06]           # fixed header
-      [0x00]                # properties = none
-      [0x00 0x03] "a/b"     # topic filter
+read  [0xa2 0x06]            # fixed header
+      [0x00]                 # properties = none
+      [0x00 0x03] "a/b"      # topic filter
 
 write [0xa0 0x05]            # fixed header
       [0x00]                 # properties = none
