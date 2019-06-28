@@ -48,12 +48,12 @@ public class MqttFunctionsTest
     public void shouldEncodeMqttRouteEx()
     {
         final byte[] array = MqttFunctions.routeEx()
-                .role("RECEIVER")
+                .location("mqtt#0")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttRouteExFW mqttRouteEx = new MqttRouteExFW().wrap(buffer, 0, buffer.capacity());
-        assertEquals(mqttRouteEx.role().toString(), "RECEIVER");
+        assertEquals(mqttRouteEx.location().location().asString(), "mqtt#0");
     }
 
     @Test
