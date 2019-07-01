@@ -42,6 +42,7 @@ connected
 
 read nukleus:end.ext ${mqtt:endEx()
                             .typeId(nukleus:id("mqtt"))
+                            .packetId(2)
                             .topic("a/b")
                             .build()}
 
@@ -49,6 +50,7 @@ read closed
 
 write nukleus:end.ext ${mqtt:endEx()
                              .typeId(nukleus:id("mqtt"))
+                             .packetId(2)
                              .reason(0)
                              .build()}
 

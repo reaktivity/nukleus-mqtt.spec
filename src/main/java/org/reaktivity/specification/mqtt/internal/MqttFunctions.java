@@ -232,6 +232,13 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttEndExBuilder packetId(
+           int packetId)
+        {
+            endExRW.packetId(packetId);
+            return this;
+        }
+
         public MqttEndExBuilder topic(
            String topic)
         {

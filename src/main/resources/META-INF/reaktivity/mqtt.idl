@@ -95,6 +95,7 @@ scope mqtt
 
         struct MqttEndEx extends core::stream::Extension
         {
+            uint16 packetId;
             list<mqtt::MqttString> topics;
             list<mqtt::MqttReasonCode> reasonCodes;
             list<mqtt::MqttUserProperty> userProperties;

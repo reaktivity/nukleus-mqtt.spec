@@ -141,6 +141,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
+                .packetId(1)
                 .topic("a/b")
                 .build();
 
@@ -158,6 +159,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
+                .packetId(1)
                 .topic("a/b")
                 .userProperty("key", "value")
                 .build();
@@ -182,6 +184,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
+                .packetId(1)
                 .reason(0x00)
                 .build();
 
