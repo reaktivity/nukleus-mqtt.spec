@@ -32,3 +32,5 @@ write nukleus:data.ext ${mqtt:dataEx()
                               .build()}
 
 write "hello"
+
+write close

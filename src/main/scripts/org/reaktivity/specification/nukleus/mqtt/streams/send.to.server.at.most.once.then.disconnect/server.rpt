@@ -35,3 +35,5 @@ read nukleus:data.ext ${mqtt:dataEx()
                               .build()}
 
 read "hello"
+
+read closed
