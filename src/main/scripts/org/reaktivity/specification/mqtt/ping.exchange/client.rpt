@@ -36,4 +36,3 @@ read [0x20 0x02]            # fixed header
 write [0xB0 0x00]           # fixed header = ping request
 
 read [0xC0 0x00]            # fixed header = ping response
-
