@@ -63,6 +63,18 @@ public class StreamIT
 
     @Test
     @Specification({
+            "${scripts}/connect.as.receiver.then.unsubscribe.then.disconnect/client",
+            "${scripts}/connect.as.receiver.then.unsubscribe.then.disconnect/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeThenUnsubscribeAndDisconnect() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
             "${scripts}/send.to.client.at.most.once/client",
             "${scripts}/send.to.client.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
