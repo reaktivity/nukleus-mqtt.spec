@@ -189,9 +189,9 @@ public class MqttFunctionsTest
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
-        MqttEndExFW mqttEndex = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
+        MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
 
-        mqttEndex.reasonCodes().forEach(reason ->
+        mqttEndEx.reasonCodes().forEach(reason ->
         {
             assertEquals(0x00, reason.reasonCode());
         });
