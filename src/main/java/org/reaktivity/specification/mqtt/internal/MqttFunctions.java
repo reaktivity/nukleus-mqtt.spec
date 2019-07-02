@@ -97,6 +97,13 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttBeginExBuilder packetId(
+                int packetId)
+        {
+            beginExRW.packetId(packetId);
+            return this;
+        }
+
         public MqttBeginExBuilder clientId(
            String clientId)
         {
@@ -220,6 +227,13 @@ public final class MqttFunctions
            int typeId)
         {
             endExRW.typeId(typeId);
+            return this;
+        }
+
+        public MqttEndExBuilder packetId(
+                int packetId)
+        {
+            endExRW.packetId(packetId);
             return this;
         }
 

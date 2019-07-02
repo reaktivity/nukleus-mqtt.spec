@@ -68,6 +68,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
+                .packetId(1)
                 .role("RECEIVER")
                 .clientId("abcd")
                 .topic("a/b", 0)
@@ -90,6 +91,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
+                .packetId(1)
                 .role("SENDER")
                 .clientId("abcd")
                 .reason(0x00)
@@ -137,6 +139,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
+                .packetId(1)
                 .topic("a/b")
                 .build();
 
@@ -154,6 +157,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
+                .packetId(1)
                 .topic("a/b")
                 .userProperty("key", "value")
                 .build();
@@ -178,6 +182,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
+                .packetId(1)
                 .reason(0x00)
                 .build();
 
