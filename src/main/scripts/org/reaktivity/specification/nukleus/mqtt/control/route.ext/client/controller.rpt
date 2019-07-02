@@ -18,7 +18,7 @@ property nukleiRG010101EC ${nuklei:directory("target/nukleus-itests").controlCap
 
 property controlRG010101EC ${nukleiRG010101EC.control()}
 
-property topicFilter "a/b"
+property topicFilter "sensor/one"
 
 connect "agrona://stream/bidirectional"
         option agrona:reader ${agrona:broadcastReceiver(controlRG010101EC.controller)}

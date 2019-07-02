@@ -20,7 +20,7 @@ property controlRG010001C ${nukleiRG010001C.control()}
 
 property routeAuthorization 0x0000_000000000000L
 
-property topicFilter "a/b"
+property topicFilter "sensor/one"
 
 connect "agrona://stream/bidirectional"
         option agrona:reader ${agrona:broadcastReceiver(controlRG010001C.controller)}
