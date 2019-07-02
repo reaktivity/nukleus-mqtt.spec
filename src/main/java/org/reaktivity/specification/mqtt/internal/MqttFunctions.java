@@ -159,13 +159,6 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder packetId(
-           int packetId)
-        {
-            dataExRW.packetId(packetId);
-            return this;
-        }
-
         public MqttDataExBuilder topic(
            String topic)
         {

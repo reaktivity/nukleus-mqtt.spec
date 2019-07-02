@@ -84,7 +84,6 @@ scope mqtt
 
         struct MqttDataEx extends core::stream::Extension
         {
-            uint16 packetId;
             string topic;
             uint32 messageExpiry;
             string contentType;

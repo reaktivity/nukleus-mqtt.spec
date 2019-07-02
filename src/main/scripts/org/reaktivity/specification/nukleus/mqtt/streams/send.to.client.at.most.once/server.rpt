@@ -42,7 +42,6 @@ connected
 
 write nukleus:data.ext ${mqtt:dataEx()
                               .typeId(nukleus:id("mqtt"))
-                              .packetId(2)
                               .topic("sensor/one")
                               .messageExpiry(15)
                               .contentType("message")

@@ -55,12 +55,12 @@ public class MqttFunctionsTest
     public void shouldEncodeMqttRouteEx()
     {
         final byte[] array = MqttFunctions.routeEx()
-                .topic("a/b")
+                .topic("sensor/one")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttRouteExFW mqttRouteEx = new MqttRouteExFW().wrap(buffer, 0, buffer.capacity());
-        assertEquals(mqttRouteEx.topic().asString(), "a/b");
+        assertEquals(mqttRouteEx.topic().asString(), "sensor/one");
     }
 
     @Test
@@ -70,18 +70,18 @@ public class MqttFunctionsTest
                 .typeId(0)
                 .packetId(1)
                 .role("RECEIVER")
-                .clientId("abcd")
-                .topic("a/b", 0)
+                .clientId("client")
+                .topic("sensor/one", 0)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
 
         assertEquals("RECEIVER", mqttBeginEx.role().toString());
-        assertEquals("abcd", mqttBeginEx.clientId().asString());
+        assertEquals("client", mqttBeginEx.clientId().asString());
         mqttBeginEx.topics().forEach(topic ->
         {
-            assertEquals("a/b", topic.topic().asString());
+            assertEquals("sensor/one", topic.topic().asString());
             assertEquals(0, topic.options());
         });
     }
@@ -93,7 +93,7 @@ public class MqttFunctionsTest
                 .typeId(0)
                 .packetId(1)
                 .role("SENDER")
-                .clientId("abcd")
+                .clientId("client")
                 .reason(0x00)
                 .build();
 
@@ -101,7 +101,7 @@ public class MqttFunctionsTest
         MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
 
         assertEquals("SENDER", mqttBeginEx.role().toString());
-        assertEquals("abcd", mqttBeginEx.clientId().asString());
+        assertEquals("client", mqttBeginEx.clientId().asString());
         mqttBeginEx.reasonCodes().forEach(reason ->
         {
             assertEquals(0x00, reason.reasonCode());
@@ -113,24 +113,22 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.dataEx()
                 .typeId(0)
-                .packetId(1)
-                .topic("a/b")
+                .topic("sensor/one")
                 .messageExpiry(15)
                 .contentType("message")
                 .payloadFormat("TEXT")
-                .respTopicInfo("a/b", "info")
+                .respTopicInfo("sensor/one", "info")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
 
         assertEquals(0, mqttDataEx.typeId());
-        assertEquals(1, mqttDataEx.packetId());
-        assertEquals("a/b", mqttDataEx.topic().asString());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.messageExpiry());
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.payloadFormat().toString());
-        assertEquals("a/b",  mqttDataEx.respTopicInfo().topic().asString());
+        assertEquals("sensor/one",  mqttDataEx.respTopicInfo().topic().asString());
         assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.respTopicInfo().correlationInfo().toString());
     }
 
@@ -140,7 +138,7 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
                 .packetId(1)
-                .topic("a/b")
+                .topic("sensor/one")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -148,7 +146,7 @@ public class MqttFunctionsTest
 
         mqttEndEx.topics().forEach(topic ->
         {
-            assertEquals("a/b", topic.value().asString());
+            assertEquals("sensor/one", topic.value().asString());
         });
     }
 
@@ -158,7 +156,7 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
                 .packetId(1)
-                .topic("a/b")
+                .topic("sensor/one")
                 .userProperty("key", "value")
                 .build();
 
@@ -167,7 +165,7 @@ public class MqttFunctionsTest
 
         mqttEndEx.topics().forEach(topic ->
         {
-            assertEquals("a/b", topic.value().asString());
+            assertEquals("sensor/one", topic.value().asString());
         });
 
         mqttEndEx.userProperties().forEach(p ->
