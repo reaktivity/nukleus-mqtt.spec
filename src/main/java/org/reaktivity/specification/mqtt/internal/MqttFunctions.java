@@ -113,8 +113,7 @@ public final class MqttFunctions
         }
 
         public MqttBeginExBuilder packetId(
-           int packetId
-        )
+           int packetId)
         {
             beginExRW.packetId(packetId);
             return this;
@@ -161,8 +160,7 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder packetId(
-           int packetId
-        )
+           int packetId)
         {
             dataExRW.packetId(packetId);
             return this;

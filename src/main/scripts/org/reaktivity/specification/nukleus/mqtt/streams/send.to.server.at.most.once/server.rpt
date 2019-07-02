@@ -27,11 +27,11 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                               .typeId(nukleus:id("mqtt"))
                               .packetId(2)
-                              .topic("a/b")
+                              .topic("sensor/one")
                               .messageExpiry(15)
                               .contentType("message")
                               .payloadFormat("TEXT")
-                              .respTopicInfo("a/b", "info")
+                              .respTopicInfo("sensor/one", "info")
                               .build()}
 
-read "hello"
+read "update"

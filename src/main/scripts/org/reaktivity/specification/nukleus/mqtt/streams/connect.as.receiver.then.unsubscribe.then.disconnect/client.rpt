@@ -22,15 +22,15 @@ connect await ROUTED_CLIENT
 write nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .role("RECEIVER")
-                             .clientId("mango")
+                             .clientId("client")
                              .packetId(1)
-                             .topic("a/b", 0)
+                             .topic("sensor/one", 0)
                              .build()}
 
 read nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
                               .role("SENDER")
-                              .clientId("mango")
+                              .clientId("client")
                               .packetId(1)
                               .reason(0)
                               .build()}
@@ -39,9 +39,7 @@ connected
 write nukleus:end.ext ${mqtt:endEx()
                              .typeId(nukleus:id("mqtt"))
                              .packetId(2)
-                             .topic("a/b")
+                             .topic("sensor/one")
                              .build()}
-
-write [0x7C 0x00]             # disconnect = normal
 
 write close
