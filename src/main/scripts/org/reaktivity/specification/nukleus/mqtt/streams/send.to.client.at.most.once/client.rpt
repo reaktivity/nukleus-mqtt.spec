@@ -23,7 +23,6 @@ write nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .role("RECEIVER")
                              .clientId("client")
-                             .packetId(1)
                              .topic("sensor/one", 0)
                              .build()}
 
@@ -31,7 +30,6 @@ read nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
                               .role("SENDER")
                               .clientId("client")
-                              .packetId(1)
                               .reason(0)
                               .build()}
 

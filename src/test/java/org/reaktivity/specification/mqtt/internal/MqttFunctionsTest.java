@@ -70,7 +70,6 @@ public class MqttFunctionsTest
                 .typeId(0)
                 .role("RECEIVER")
                 .clientId("abcd")
-                .packetId(1)
                 .topic("a/b", 0)
                 .build();
 
@@ -79,7 +78,6 @@ public class MqttFunctionsTest
 
         assertEquals("RECEIVER", mqttBeginEx.role().toString());
         assertEquals("abcd", mqttBeginEx.clientId().asString());
-        assertEquals(1, mqttBeginEx.packetId());
         mqttBeginEx.topics().forEach(topic ->
         {
             assertEquals("a/b", topic.topic().asString());
@@ -94,7 +92,6 @@ public class MqttFunctionsTest
                 .typeId(0)
                 .role("SENDER")
                 .clientId("abcd")
-                .packetId(1)
                 .reason(0x00)
                 .build();
 
@@ -103,7 +100,6 @@ public class MqttFunctionsTest
 
         assertEquals("SENDER", mqttBeginEx.role().toString());
         assertEquals("abcd", mqttBeginEx.clientId().asString());
-        assertEquals(1, mqttBeginEx.packetId());
         mqttBeginEx.reasonCodes().forEach(reason ->
         {
             assertEquals(0x00, reason.reasonCode());
@@ -141,7 +137,6 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
-                .packetId(1)
                 .topic("a/b")
                 .build();
 
@@ -159,7 +154,6 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
-                .packetId(1)
                 .topic("a/b")
                 .userProperty("key", "value")
                 .build();
@@ -184,7 +178,6 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
-                .packetId(1)
                 .reason(0x00)
                 .build();
 

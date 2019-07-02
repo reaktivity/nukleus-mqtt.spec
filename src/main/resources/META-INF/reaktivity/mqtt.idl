@@ -76,7 +76,6 @@ scope mqtt
         {
             mqtt::MqttRole role;
             string clientId;
-            uint16 packetId;
             list<mqtt::MqttTopicFormat> topics;
             list<mqtt::MqttReasonCode> reasonCodes;
             list<mqtt::MqttUserProperty> properties;
@@ -95,7 +94,6 @@ scope mqtt
 
         struct MqttEndEx extends core::stream::Extension
         {
-            uint16 packetId;
             list<mqtt::MqttString> topics;
             list<mqtt::MqttReasonCode> reasonCodes;
             list<mqtt::MqttUserProperty> userProperties;
