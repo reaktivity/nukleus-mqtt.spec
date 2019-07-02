@@ -192,7 +192,7 @@ public final class MqttFunctions
            String correlationData)
         {
             dataExRW.respTopicInfo(r -> r.topic(topic)
-                    .correlationInfo(c -> c.bytes(b -> b.set(correlationData.getBytes()))));
+                                         .correlationInfo(c -> c.bytes(b -> b.set(correlationData.getBytes()))));
             return this;
         }
 
