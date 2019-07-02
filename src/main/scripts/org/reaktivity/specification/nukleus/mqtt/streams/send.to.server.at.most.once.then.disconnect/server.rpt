@@ -36,4 +36,6 @@ read nukleus:data.ext ${mqtt:dataEx()
 
 read "hello"
 
+read [0x7C 0x00]              # disconnect = normal
+
 read closed

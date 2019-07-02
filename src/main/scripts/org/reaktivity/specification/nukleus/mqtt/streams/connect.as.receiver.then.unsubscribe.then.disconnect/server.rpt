@@ -46,4 +46,6 @@ read nukleus:end.ext ${mqtt:endEx()
                             .topic("a/b")
                             .build()}
 
+read [0x7C 0x00]            # disconnect = normal
+
 read closed

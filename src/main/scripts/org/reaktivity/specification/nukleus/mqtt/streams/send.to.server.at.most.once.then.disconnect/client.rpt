@@ -33,4 +33,6 @@ write nukleus:data.ext ${mqtt:dataEx()
 
 write "hello"
 
+write [0x7C 0x00]             # disconnect = normal
+
 write close

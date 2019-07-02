@@ -42,4 +42,6 @@ write nukleus:end.ext ${mqtt:endEx()
                              .topic("a/b")
                              .build()}
 
+write [0x7C 0x00]             # disconnect = normal
+
 write close
