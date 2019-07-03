@@ -27,7 +27,7 @@ import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
-public class ConnectionIT
+public class PingIT
 {
     private final K3poRule k3po = new K3poRule()
             .addScriptRoot("scripts", "org/reaktivity/specification/mqtt");
@@ -38,8 +38,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}/connection/client",
-            "${scripts}/connection/server"})
+            "${scripts}/ping.exchange/client",
+            "${scripts}/ping.exchange/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnect() throws Exception
     {

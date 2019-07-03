@@ -14,21 +14,25 @@
 # under the License.
 #
 
-connect await ROUTED_SERVER
-        "nukleus://streams/mqtt#0"
-  option nukleus:window 8192
-  option nukleus:transmission "duplex"
+property nukleiUR020101N ${nuklei:directory("target/nukleus-itests").controlCapacity(1024, 1024)}
+
+property controlUR020101N ${nukleiUR020101N.controlNew()}
+
+connect await ROUTED_CLIENT
+        "agrona://stream/bidirectional"
+        option agrona:reader ${agrona:manyToOneReader(controlUR020101N.nukleus)}
+        option agrona:writer ${agrona:broadcastTransmitter(controlUR020101N.controller)}
 
 connected
 
-write [0x10 0x11]             # CONNECT header
-      [0x00 0x04] "MQTT"      # protocol name
-      [0x05]                  # protocol version
-      [0x02]                  # connect flags = clean start
-      [0x00 0x3c]             # keep alive = 60s
-      [0x00]                  # properties = none
-      [0x00 0x04] "client"    # clientId
+read 0x00000002
+read (long:correlationIdUR020101N)
+read ${core:string("mqtt")}
+read [0..8] # routeId
 
-read [0x20 0x02]              # CONNACK header
-     [0x00]                   # connect flags = none
-     [0x00]                   # reason code
+write 0x40000002
+write ${correlationIdUR020101N}
+write flush
+
+close
+closed

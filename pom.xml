@@ -7,7 +7,8 @@
   <groupId>org.reaktivity</groupId>
   <artifactId>nukleus-mqtt.spec</artifactId>
   <version>develop-SNAPSHOT</version>
-  <name>MQTT Nukleus Specification</name>
+  <name>Mqtt Nukleus Specification</name>
+  <description>Mqtt Nukleus Specification</description>
   <url>https://github.com/reaktivity/nukleus-mqtt.spec</url>
 
   <licenses>
@@ -48,7 +49,7 @@
     <k3po.version>3.0.0-alpha-101</k3po.version>
     <k3po.nukleus.ext.version>0.42</k3po.nukleus.ext.version>
 
-    <nukleus.plugin.version>0.33</nukleus.plugin.version>
+    <nukleus.plugin.version>0.35</nukleus.plugin.version>
     <nukleus.spec.version>0.36</nukleus.spec.version>
   </properties>
 
@@ -94,10 +95,12 @@
         <version>${nukleus.plugin.version}</version>
         <configuration>
           <scopeNames>mqtt</scopeNames>
+          <packageName>org.reaktivity.specification.mqtt.internal.types</packageName>
         </configuration>
         <executions>
           <execution>
             <goals>
+              <goal>generate</goal>
               <goal>validate</goal>
             </goals>
           </execution>
@@ -168,6 +171,9 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.2</version>
         <configuration>
+          <excludes>
+            <exclude>org/reaktivity/specification/mqtt/internal/types/**/*.class</exclude>
+          </excludes>
           <rules>
             <rule>
               <element>BUNDLE</element>
