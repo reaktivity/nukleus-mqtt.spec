@@ -24,34 +24,26 @@ accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .packetId(3)
                              .role("RECEIVER")
                              .clientId("client")
-                             .topic("sensor/one", 0)
+                             .topic("sensor/one")
+                             .topicOptions(0)
                              .build()}
 
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
-                              .packetId(6)
                               .role("SENDER")
                               .clientId("client")
-                              .reason(0)
+                              .topic("sensor/one")
+                              .topicOptions(0)
                               .build()}
 
 connected
 
 read nukleus:end.ext ${mqtt:endEx()
                             .typeId(nukleus:id("mqtt"))
-                            .packetId(3)
-                            .topic("sensor/one")
                             .build()}
 
 read closed
-
-write nukleus:end.ext ${mqtt:endEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .packetId(6)
-                             .reason(0)
-                             .build()}
 
 write close

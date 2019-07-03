@@ -31,6 +31,7 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 
 public class MqttFunctionsTest
 {
@@ -68,10 +69,10 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
-                .packetId(1)
                 .role("RECEIVER")
                 .clientId("client")
-                .topic("sensor/one", 0)
+                .topic("sensor/one")
+                .topicOptions(0)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -79,11 +80,8 @@ public class MqttFunctionsTest
 
         assertEquals("RECEIVER", mqttBeginEx.role().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
-        mqttBeginEx.topics().forEach(topic ->
-        {
-            assertEquals("sensor/one", topic.topic().asString());
-            assertEquals(0, topic.options());
-        });
+        assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(0, mqttBeginEx.topicOptions());
     }
 
     @Test
@@ -91,10 +89,10 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
-                .packetId(1)
                 .role("SENDER")
                 .clientId("client")
-                .reason(0x00)
+                .topic("sensor/one")
+                .topicOptions(0)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -102,10 +100,8 @@ public class MqttFunctionsTest
 
         assertEquals("SENDER", mqttBeginEx.role().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
-        mqttBeginEx.reasonCodes().forEach(reason ->
-        {
-            assertEquals(0x00, reason.reasonCode());
-        });
+        assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(0, mqttBeginEx.topicOptions());
     }
 
     @Test
@@ -117,7 +113,8 @@ public class MqttFunctionsTest
                 .messageExpiry(15)
                 .contentType("message")
                 .payloadFormat("TEXT")
-                .respTopicInfo("sensor/one", "info")
+                .respTopic("sensor/one")
+                .respTopicCorrelationData("info")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -128,8 +125,8 @@ public class MqttFunctionsTest
         assertEquals(15, mqttDataEx.messageExpiry());
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.payloadFormat().toString());
-        assertEquals("sensor/one",  mqttDataEx.respTopicInfo().topic().asString());
-        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.respTopicInfo().correlationInfo().toString());
+        assertEquals("sensor/one",  mqttDataEx.respTopic().asString());
+        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationInfo().toString());
     }
 
     @Test
@@ -137,59 +134,24 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.endEx()
                 .typeId(0)
-                .packetId(1)
-                .topic("sensor/one")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
-
-        mqttEndEx.topics().forEach(topic ->
-        {
-            assertEquals("sensor/one", topic.value().asString());
-        });
+        assertEquals(0, mqttEndEx.typeId());
     }
 
     @Test
-    public void shouldEncodeMqttEndExAsUnsubscribeWithUserProperty()
+    public void shouldEncodeMqttAbortExAsUnsubscribe()
     {
-        final byte[] array = MqttFunctions.endEx()
+        final byte[] array = MqttFunctions.abortEx()
                 .typeId(0)
-                .packetId(1)
-                .topic("sensor/one")
-                .userProperty("key", "value")
+                .reason(0xF9)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
-        MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
-
-        mqttEndEx.topics().forEach(topic ->
-        {
-            assertEquals("sensor/one", topic.value().asString());
-        });
-
-        mqttEndEx.userProperties().forEach(p ->
-        {
-            assertEquals("key", p.key().asString());
-            assertEquals("value", p.value().asString());
-        });
-    }
-
-    @Test
-    public void shouldEncodeMqttEndExAsUnsuback()
-    {
-        final byte[] array = MqttFunctions.endEx()
-                .typeId(0)
-                .packetId(1)
-                .reason(0x00)
-                .build();
-
-        DirectBuffer buffer = new UnsafeBuffer(array);
-        MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
-
-        mqttEndEx.reasonCodes().forEach(reason ->
-        {
-            assertEquals(0x00, reason.reasonCode());
-        });
+        MqttAbortExFW mqttAbortEx = new MqttAbortExFW().wrap(buffer, 0, buffer.capacity());
+        assertEquals(0, mqttAbortEx.typeId());
+        assertEquals(0xF9, mqttAbortEx.reason());
     }
 }

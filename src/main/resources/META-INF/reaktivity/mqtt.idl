@@ -16,18 +16,6 @@
 
 scope mqtt
 {
-    struct MqttTopicFormat
-    {
-        string topic;
-        uint8 options;
-    }
-
-    struct MqttResponseTopicFormat
-    {
-        string topic;
-        mqtt::MqttBinary correlationInfo;
-    }
-
     enum MqttRole
     {
         SENDER,
@@ -40,11 +28,6 @@ scope mqtt
         TEXT
     }
 
-    struct MqttReasonCode
-    {
-        uint8 reasonCode;
-    }
-
     struct MqttBinary
     {
         uint16 length;
@@ -54,11 +37,6 @@ scope mqtt
     struct MqttUserProperty
     {
         string key;
-        string value;
-    }
-
-    struct MqttString
-    {
         string value;
     }
 
@@ -74,12 +52,10 @@ scope mqtt
     {
         struct MqttBeginEx extends core::stream::Extension
         {
-            uint16 packetId;
             mqtt::MqttRole role;
             string clientId;
-            list<mqtt::MqttTopicFormat> topics;
-            list<mqtt::MqttReasonCode> reasonCodes;
-            list<mqtt::MqttUserProperty> properties;
+            string topic;
+            uint8 topicOptions;
         }
 
         struct MqttDataEx extends core::stream::Extension
@@ -88,16 +64,19 @@ scope mqtt
             uint32 messageExpiry;
             string contentType;
             mqtt::MqttPayloadFormat payloadFormat;
-            mqtt::MqttResponseTopicFormat respTopicInfo;
+            string respTopic;
+            mqtt::MqttBinary correlationInfo;
             list<mqtt::MqttUserProperty> properties;
         }
 
         struct MqttEndEx extends core::stream::Extension
         {
-            uint16 packetId;
-            list<mqtt::MqttString> topics;
-            list<mqtt::MqttReasonCode> reasonCodes;
-            list<mqtt::MqttUserProperty> userProperties;
+
+        }
+
+        struct MqttAbortEx extends core::stream::Extension
+        {
+            uint8 reason;
         }
     }
 }

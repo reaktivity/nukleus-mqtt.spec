@@ -27,6 +27,7 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 
 public final class MqttFunctions
 {
@@ -52,6 +53,12 @@ public final class MqttFunctions
     public static MqttEndExBuilder endEx()
     {
         return new MqttEndExBuilder();
+    }
+
+    @Function
+    public static MqttAbortExBuilder abortEx()
+    {
+        return new MqttAbortExBuilder();
     }
 
     public static final class MqttRouteExBuilder
@@ -97,13 +104,6 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttBeginExBuilder packetId(
-                int packetId)
-        {
-            beginExRW.packetId(packetId);
-            return this;
-        }
-
         public MqttBeginExBuilder clientId(
            String clientId)
         {
@@ -112,17 +112,16 @@ public final class MqttFunctions
         }
 
         public MqttBeginExBuilder topic(
-           String topic,
-           int options)
+           String topic)
         {
-            beginExRW.topicsItem(a -> a.topic(topic).options(options));
+            beginExRW.topic(topic);
             return this;
         }
 
-        public MqttBeginExBuilder reason(
-           int reason)
+        public MqttBeginExBuilder topicOptions(
+           int options)
         {
-            beginExRW.reasonCodesItem(b -> b.reasonCode(reason));
+            beginExRW.topicOptions(options);
             return this;
         }
 
@@ -187,12 +186,17 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder respTopicInfo(
-           String topic,
-           String correlationData)
+        public MqttDataExBuilder respTopic(
+           String topic)
         {
-            dataExRW.respTopicInfo(r -> r.topic(topic)
-                                         .correlationInfo(c -> c.bytes(b -> b.set(correlationData.getBytes()))));
+            dataExRW.respTopic(topic);
+            return this;
+        }
+
+        public MqttDataExBuilder respTopicCorrelationData(
+                String info)
+        {
+            dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes())));
             return this;
         }
 
@@ -223,40 +227,44 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttEndExBuilder packetId(
-                int packetId)
-        {
-            endExRW.packetId(packetId);
-            return this;
-        }
-
-        public MqttEndExBuilder topic(
-           String topic)
-        {
-            endExRW.topicsItem(t -> t.value(topic));
-            return this;
-        }
-
-        public MqttEndExBuilder reason(
-           int reason)
-        {
-            endExRW.reasonCodesItem(b -> b.reasonCode(reason));
-            return this;
-        }
-
-        public MqttEndExBuilder userProperty(
-           String key,
-           String value)
-        {
-            endExRW.userPropertiesItem(p -> p.key(key).value(value));
-            return this;
-        }
-
         public byte[] build()
         {
             final MqttEndExFW endEx = endExRW.build();
             final byte[] array = new byte[endEx.sizeof()];
             endEx.buffer().getBytes(endEx.offset(), array);
+            return array;
+        }
+    }
+
+    public static final class MqttAbortExBuilder
+    {
+        private final MqttAbortExFW.Builder abortExRW;
+
+        private MqttAbortExBuilder()
+        {
+            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
+            this.abortExRW = new MqttAbortExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
+        }
+
+        public MqttAbortExBuilder typeId(
+           int typeId)
+        {
+            abortExRW.typeId(typeId);
+            return this;
+        }
+
+        public MqttAbortExBuilder reason(
+           int reason)
+        {
+            abortExRW.reason(reason);
+            return this;
+        }
+
+        public byte[] build()
+        {
+            final MqttAbortExFW abortEx = abortExRW.build();
+            final byte[] array = new byte[abortEx.sizeof()];
+            abortEx.buffer().getBytes(abortEx.offset(), array);
             return array;
         }
     }
