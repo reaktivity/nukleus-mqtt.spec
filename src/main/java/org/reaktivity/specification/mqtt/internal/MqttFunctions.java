@@ -21,6 +21,8 @@ import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 
+import java.nio.charset.StandardCharsets;
+
 import org.reaktivity.specification.mqtt.internal.types.MqttRole;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
@@ -189,7 +191,7 @@ public final class MqttFunctions
         public MqttDataExBuilder correlationInfo(
            String info)
         {
-            dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes())));
+            dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes(StandardCharsets.UTF_8))));
             return this;
         }
 
