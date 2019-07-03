@@ -55,7 +55,7 @@ scope mqtt
             mqtt::MqttRole role;
             string clientId;
             string topic;
-            uint8 topicOptions;
+            uint8 topicOptions = 0;
         }
 
         struct MqttDataEx extends core::stream::Extension
@@ -63,8 +63,8 @@ scope mqtt
             string topic;
             uint32 messageExpiry;
             string contentType;
-            mqtt::MqttPayloadFormat payloadFormat;
-            string respTopic;
+            mqtt::MqttPayloadFormat format;
+            string responseTopic;
             mqtt::MqttBinary correlationInfo;
             list<mqtt::MqttUserProperty> properties;
         }

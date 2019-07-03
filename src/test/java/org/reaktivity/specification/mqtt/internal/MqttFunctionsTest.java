@@ -112,9 +112,9 @@ public class MqttFunctionsTest
                 .topic("sensor/one")
                 .messageExpiry(15)
                 .contentType("message")
-                .payloadFormat("TEXT")
-                .respTopic("sensor/one")
-                .respTopicCorrelationData("info")
+                .format("TEXT")
+                .responseTopic("sensor/one")
+                .correlationInfo("info")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -124,8 +124,8 @@ public class MqttFunctionsTest
         assertEquals("sensor/one", mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.messageExpiry());
         assertEquals("message", mqttDataEx.contentType().asString());
-        assertEquals("TEXT", mqttDataEx.payloadFormat().toString());
-        assertEquals("sensor/one",  mqttDataEx.respTopic().asString());
+        assertEquals("TEXT", mqttDataEx.format().toString());
+        assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationInfo().toString());
     }
 
@@ -146,7 +146,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.abortEx()
                 .typeId(0)
-                .reason(0xF9)
+                .reason(0xf9)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);

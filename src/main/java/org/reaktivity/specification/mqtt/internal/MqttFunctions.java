@@ -179,21 +179,21 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder payloadFormat(
+        public MqttDataExBuilder format(
            String format)
         {
-            dataExRW.payloadFormat(p -> p.set(MqttPayloadFormat.valueOf(format)));
+            dataExRW.format(p -> p.set(MqttPayloadFormat.valueOf(format)));
             return this;
         }
 
-        public MqttDataExBuilder respTopic(
+        public MqttDataExBuilder responseTopic(
            String topic)
         {
-            dataExRW.respTopic(topic);
+            dataExRW.responseTopic(topic);
             return this;
         }
 
-        public MqttDataExBuilder respTopicCorrelationData(
+        public MqttDataExBuilder correlationInfo(
                 String info)
         {
             dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes())));

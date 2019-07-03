@@ -26,9 +26,9 @@ write nukleus:data.ext ${mqtt:dataEx()
                               .topic("sensor/one")
                               .messageExpiry(15)
                               .contentType("message")
-                              .payloadFormat("TEXT")
-                              .respTopic("sensor/one")
-                              .respTopicCorrelationData("info")
+                              .format("TEXT")
+                              .responseTopic("sensor/one")
+                              .correlationInfo("info")
                               .build()}
 
 write "update"
