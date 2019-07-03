@@ -72,7 +72,6 @@ public class MqttFunctionsTest
                 .role("RECEIVER")
                 .clientId("client")
                 .topic("sensor/one")
-                .topicOptions(0)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -81,7 +80,6 @@ public class MqttFunctionsTest
         assertEquals("RECEIVER", mqttBeginEx.role().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
-        assertEquals(0, mqttBeginEx.topicOptions());
     }
 
     @Test
@@ -92,7 +90,6 @@ public class MqttFunctionsTest
                 .role("SENDER")
                 .clientId("client")
                 .topic("sensor/one")
-                .topicOptions(0)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -101,7 +98,6 @@ public class MqttFunctionsTest
         assertEquals("SENDER", mqttBeginEx.role().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
-        assertEquals(0, mqttBeginEx.topicOptions());
     }
 
     @Test
@@ -110,7 +106,7 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                 .typeId(0)
                 .topic("sensor/one")
-                .messageExpiry(15)
+                .expiryInterval(15)
                 .contentType("message")
                 .format("TEXT")
                 .responseTopic("sensor/one")
@@ -122,7 +118,7 @@ public class MqttFunctionsTest
 
         assertEquals(0, mqttDataEx.typeId());
         assertEquals("sensor/one", mqttDataEx.topic().asString());
-        assertEquals(15, mqttDataEx.messageExpiry());
+        assertEquals(15, mqttDataEx.expiryInterval());
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());

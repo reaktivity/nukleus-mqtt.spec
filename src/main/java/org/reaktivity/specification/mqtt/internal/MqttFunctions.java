@@ -118,13 +118,6 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttBeginExBuilder topicOptions(
-           int options)
-        {
-            beginExRW.topicOptions(options);
-            return this;
-        }
-
         public MqttBeginExBuilder role(
            String role)
         {
@@ -165,10 +158,10 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder messageExpiry(
+        public MqttDataExBuilder expiryInterval(
            long msgExp)
         {
-            dataExRW.messageExpiry(msgExp);
+            dataExRW.expiryInterval(msgExp);
             return this;
         }
 
