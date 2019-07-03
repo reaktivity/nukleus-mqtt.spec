@@ -148,6 +148,6 @@ public class MqttFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttAbortExFW mqttAbortEx = new MqttAbortExFW().wrap(buffer, 0, buffer.capacity());
         assertEquals(0, mqttAbortEx.typeId());
-        assertEquals(0xF9, mqttAbortEx.reason());
+        assertEquals(0xf9, mqttAbortEx.reason());
     }
 }
