@@ -27,11 +27,11 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .build()}
 
 read nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .role("SENDER")
-                              .clientId("client")
-                              .topic("sensor/one")
-                              .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .role("SENDER")
+                             .clientId("client")
+                             .topic("sensor/one")
+                             .build()}
 connected
 
 write close
