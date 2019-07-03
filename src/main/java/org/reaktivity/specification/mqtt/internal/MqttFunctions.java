@@ -187,7 +187,7 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder correlationInfo(
-                String info)
+           String info)
         {
             dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes())));
             return this;
