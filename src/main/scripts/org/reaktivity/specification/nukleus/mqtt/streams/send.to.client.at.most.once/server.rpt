@@ -39,14 +39,14 @@ write nukleus:begin.ext ${mqtt:beginEx()
 connected
 
 write nukleus:data.ext ${mqtt:dataEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .topic("sensor/one")
-                              .expiryInterval(15)
-                              .contentType("message")
-                              .format("TEXT")
-                              .responseTopic("sensor/one")
-                              .correlationInfo("info")
-                              .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("sensor/one")
+                             .expiryInterval(15)
+                             .contentType("message")
+                             .format("TEXT")
+                             .responseTopic("sensor/one")
+                             .correlationInfo("info")
+                             .build()}
 
 write "update"
 

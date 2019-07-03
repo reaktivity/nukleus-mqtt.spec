@@ -32,8 +32,8 @@ read [0..8] # authorization
 read ${core:string("mqtt#0")}
 read ${core:string("target#0")}
 read ${mqtt:routeEx()
-            .topic("sensor/one")
-            .build()}
+           .topic("sensor/one")
+           .build()}
 
 write 0x40000001
 write ${correlationIdRG010101N}
