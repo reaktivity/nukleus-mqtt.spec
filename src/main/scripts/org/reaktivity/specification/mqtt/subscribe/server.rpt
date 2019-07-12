@@ -34,6 +34,7 @@ read   [0x10 0x11]                   # CONNECT header
 write  [0x20 0x02]                   # CONNACK header
        [0x00]                        # connect flags = none
        [0x00]                        # reason code
+       [0x00]                        # properties = none
 
 read   [0x82 0x0B]                   # SUBSCRIBE header
        [0x00 0x01 0x00]              # packetId = 1

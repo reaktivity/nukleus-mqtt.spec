@@ -34,6 +34,7 @@ read  [0x10 0x11]                    # CONNECT header
 write [0x20 0x02]                    # CONNACK header
       [0x00]                         # connect flags = none
       [0x00]                         # reason code
+      [0x00]                         # properties = none
 
 read  [0x30 0x0C]                    # PUBLISH header
       [0x00 0x03] "sensor/one"       # topic filter
