@@ -38,8 +38,8 @@ public class PingIT
 
     @Test
     @Specification({
-            "${scripts}/ping.exchange/client",
-            "${scripts}/ping.exchange/server"})
+            "${scripts}/ping/client",
+            "${scripts}/ping/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnect() throws Exception
     {

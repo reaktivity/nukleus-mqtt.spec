@@ -38,10 +38,22 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}/connection/client",
-            "${scripts}/connection/server"})
+            "${scripts}/connect/client",
+            "${scripts}/connect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnect() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/disconnect/client",
+        "${scripts}/disconnect/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectThenDisconnect() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

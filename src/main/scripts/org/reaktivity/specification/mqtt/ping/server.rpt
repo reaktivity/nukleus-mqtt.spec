@@ -14,14 +14,16 @@
 # under the License.
 #
 
-connect await ROUTED_SERVER
-        "nukleus://streams/mqtt#0"
+property serverTransport "nukleus://streams/target#0"
+
+accept ${serverTransport}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
+accepted
 connected
 
-write [0x10 0x11]           # fixed header
+read  [0x10 0x11]           # fixed header
       [0x00 0x04] "MQTT"    # protocol name
       [0x05]                # protocol version
       [0x02]                # connect flags = clean start
@@ -29,11 +31,11 @@ write [0x10 0x11]           # fixed header
       [0x00]                # properties = none
       [0x00 0x04] "abcd"    # clientId
 
-read [0x20 0x02]            # fixed header
-     [0x00]                 # connect flags = none
-     [0x00]                 # reason code
-     [0x00]                  # properties = none
+write [0x20 0x03]           # fixed header
+      [0x00]                # connect flags = none
+      [0x00]                # reason code
+      [0x00]                # properties = none
 
-write [0xB0 0x00]           # fixed header = ping request
+read  [0xC0 0x00]           # fixed header = ping request
 
-read [0xC0 0x00]            # fixed header = ping response
+write [0xD0 0x00]           # fixed header = ping response
