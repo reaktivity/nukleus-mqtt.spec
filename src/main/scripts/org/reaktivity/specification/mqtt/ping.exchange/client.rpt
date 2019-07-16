@@ -32,8 +32,8 @@ write [0x10 0x11]           # fixed header
 read [0x20 0x02]            # fixed header
      [0x00]                 # connect flags = none
      [0x00]                 # reason code
-     [0x00]                  # properties = none
+     [0x00]                 # properties = none
 
-write [0xB0 0x00]           # fixed header = ping request
+write [0xC0 0x00]           # fixed header = ping request
 
-read [0xC0 0x00]            # fixed header = ping response
+read [0xD0 0x00]            # fixed header = ping response
