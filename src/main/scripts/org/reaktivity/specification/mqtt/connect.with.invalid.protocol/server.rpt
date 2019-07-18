@@ -41,7 +41,7 @@ read  [0x10 0x13]             # CONNECT header
 
 write [0x20 0x03]              # CONNACK header
       [0x00]                   # connect flags = none
-      [0x80]                   # reason code
+      [0x84]                   # reason code
       [0x00]                   # properties = none
 
 write close
