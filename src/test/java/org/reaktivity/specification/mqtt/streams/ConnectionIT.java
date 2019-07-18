@@ -60,4 +60,16 @@ public class ConnectionIT
         k3po.finish();
     }
 
+    @Test
+    @Specification({
+        "${scripts}/send.more.data.before.connack/client",
+        "${scripts}/send.more.data.before.connack/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldDisconnectAfterClientSendsMoreDataBeforeConnack() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
 }

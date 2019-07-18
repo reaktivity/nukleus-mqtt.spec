@@ -27,14 +27,14 @@ write [0x10 0x13]           # fixed header
       [0x02]                # connect flags = clean start
       [0x00 0x3c]           # keep alive = 60s
       [0x00]                # properties = none
-      [0x00 0x04] "abcd"    # clientId
+      [0x00 0x04] "client"    # clientId
 
 read  [0x20 0x03]           # fixed header
       [0x00]                # connect flags = none
       [0x00]                # reason code
       [0x00]                # properties = none
 
-write [0xE0 0x00]           # disconnect = normal
+write [0xE0 0x02]           # disconnect = normal
       [0x00]                # normal disconnect
       [0x00]                # properties = none
 
