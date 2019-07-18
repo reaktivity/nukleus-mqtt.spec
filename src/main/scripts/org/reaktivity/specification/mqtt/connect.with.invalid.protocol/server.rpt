@@ -25,7 +25,7 @@ connected
 
 read  [0x10 0x13]             # CONNECT header
       [0x00 0x04] "MQTT"      # protocol name
-      [0x05]                  # protocol version
+      [0x03]                  # protocol version
       [0x02]                  # connect flags = clean start
       [0x00 0x3c]             # keep alive = 60s
       [0x00]                  # properties = none
