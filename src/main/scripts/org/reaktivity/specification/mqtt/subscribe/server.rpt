@@ -38,7 +38,7 @@ write  [0x20 0x03]                   # CONNACK header
 
 read   [0x82 0x10]                   # SUBSCRIBE header
        [0x00 0x01 0x00]              # packetId = 1
-       [0x00 0x03] "sensor/one"      # topic filter
+       [0x00 0x09] "sensor/one"      # topic filter
        [0x00]                        # subscription opts = QoS 0
 
 write  [0x90 0x02]                   # SUBACK header
