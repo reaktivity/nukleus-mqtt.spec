@@ -62,8 +62,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect.with.invalid.protocol/client",
-        "${scripts}/connect.with.invalid.protocol/server"})
+        "${scripts}/malformed.connect/invalid.protocol.version/client",
+        "${scripts}/malformed.connect/invalid.protocol.version/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectInvalidProtocolVersion() throws Exception
     {
@@ -74,8 +74,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/client.sends.malformed.connect.flags/client",
-        "${scripts}/client.sends.malformed.connect.flags/server"})
+        "${scripts}/malformed.connect/invalid.flags/client",
+        "${scripts}/malformed.connect/invalid.flags/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectMalformedConnectPacket() throws Exception
     {
