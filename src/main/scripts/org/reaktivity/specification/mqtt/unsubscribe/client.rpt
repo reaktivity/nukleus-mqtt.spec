@@ -27,7 +27,7 @@ write  [0x10 0x13]                   # CONNECT header
        [0x02]                        # connect flags = clean start
        [0x00 0x3C]                   # keep alive = 60s
        [0x00]                        # properties = none
-       [0x00 0x04] "client"          # clientId
+       [0x00 0x05] "client"          # clientId
 
 read   [0x20 0x03]                   # CONNACK header
        [0x00]                        # connect flags = none
@@ -36,7 +36,7 @@ read   [0x20 0x03]                   # CONNACK header
 
 write  [0x82 0x10]                   # SUBSCRIBE header
        [0x00 0x01 0x00]              # packetId = 1
-       [0x00 0x03] "sensor/one"      # topic filter
+       [0x00 0x0a] "sensor/one"      # topic filter
        [0x00]                        # subscription opts = QoS 0
 
 read   [0x90 0x02]                   # SUBACK header
@@ -45,7 +45,7 @@ read   [0x90 0x02]                   # SUBACK header
 
 write  [0xa2 0x0D]                   # UNSUBSCRIBE header
        [0x00]                        # properties = none
-       [0x00 0x09] "sensor/one"      # topic filter
+       [0x00 0x0a] "sensor/one"      # topic filter
 
 read   [0xa0 0x02]                   # UNSUBACK header
        [0x00]                        # properties = none
