@@ -45,7 +45,8 @@ write [0x90 0x02]                   # SUBACK header
       [0x00]                        # properties = none
       [0x00]                        # reason code
 
-read  [0xa2 0x0D]                   # UNSUBSCRIBE header
+read  [0xa2 0x0f]                   # UNSUBSCRIBE header
+      [0x00 0x01]                   # packetId = 1
       [0x00]                        # properties = none
       [0x00 0x0a] "sensor/one"      # topic filter
 
