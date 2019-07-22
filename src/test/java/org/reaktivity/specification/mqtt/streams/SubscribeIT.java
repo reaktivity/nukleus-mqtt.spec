@@ -38,10 +38,22 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/client",
-            "${scripts}/server"})
+            "${scripts}/successful/client",
+            "${scripts}/successful/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToOneTopicToOneTopic() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+            "${scripts}/subscribe.with.no.topic.filters/client",
+            "${scripts}/subscribe.with.no.topic.filters/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectSubscribeWithNoTopicFilters() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
