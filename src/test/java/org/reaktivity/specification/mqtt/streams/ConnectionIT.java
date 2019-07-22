@@ -84,4 +84,16 @@ public class ConnectionIT
         k3po.finish();
     }
 
+    @Test
+    @Specification({
+        "${scripts}/connect/fragmented.connect.packet/client",
+        "${scripts}/connect/fragmented.connect.packet/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldProcessFragmentedConnectPacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
 }
