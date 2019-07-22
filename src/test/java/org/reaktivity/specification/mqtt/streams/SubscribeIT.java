@@ -50,8 +50,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/subscribe.with.no.topic.filters/client",
-            "${scripts}/subscribe.with.no.topic.filters/server"})
+            "${scripts}/no.topic.filters/client",
+            "${scripts}/no.topic.filters/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectSubscribeWithNoTopicFilters() throws Exception
     {
