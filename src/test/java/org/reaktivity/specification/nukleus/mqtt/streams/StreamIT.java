@@ -144,4 +144,64 @@ public class StreamIT
         k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
+
+    @Test
+    @Specification({
+            "${scripts}/subscribe/no.topic.filters/client",
+            "${scripts}/subscribe/no.topic.filters/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldEndWhenTopicFiltersIsEmpty() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+@Test
+    @Specification({
+            "${scripts}/subscribe/two.topics.both.wildcard.from.one.subscribe/client",
+            "${scripts}/subscribe/two.topics.both.wildcard.from.one.subscribe/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeToTwoTopicsBothWildcardFromSameSubscribePacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+            "${scripts}/subscribe/two.topics.both.wildcard.from.two.subscribes/client",
+            "${scripts}/subscribe/two.topics.both.wildcard.from.two.subscribes/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribetoTwoTopicsBothWildcardFromDifferentSubscribePackets() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+            "${scripts}/subscribe/two.topics.one.exact.from.one.subscribe/client",
+            "${scripts}/subscribe/two.topics.one.exact.from.one.subscribe/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeToTwoTopicsOneExactFromSameSubscribePacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+            "${scripts}/subscribe/two.topics.one.exact.from.two.subscribes/client",
+            "${scripts}/subscribe/two.topics.one.exact.from.two.subscribes/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribetoTwoTopicsOneExactFromDifferentSubscribePackets() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
 }

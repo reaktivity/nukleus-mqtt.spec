@@ -26,14 +26,16 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .role("SENDER")
                              .clientId("client")
-                             .topic("")
+                             .topic("sensor/#")
+                             .subscriptionId(1)
+                             .build()}
+
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .role("SENDER")
+                             .clientId("client")
+                             .topic("device/#")
                              .subscriptionId(1)
                              .build()}
 
 connected
-
-write nukleus:end.ext ${mqtt:endEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .build()}
-
-write close
