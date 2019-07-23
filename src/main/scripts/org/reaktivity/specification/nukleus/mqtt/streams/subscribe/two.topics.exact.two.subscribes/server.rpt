@@ -24,34 +24,18 @@ accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .role("RECEIVER")
+                             .role("SENDER")
                              .clientId("client")
-                             .topic("sensor/one")
+                             .topic("sesnor/one")
                              .subscriptionId(1)
                              .build()}
 
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .role("SENDER")
-                              .clientId("client")
-                              .topic("sensor/one")
-                              .subscriptionId(1)
-                              .build()}
-
-connected
-
-write nukleus:data.ext ${mqtt:dataEx()
+read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("sensor/one")
-                             .expiryInterval(15)
-                             .contentType("message")
-                             .format("TEXT")
-                             .responseTopic("sensor/one")
-                             .correlationInfo("info")
+                             .role("SENDER")
+                             .clientId("client")
+                             .topic("sesnor/two")
+                             .subscriptionId(2)
                              .build()}
 
-write "update"
-
-read closed
-
-write close
+connected

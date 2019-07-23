@@ -127,6 +127,13 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttBeginExBuilder subscriptionId(
+           int id)
+        {
+            beginExRW.subscriptionId(id);
+            return this;
+        }
+
         public byte[] build()
         {
             final MqttBeginExFW beginEx = beginExRW.build();
