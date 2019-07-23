@@ -24,9 +24,10 @@ accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .role("RECEIVER")
+                             .role("SENDER")
                              .clientId("client")
-                             .topic("sesnor/one")
+                             .topic("sensor/one")
+                             .subscriptionId(1)
                              .build()}
 
 connected

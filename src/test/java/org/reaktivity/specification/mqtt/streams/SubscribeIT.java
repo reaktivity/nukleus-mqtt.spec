@@ -86,10 +86,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.both.exact.one.subscribe/client",
-            "${scripts}/two.topics.both.exact.one.subscribe/server"})
+            "${scripts}/two.topics.both.exact.from.one.subscribe/client",
+            "${scripts}/two.topics.both.exact.from.one.subscribe/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoTopicsInOneSubscribePacket() throws Exception
+    public void shouldSubscribeToTwoTopicsFromOneSubscribePacket() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -98,10 +98,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.both.exact.two.subscribes/client",
-            "${scripts}/two.topics.both.exact.two.subscribes/server"})
+            "${scripts}/two.topics.both.exact.from.two.subscribes/client",
+            "${scripts}/two.topics.both.exact.from.two.subscribes/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoTopicsInTwoSubscribePackets() throws Exception
+    public void shouldSubscribeToTwoTopicsFromTwoSubscribePackets() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
