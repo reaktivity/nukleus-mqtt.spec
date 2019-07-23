@@ -14,16 +14,14 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
-
-accept ${serverTransport}
+connect await ROUTED_SERVER
+        "nukleus://streams/mqtt#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
-accepted
 connected
 
-read  [0x10 0x13]             # fixed header
+write [0x10 0x13]             # CONNECT header
       [0x00 0x04] "MQTT"      # protocol name
       [0x05]                  # protocol version
       [0x02]                  # connect flags = clean start
@@ -31,13 +29,7 @@ read  [0x10 0x13]             # fixed header
       [0x00]                  # properties = none
       [0x00 0x06] "client"    # clientId
 
-write [0x20 0x03]             # fixed header
-      [0x00]                  # connect flags = none
-      [0x00]                  # reason code
-      [0x00]                  # properties = none
-  
-read  [0xE0 0x02]             # disconnect = normal
-      [0x00]                  # normal disconnect
-      [0x00]                  # properties = none
-
-read aborted
+read [0x20 0x03]              # CONNACK header
+     [0x00]                   # connect flags = none
+     [0x00]                   # reason code
+     [0x00]                   # properties = none
