@@ -38,8 +38,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}/connect/successful/client",
-            "${scripts}/connect/successful/server"})
+            "${scripts}/connect/successful/complete/client",
+            "${scripts}/connect/successful/complete/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnect() throws Exception
     {
@@ -86,8 +86,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/fragmented.connect.packet/client",
-        "${scripts}/connect/fragmented.connect.packet/server"})
+        "${scripts}/connect/successful/fragmented/client",
+        "${scripts}/connect/successful/fragmented/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldProcessFragmentedConnectPacket() throws Exception
     {
