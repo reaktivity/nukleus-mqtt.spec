@@ -36,12 +36,12 @@ write  [0x20 0x03]                   # CONNACK header
        [0x00]                        # reason code
        [0x00]                        # properties = none
 
-read   [0x82 0x1d]                   # SUBSCRIBE header
+read   [0x82 0x19]                   # SUBSCRIBE header
        [0x00 0x01]                   # packetId = 1
        [0x00]                        # properties = none
-       [0x00 0x0a] "sensor/one"      # topic filter
+       [0x00 0x0a] "sensor/#"        # topic filter
        [0x00]                        # subscription opts = QoS 0
-       [0x00 0x0a] "sensor/two"      # topic filter
+       [0x00 0x08] "device/#"        # topic filter
        [0x00]                        # subscription opts = QoS 0
 
 write  [0x90 0x03]                   # SUBACK header
