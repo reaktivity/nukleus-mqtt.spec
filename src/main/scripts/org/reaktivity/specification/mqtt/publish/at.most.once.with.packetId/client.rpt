@@ -35,6 +35,13 @@
        [0x00]                         # properties = none
 
  write [0x30 0x13]                    # PUBLISH header
+       [0x00 0x01]                    # packetId = 1
        [0x00 0x0a] "sensor/one"       # topic filter
        [0x00]                         # properties = none
        "message"                      # payload
+
+read   [0xE0 0x02]                    # disconnect header
+       [0x82]                         # disconnect = protocol error
+       [0x00]                         # properties = none       
+
+read closed

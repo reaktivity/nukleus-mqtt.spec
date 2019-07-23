@@ -38,8 +38,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}/connect/client",
-            "${scripts}/connect/server"})
+            "${scripts}/connect/successful/client",
+            "${scripts}/connect/successful/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnect() throws Exception
     {
@@ -54,6 +54,42 @@ public class ConnectionIT
         "${scripts}/disconnect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnectThenDisconnect() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect/invalid.protocol.version/client",
+        "${scripts}/connect/invalid.protocol.version/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectInvalidProtocolVersion() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect/invalid.flags/client",
+        "${scripts}/connect/invalid.flags/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectMalformedConnectPacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect/successful.fragmented/client",
+        "${scripts}/connect/successful.fragmented/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldProcessFragmentedConnectPacket() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
