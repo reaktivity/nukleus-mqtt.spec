@@ -42,6 +42,6 @@ write [0x82 0x19]                   # SUBSCRIBE header
       [0x00 0x08] "device/#"        # topic filter
       [0x00]                        # subscription opts = QoS 0
 
-read  [0x90 0x02]                   # SUBACK header
+read  [0x90 0x03]                   # SUBACK header
       [0x00]                        # property length
       [0x00 0x00]                   # reason codes      
