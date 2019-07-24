@@ -123,6 +123,18 @@ public class StreamIT
 
     @Test
     @Specification({
+            "${scripts}/subscribe/one.topic.wildcard/client",
+            "${scripts}/subscribe/one.topic.wildcard/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeToWildcardTopic() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
             "${scripts}/subscribe/two.topics.both.exact.from.one.subscribe/client",
             "${scripts}/subscribe/two.topics.both.exact.from.one.subscribe/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
