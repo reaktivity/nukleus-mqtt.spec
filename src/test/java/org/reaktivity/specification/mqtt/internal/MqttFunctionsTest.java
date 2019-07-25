@@ -72,6 +72,7 @@ public class MqttFunctionsTest
                 .role("RECEIVER")
                 .clientId("client")
                 .topic("sensor/one")
+                .subscriptionId(1)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -80,6 +81,7 @@ public class MqttFunctionsTest
         assertEquals("RECEIVER", mqttBeginEx.role().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(1, mqttBeginEx.subscriptionId());
     }
 
     @Test
@@ -90,6 +92,7 @@ public class MqttFunctionsTest
                 .role("SENDER")
                 .clientId("client")
                 .topic("sensor/one")
+                .subscriptionId(1)
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -98,6 +101,7 @@ public class MqttFunctionsTest
         assertEquals("SENDER", mqttBeginEx.role().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(1, mqttBeginEx.subscriptionId());
     }
 
     @Test

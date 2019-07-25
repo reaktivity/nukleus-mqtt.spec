@@ -27,6 +27,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .role("RECEIVER")
                              .clientId("client")
                              .topic("//")
+                             .subscriptionId(1)
                              .build()}
 
 connected

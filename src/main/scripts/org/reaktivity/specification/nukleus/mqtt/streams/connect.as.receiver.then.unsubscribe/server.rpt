@@ -27,6 +27,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .role("RECEIVER")
                              .clientId("client")
                              .topic("sensor/one")
+                             .subscriptionId(1)
                              .build()}
 
 write nukleus:begin.ext ${mqtt:beginEx()
@@ -34,6 +35,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .role("SENDER")
                               .clientId("client")
                               .topic("sensor/one")
+                              .subscriptionId(1)
                               .build()}
 
 connected

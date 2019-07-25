@@ -14,44 +14,33 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
-
-accept ${serverTransport}
+connect await ROUTED_SERVER
+        "nukleus://streams/mqtt#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
-accepted
 connected
 
-read  [0x10 0x13]                   # CONNECT header
+write [0x10 0x13]                   # CONNECT header
       [0x00 0x04] "MQTT"            # protocol name
       [0x05]                        # protocol version
       [0x02]                        # connect flags = clean start
-      [0x00 0x3C]                   # keep alive = 60s
+      [0x00 0x3c]                   # keep alive = 60s
       [0x00]                        # properties = none
       [0x00 0x06] "client"          # clientId
 
-write [0x20 0x03]                   # CONNACK header
+read  [0x20 0x03]                   # CONNACK header
       [0x00]                        # connect flags = none
       [0x00]                        # reason code
       [0x00]                        # properties = none
 
-read [0x82 0x12]                   # SUBSCRIBE header
+write [0x82 0x12]                   # SUBSCRIBE header
       [0x00 0x01]                   # packetId = 1
       [0x02]                        # properties
       [0x0b 0x01]                   # subscriptionId = 1
       [0x00 0x0a] "sensor/one"      # topic filter
       [0x00]                        # subscription opts = QoS 0
 
-write [0x90 0x02]                   # SUBACK header
-      [0x00]                        # properties = none
+read  [0x90 0x02]                   # SUBACK header
+      [0x00]                        # property length
       [0x00]                        # reason code
-
-read  [0xa2 0x0f]                   # UNSUBSCRIBE header
-      [0x00 0x01]                   # packetId = 1
-      [0x00]                        # properties = none
-      [0x00 0x0a] "sensor/one"      # topic filter
-
-write [0xa0 0x02]                   # UNSUBACK header
-      [0x00]                        # properties = none
-      [0x00]                        # unsubscribe = success
