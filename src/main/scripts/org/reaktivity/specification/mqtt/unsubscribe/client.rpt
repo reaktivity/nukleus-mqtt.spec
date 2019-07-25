@@ -34,8 +34,10 @@ read   [0x20 0x03]                   # CONNACK header
        [0x00]                        # reason code
        [0x00]                        # properties = none
 
-write  [0x82 0x10]                   # SUBSCRIBE header
+write  [0x82 0x12]                   # SUBSCRIBE header
        [0x00 0x01 0x00]              # packetId = 1
+       [0x02]                        # properties
+       [0x0b 0x01]                   # subscriptionId = 1
        [0x00 0x0a] "sensor/one"      # topic filter
        [0x00]                        # subscription opts = QoS 0
 

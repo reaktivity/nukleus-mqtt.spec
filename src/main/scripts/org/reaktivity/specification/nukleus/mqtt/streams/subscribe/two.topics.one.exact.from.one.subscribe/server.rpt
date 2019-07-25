@@ -24,15 +24,19 @@ accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .role("SENDER")
+                             .role("RECEIVER")
                              .clientId("client")
                              .topic("sensor/one")
                              .subscriptionId(1)
                              .build()}
 
+connected
+
+accepted
+
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .role("SENDER")
+                             .role("RECEIVER")
                              .clientId("client")
                              .topic("device/#")
                              .subscriptionId(1)
