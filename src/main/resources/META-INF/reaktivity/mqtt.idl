@@ -55,6 +55,7 @@ scope mqtt
             mqtt::MqttRole role;
             string clientId;
             string topic;
+            int32 subscriptionId;
         }
 
         struct MqttDataEx extends core::stream::Extension
