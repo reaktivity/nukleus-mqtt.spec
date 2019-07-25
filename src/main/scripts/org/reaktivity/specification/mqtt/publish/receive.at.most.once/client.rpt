@@ -1,0 +1,51 @@
+#
+# Copyright 2016-2019 The Reaktivity Project
+#
+# The Reaktivity Project licenses this file to you under the Apache License,
+# version 2.0 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at:
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+
+connect await ROUTED_SERVER
+        "nukleus://streams/mqtt#0"
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
+
+connected
+
+write [0x10 0x13]                   # CONNECT header
+      [0x00 0x04] "MQTT"            # protocol name
+      [0x05]                        # protocol version
+      [0x02]                        # connect flags = clean start
+      [0x00 0x3c]                   # keep alive = 60s
+      [0x00]                        # properties = none
+      [0x00 0x06] "client"          # clientId
+
+read  [0x20 0x03]                   # CONNACK header
+      [0x00]                        # connect flags = none
+      [0x00]                        # reason code
+      [0x00]                        # properties = none
+
+write [0x82 0x12]                   # SUBSCRIBE header
+      [0x00 0x01]                   # packetId = 1
+      [0x02]                        # properties
+      [0x0b 0x01]                   # subscriptionId = 1
+      [0x00 0x0a] "sensor/one"      # topic filter
+      [0x00]                        # subscription opts = QoS 0
+
+read  [0x90 0x02]                   # SUBACK header
+      [0x00]                        # property length
+      [0x00]                        # reason code
+
+read  [0x30 0x13]                    # PUBLISH header
+      [0x00 0x0a] "sensor/one"       # topic filter
+      [0x00]                         # properties = none
+      "message"                      # payload
