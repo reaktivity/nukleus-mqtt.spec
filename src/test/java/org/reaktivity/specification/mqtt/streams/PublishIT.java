@@ -41,7 +41,7 @@ public class PublishIT
             "${scripts}/send.at.most.once/client",
             "${scripts}/send.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendPublishToServerAtMostOnce() throws Exception
+    public void shouldSendPublishAtMostOnce() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -53,7 +53,7 @@ public class PublishIT
             "${scripts}/receive.at.most.once/client",
             "${scripts}/receive.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendPublishToClientAtMostOnce() throws Exception
+    public void shouldReceivePublishAtMostOnce() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
