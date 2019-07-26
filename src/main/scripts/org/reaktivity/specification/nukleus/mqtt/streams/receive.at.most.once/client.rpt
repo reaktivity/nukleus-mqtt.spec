@@ -19,7 +19,7 @@ connect await ROUTED_CLIENT
          option nukleus:window 8192
          option nukleus:transmission "duplex"
 
-write nukleus:begin.ext ${mqtt:beginEx()
+read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .role("RECEIVER")
                              .clientId("client")
