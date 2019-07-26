@@ -59,4 +59,16 @@ public class PublishIT
         k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
+
+    @Test
+    @Specification({
+            "${scripts}/receive.at.most.once.with.packetId/client",
+            "${scripts}/receive.at.most.once.with.packetId/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectAtMostOncePublishPacketWithPacketId() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
 }
