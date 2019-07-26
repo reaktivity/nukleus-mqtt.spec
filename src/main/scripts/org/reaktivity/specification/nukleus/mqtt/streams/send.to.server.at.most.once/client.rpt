@@ -31,4 +31,4 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .correlationInfo("info")
                              .build()}
 
-write "update"
+write "message"
