@@ -38,10 +38,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/successful/client",
-            "${scripts}/successful/server"})
+        "${scripts}/missing.topic.filters/client",
+        "${scripts}/missing.topic.filters/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToOneTopicToOneTopic() throws Exception
+    public void shouldRejectSubscribeWithMissingTopicFilters() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -50,10 +50,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/no.topic.filters/client",
-            "${scripts}/no.topic.filters/server"})
+        "${scripts}/single.topic.filter.exact/client",
+        "${scripts}/single.topic.filter.exact/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectSubscribeWithNoTopicFilters() throws Exception
+    public void shouldSubscribeToExactTopicFilter() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -62,10 +62,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/one.topic.exact/client",
-            "${scripts}/one.topic.exact/server"})
+        "${scripts}/single.topic.filter.wildcard/client",
+        "${scripts}/single.topic.filter.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToOneExactTopic() throws Exception
+    public void shouldSubscribeToWildcardTopicFilter() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -74,10 +74,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/one.topic.wildcard/client",
-            "${scripts}/one.topic.wildcard/server"})
+            "${scripts}/aggregated.topic.filters.both.exact/client",
+            "${scripts}/aggregated.topic.filters.both.exact/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectWildcardSubscription() throws Exception
+    public void shouldSubscribeToAggregatedTopicFiltersBothExact() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -86,10 +86,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.both.exact.from.one.subscribe/client",
-            "${scripts}/two.topics.both.exact.from.one.subscribe/server"})
+            "${scripts}/isolated.topic.filters.both.exact/client",
+            "${scripts}/isolated.topic.filters.both.exact/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoTopicsFromOneSubscribePacket() throws Exception
+    public void shouldSubscribeToIsolatedTopicFiltersBothExact() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -98,10 +98,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.both.exact.from.two.subscribes/client",
-            "${scripts}/two.topics.both.exact.from.two.subscribes/server"})
+            "${scripts}/aggregated.topic.filters.both.wildcard/client",
+            "${scripts}/aggregated.topic.filters.both.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoTopicsFromTwoSubscribePackets() throws Exception
+    public void shouldSubscribeToAggregatedTopicFiltersBothWildcard() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -110,10 +110,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.both.wildcard.from.one.subscribe/client",
-            "${scripts}/two.topics.both.wildcard.from.one.subscribe/server"})
+            "${scripts}/isolated.topic.filters.both.wildcard/client",
+            "${scripts}/isolated.topic.filters.both.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoWildcardTopicsFromOneSubscribePacket() throws Exception
+    public void shouldSubscribeToIsolatedTopicFiltersBothWildcard() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -122,10 +122,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.both.wildcard.from.two.subscribes/client",
-            "${scripts}/two.topics.both.wildcard.from.two.subscribes/server"})
+            "${scripts}/aggregated.topic.filters.exact.and.wildcard/client",
+            "${scripts}/aggregated.topic.filters.exact.and.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoWildcardTopicsFromTwoSubscribePackets() throws Exception
+    public void shouldSubscribeToAggregatedExactAndWildcardTopicFilters() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -134,22 +134,10 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/two.topics.one.exact.from.one.subscribe/client",
-            "${scripts}/two.topics.one.exact.from.one.subscribe/server"})
+            "${scripts}/isolated.topic.filters.exact.and.wildcard/client",
+            "${scripts}/isolated.topic.filters.exact.and.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoTopicsOneExactFromOneSubscribePacket() throws Exception
-    {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
-        k3po.finish();
-    }
-
-    @Test
-    @Specification({
-            "${scripts}/two.topics.one.exact.from.two.subscribes/client",
-            "${scripts}/two.topics.one.exact.from.two.subscribes/server"})
-    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscribeToTwoTopicsOneExactFromTwoSubscribePackets() throws Exception
+    public void shouldSubscribeToIsolatedExactAndWildcardTopicFilters() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
