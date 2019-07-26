@@ -37,6 +37,6 @@ write [0x20 0x03]                    # CONNACK header
       [0x00]                         # properties = none
 
 read  [0x30 0x14]                    # PUBLISH header
-      [0x00 0x0a] "sensor/one"       # topic filter
+      [0x00 0x0a] "sensor/one"       # topic name
       [0x00]                         # properties = none
       "message"                      # payload

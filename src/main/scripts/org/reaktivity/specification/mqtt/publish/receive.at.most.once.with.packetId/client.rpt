@@ -47,7 +47,7 @@ read  [0x90 0x02]                   # SUBACK header
  
 read  [0x30 0x16]                   # PUBLISH header
       [0x00 0x01]                   # packetId = 1
-      [0x00 0x0a] "sensor/one"      # topic filter
+      [0x00 0x0a] "sensor/one"      # topic name
       [0x00]                        # properties = none
       "message"                     # payload
 
