@@ -34,4 +34,4 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .correlationInfo("info")
                             .build()}
 
-read "update"
+read "message"
