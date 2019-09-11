@@ -16,20 +16,19 @@
 
 package org.reaktivity.specification.mqtt.internal;
 
+import java.nio.charset.StandardCharsets;
+
 import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
-
-import java.nio.charset.StandardCharsets;
-
-import org.reaktivity.specification.mqtt.internal.types.MqttRole;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
+import org.reaktivity.specification.mqtt.internal.types.MqttRole;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
-import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 
 public final class MqttFunctions
 {
@@ -74,7 +73,7 @@ public final class MqttFunctions
         }
 
         public MqttRouteExBuilder topic(
-           String topic)
+            String topic)
         {
             routeExRW.topic(topic);
             return this;
@@ -100,35 +99,35 @@ public final class MqttFunctions
         }
 
         public MqttBeginExBuilder typeId(
-           int typeId)
+            int typeId)
         {
             beginExRW.typeId(typeId);
             return this;
         }
 
         public MqttBeginExBuilder clientId(
-           String clientId)
+            String clientId)
         {
             beginExRW.clientId(clientId);
             return this;
         }
 
         public MqttBeginExBuilder topic(
-           String topic)
+            String topic)
         {
             beginExRW.topic(topic);
             return this;
         }
 
         public MqttBeginExBuilder role(
-           String role)
+            String role)
         {
             beginExRW.role(p -> p.set(MqttRole.valueOf(role)));
             return this;
         }
 
         public MqttBeginExBuilder subscriptionId(
-           int id)
+            int id)
         {
             beginExRW.subscriptionId(id);
             return this;
@@ -154,54 +153,53 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder typeId(
-           int typeId)
+            int typeId)
         {
             dataExRW.typeId(typeId);
             return this;
         }
 
         public MqttDataExBuilder topic(
-           String topic)
+            String topic)
         {
             dataExRW.topic(topic);
             return this;
         }
 
         public MqttDataExBuilder expiryInterval(
-           long msgExp)
+            long msgExp)
         {
             dataExRW.expiryInterval(msgExp);
             return this;
         }
 
         public MqttDataExBuilder contentType(
-           String contentType)
+            String contentType)
         {
             dataExRW.contentType(contentType);
             return this;
         }
 
         public MqttDataExBuilder format(
-           String format)
+            String format)
         {
             dataExRW.format(p -> p.set(MqttPayloadFormat.valueOf(format)));
             return this;
         }
 
         public MqttDataExBuilder responseTopic(
-           String topic)
+            String topic)
         {
             dataExRW.responseTopic(topic);
             return this;
         }
 
         public MqttDataExBuilder correlationInfo(
-           String info)
+            String info)
         {
             dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes(StandardCharsets.UTF_8))));
             return this;
         }
-
 
         public byte[] build()
         {
@@ -223,7 +221,7 @@ public final class MqttFunctions
         }
 
         public MqttEndExBuilder typeId(
-           int typeId)
+            int typeId)
         {
             endExRW.typeId(typeId);
             return this;
@@ -249,14 +247,14 @@ public final class MqttFunctions
         }
 
         public MqttAbortExBuilder typeId(
-           int typeId)
+            int typeId)
         {
             abortExRW.typeId(typeId);
             return this;
         }
 
         public MqttAbortExBuilder reason(
-           int reason)
+            int reason)
         {
             abortExRW.reason(reason);
             return this;
