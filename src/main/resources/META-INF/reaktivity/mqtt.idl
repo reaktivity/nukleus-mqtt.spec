@@ -52,7 +52,7 @@ scope mqtt
     {
         struct MqttBeginEx extends core::stream::Extension
         {
-            mqtt::MqttRole role;
+            MqttRole role;
             string clientId;
             string topic;
             int32 subscriptionId;
@@ -63,9 +63,9 @@ scope mqtt
             string topic;
             uint32 expiryInterval;
             string contentType;
-            mqtt::MqttPayloadFormat format;
+            MqttPayloadFormat format;
             string responseTopic;
-            mqtt::MqttBinary correlationInfo;
+            MqttBinary correlationInfo;
             MqttUserProperty[] properties;
         }
 
