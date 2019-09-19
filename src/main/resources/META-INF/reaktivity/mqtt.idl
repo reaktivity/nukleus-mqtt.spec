@@ -66,7 +66,7 @@ scope mqtt
             mqtt::MqttPayloadFormat format;
             string responseTopic;
             mqtt::MqttBinary correlationInfo;
-            list<mqtt::MqttUserProperty> properties;
+            MqttUserProperty[] properties;
         }
 
         struct MqttEndEx extends core::stream::Extension
