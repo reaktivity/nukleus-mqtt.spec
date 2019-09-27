@@ -159,8 +159,8 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/send.to.client.at.most.once/client",
-        "${scripts}/send.to.client.at.most.once/server"})
+        "${scripts}/receive.at.most.once/client",
+        "${scripts}/receive.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSendToClientAtMostOnce() throws Exception
     {
@@ -171,8 +171,8 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/send.to.server.at.most.once/client",
-        "${scripts}/send.to.server.at.most.once/server"})
+        "${scripts}/send.at.most.once/client",
+        "${scripts}/send.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSendToServerAtMostOnce() throws Exception
     {
@@ -183,8 +183,8 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/send.to.server.at.most.once.then.disconnect/client",
-        "${scripts}/send.to.server.at.most.once.then.disconnect/server"})
+        "${scripts}/send.at.most.once.then.disconnect/client",
+        "${scripts}/send.at.most.once.then.disconnect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSendToServerAtMostOnceThenDisconnect() throws Exception
     {
