@@ -36,7 +36,7 @@ write [0x20 0x03]                   # CONNACK header
       [0x00]                        # reason code
       [0x00]                        # properties = none
 
-read [0x82 0x12]                   # SUBSCRIBE header
+read  [0x82 0x12]                   # SUBSCRIBE header
       [0x00 0x01]                   # packetId = 1
       [0x02]                        # properties
       [0x0b 0x01]                   # subscriptionId = 1
@@ -44,6 +44,7 @@ read [0x82 0x12]                   # SUBSCRIBE header
       [0x00]                        # subscription opts = QoS 0
 
 write [0x90 0x02]                   # SUBACK header
+      [0x00 0x01]                   # packetId = 1
       [0x00]                        # properties = none
       [0x00]                        # reason code
 
