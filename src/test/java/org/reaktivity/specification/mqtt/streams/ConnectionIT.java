@@ -86,6 +86,18 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/connect/invalid.duplicate.connect/client",
+        "${scripts}/connect/invalid.duplicate.connect/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectDuplicateConnectPacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/connect/successful.fragmented/client",
         "${scripts}/connect/successful.fragmented/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
