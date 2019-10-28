@@ -89,7 +89,7 @@ public class ConnectionIT
         "${scripts}/connect/reject.second.connect/client",
         "${scripts}/connect/reject.second.connect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectDuplicateConnectPacket() throws Exception
+    public void shouldRejectSecondConnectPacket() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
