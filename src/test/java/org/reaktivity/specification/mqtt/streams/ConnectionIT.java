@@ -86,8 +86,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/invalid.duplicate.connect/client",
-        "${scripts}/connect/invalid.duplicate.connect/server"})
+        "${scripts}/connect/reject.second.connect/client",
+        "${scripts}/connect/reject.second.connect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectDuplicateConnectPacket() throws Exception
     {
