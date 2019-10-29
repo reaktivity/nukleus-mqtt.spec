@@ -86,6 +86,18 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/connect/reject.second.connect/client",
+        "${scripts}/connect/reject.second.connect/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectSecondConnectPacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/connect/successful.fragmented/client",
         "${scripts}/connect/successful.fragmented/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
