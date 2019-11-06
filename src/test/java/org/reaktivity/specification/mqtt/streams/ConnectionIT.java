@@ -86,6 +86,18 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/subscribe/invalid.fixed.header.flags/client",
+        "${scripts}/subscribe/invalid.fixed.header.flags/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectMalformedSubscribePacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/unsubscribe/invalid.fixed.header.flags/client",
         "${scripts}/unsubscribe/invalid.fixed.header.flags/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
