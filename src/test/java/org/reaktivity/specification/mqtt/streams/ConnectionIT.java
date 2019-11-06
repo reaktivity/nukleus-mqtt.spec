@@ -110,6 +110,18 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/disconnect/invalid.fixed.header.flags/client",
+        "${scripts}/disconnect/invalid.fixed.header.flags/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectMalformedDisconnectPacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/connect/reject.second.connect/client",
         "${scripts}/connect/reject.second.connect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
