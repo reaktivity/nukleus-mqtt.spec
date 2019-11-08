@@ -43,3 +43,4 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .build()}
 
 write "message"
+write flush

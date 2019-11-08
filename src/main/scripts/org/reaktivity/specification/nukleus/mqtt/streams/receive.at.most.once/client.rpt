@@ -26,7 +26,6 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .topic("sensor/one")
                              .subscriptionId(1)
                              .build()}
-
 connected
 
 read nukleus:data.ext ${mqtt:dataEx()
