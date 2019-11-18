@@ -38,8 +38,8 @@ public class PublishIT
 
     @Test
     @Specification({
-            "${scripts}/send.at.most.once/client",
-            "${scripts}/send.at.most.once/server"})
+        "${scripts}/send.at.most.once/client",
+        "${scripts}/send.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSendPublishAtMostOnce() throws Exception
     {
@@ -50,8 +50,20 @@ public class PublishIT
 
     @Test
     @Specification({
-            "${scripts}/receive.at.most.once/client",
-            "${scripts}/receive.at.most.once/server"})
+        "${scripts}/send.multiple.messages/client",
+        "${scripts}/send.multiple.messages/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSendMultiplePublishMessages() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/receive.at.most.once/client",
+        "${scripts}/receive.at.most.once/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldReceivePublishAtMostOnce() throws Exception
     {
@@ -62,8 +74,8 @@ public class PublishIT
 
     @Test
     @Specification({
-            "${scripts}/receive.at.most.once.with.packetId/client",
-            "${scripts}/receive.at.most.once.with.packetId/server"})
+        "${scripts}/receive.at.most.once.with.packetId/client",
+        "${scripts}/receive.at.most.once.with.packetId/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectAtMostOncePublishPacketWithPacketId() throws Exception
     {
