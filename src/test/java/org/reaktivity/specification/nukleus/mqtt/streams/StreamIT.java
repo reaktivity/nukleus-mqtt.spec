@@ -183,6 +183,18 @@ public class StreamIT
 
     @Test
     @Specification({
+        "${scripts}/send.multiple.messages/client",
+        "${scripts}/send.multiple.messages/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSendMultipleMessagesToServer() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/send.at.most.once.then.disconnect/client",
         "${scripts}/send.at.most.once.then.disconnect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")

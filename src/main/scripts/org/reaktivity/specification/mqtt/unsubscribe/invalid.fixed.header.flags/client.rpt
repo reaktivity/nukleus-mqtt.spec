@@ -46,12 +46,11 @@ read   [0x90 0x02]                   # SUBACK header
        [0x00]                        # properties = none
        [0x00]                        # reason code
 
-write  [0xa2 0x0f]                   # UNSUBSCRIBE header
+write  [0xa3 0x0f]                   # malformed UNSUBSCRIBE header
        [0x00 0x01]                   # packetId = 1
        [0x00]                        # properties = none
        [0x00 0x0a] "sensor/one"      # topic filter
 
-read   [0xa0 0x02]                   # UNSUBACK header
-       [0x00 0x01]                   # packetId = 1
+read   [0xE0 0x02]                   # disconnect = normal
+       [0x81]                        # malformed packet
        [0x00]                        # properties = none
-       [0x00]                        # unsubscribe = success
