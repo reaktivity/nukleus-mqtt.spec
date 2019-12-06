@@ -22,13 +22,13 @@ accept ${serverTransport}
 
 accepted
 
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .role("RECEIVER")
-                              .clientId("client")
-                              .topic("sensor/one")
-                              .subscriptionId(1)
-                              .build()}
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .role("RECEIVER")
+                             .clientId("client")
+                             .topic("sensor/one")
+                             .subscriptionId(1)
+                             .build()}
 
 connected
 
