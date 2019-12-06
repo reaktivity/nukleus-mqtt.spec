@@ -159,10 +159,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/receive.at.most.once/client",
-        "${scripts}/receive.at.most.once/server"})
+        "${scripts}/receive.one.message/client",
+        "${scripts}/receive.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendToClientAtMostOnce() throws Exception
+    public void shouldSendToClientOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -171,10 +171,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/send.at.most.once/client",
-        "${scripts}/send.at.most.once/server"})
+        "${scripts}/send.one.message/client",
+        "${scripts}/send.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendToServerAtMostOnce() throws Exception
+    public void shouldSendToServerOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -195,10 +195,22 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/send.at.most.once.then.disconnect/client",
-        "${scripts}/send.at.most.once.then.disconnect/server"})
+        "${scripts}/send.multiple.messages.with.delay/client",
+        "${scripts}/send.multiple.messages.with.delay/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendToServerAtMostOnceThenDisconnect() throws Exception
+    public void shouldSendMultipleMessagesWithDelay() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/send.one.message.then.disconnect/client",
+        "${scripts}/send.one.message.then.disconnect/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSendToServerOneMessageThenDisconnect() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
