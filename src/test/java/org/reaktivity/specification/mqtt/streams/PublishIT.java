@@ -38,10 +38,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/send.at.most.once/client",
-        "${scripts}/send.at.most.once/server"})
+        "${scripts}/send.one.message/client",
+        "${scripts}/send.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendPublishAtMostOnce() throws Exception
+    public void shouldSendPublishOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -62,10 +62,23 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/receive.at.most.once/client",
-        "${scripts}/receive.at.most.once/server"})
+        "${scripts}/send.multiple.messages.with.delay/client",
+        "${scripts}/send.multiple.messages.with.delay/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldReceivePublishAtMostOnce() throws Exception
+    public void shouldSendMultipleMessagesWithDelay() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("PUBLISH_CLOSE");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/receive.one.message/client",
+        "${scripts}/receive.one.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldReceivePublishOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -74,10 +87,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/receive.at.most.once.with.packetId/client",
-        "${scripts}/receive.at.most.once.with.packetId/server"})
+        "${scripts}/receive.one.message.with.packetId/client",
+        "${scripts}/receive.one.message.with.packetId/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectAtMostOncePublishPacketWithPacketId() throws Exception
+    public void shouldRejectOneMessagePublishPacketWithPacketId() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
