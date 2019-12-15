@@ -56,6 +56,20 @@ read nukleus:data.ext ${mqtt:dataEx()
 
 read "message2"
 
+read closed
+
+accepted
+
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .role("SENDER")
+                             .clientId("client")
+                             .topic("sensor/one")
+                             .subscriptionId(0)
+                             .build()}
+
+connected
+
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
