@@ -19,6 +19,14 @@ connect await ROUTED_CLIENT
          option nukleus:window 8192
          option nukleus:transmission "duplex"
 
+write nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .role("SENDER")
+                              .clientId("client")
+                              .topic("sensor/one")
+                              .subscriptionId(0)
+                              .build()}
+
 connected
 
 write nukleus:data.ext ${mqtt:dataEx()

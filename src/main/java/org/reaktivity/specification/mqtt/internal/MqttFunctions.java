@@ -167,7 +167,7 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder expiryInterval(
-            long msgExp)
+            int msgExp)
         {
             dataExRW.expiryInterval(msgExp);
             return this;
