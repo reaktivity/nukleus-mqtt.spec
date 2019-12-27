@@ -20,7 +20,16 @@ accept ${serverTransport}
         option nukleus:window 8192
         option nukleus:transmission "duplex"
 
+
 accepted
+
+read nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .role("SENDER")
+                              .clientId("client")
+                              .topic("sensor/one")
+                              .subscriptionId(0)
+                              .build()}
 
 connected
 

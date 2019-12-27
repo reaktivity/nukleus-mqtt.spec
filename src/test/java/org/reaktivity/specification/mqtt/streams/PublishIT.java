@@ -78,7 +78,19 @@ public class PublishIT
         "${scripts}/receive.one.message/client",
         "${scripts}/receive.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldReceivePublishOneMessage() throws Exception
+    public void shouldReceiveOnePublishMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/receive.one.message.with.invalid.subscription.id/client",
+        "${scripts}/receive.one.message.with.invalid.subscription.id/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldReceiveOnePublishMessageWithInvalidSubscriptionId() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

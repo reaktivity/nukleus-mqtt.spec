@@ -61,7 +61,7 @@ scope mqtt
         struct MqttDataEx extends core::stream::Extension
         {
             string topic;
-            uint32 expiryInterval;
+            int32 expiryInterval;
             string contentType;
             MqttPayloadFormat format;
             string responseTopic;
