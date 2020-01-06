@@ -38,8 +38,8 @@ public class UnsubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/client",
-            "${scripts}/server"})
+        "${scripts}/client",
+        "${scripts}/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldUnsubscribeFromOneTopic() throws Exception
     {
@@ -50,8 +50,20 @@ public class UnsubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/invalid.fixed.header.flags/client",
-            "${scripts}/invalid.fixed.header.flags/server"})
+        "${scripts}/aggregated.topic.filters.both.exact/client",
+        "${scripts}/aggregated.topic.filters.both.exact/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldUnsubscribeFromMultipleTopics() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/invalid.fixed.header.flags/client",
+        "${scripts}/invalid.fixed.header.flags/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectMalformedUnsubscribePacket() throws Exception
     {
