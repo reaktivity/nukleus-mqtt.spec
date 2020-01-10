@@ -50,6 +50,18 @@ public class SubscribeIT
 
     @Test
     @Specification({
+        "${scripts}/invalid.topic.filter/client",
+        "${scripts}/invalid.topic.filter/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectSubscribeWithInvalidTopicFilter() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/single.topic.filter.exact/client",
         "${scripts}/single.topic.filter.exact/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
