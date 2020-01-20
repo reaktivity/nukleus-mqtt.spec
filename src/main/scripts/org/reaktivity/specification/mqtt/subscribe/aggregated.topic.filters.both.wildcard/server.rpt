@@ -45,7 +45,7 @@ read   [0x82 0x1b]                   # SUBSCRIBE header
        [0x00 0x08] "device/#"        # topic filter
        [0x00]                        # subscription opts = QoS 0
 
-write  [0x90 0x03]                   # SUBACK header
-       [0x00 0x01]                   # packetId = 1
-       [0x00]                        # property length
-       [0x00 0x00]                   # reason codes
+write  [0x90 0x05]                   # SUBACK header
+      [0x00 0x01]                   # packetId = 1
+      [0x00]                        # property length
+      [0x00 0x00]                   # reason codes
