@@ -43,7 +43,7 @@ read   [0x82 0x12]                   # SUBSCRIBE header
        [0x00 0x0a] "sensor/one"      # topic filter
        [0x00]                        # subscription opts = QoS 0
 
-write  [0x90 0x02]                   # SUBACK header
-       [0x00 0x01]                   # packetId = 1
-       [0x00]                        # property length
-       [0x00]                        # reason code
+write  [0x90 0x04]                   # SUBACK header
+      [0x00 0x01]                   # packetId = 1
+      [0x00]                        # properties = none
+      [0x00]                        # reason code
