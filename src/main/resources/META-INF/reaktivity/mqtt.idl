@@ -56,6 +56,7 @@ scope mqtt
             string clientId;
             string topic;
             varbyteuint32 subscriptionId;
+            MqttUserProperty[] properties;
         }
 
         struct MqttDataEx extends core::stream::Extension

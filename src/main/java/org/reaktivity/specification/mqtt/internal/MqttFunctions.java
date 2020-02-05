@@ -133,6 +133,23 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttBeginExBuilder userProperty(
+            String name,
+            String value)
+        {
+            if (value == null)
+            {
+                beginExRW.propertiesItem(p -> p.key(name)
+                                               .value((String) null));
+            }
+            else
+            {
+                beginExRW.propertiesItem(p -> p.key(name)
+                                               .value(value));
+            }
+            return this;
+        }
+
         public byte[] build()
         {
             final MqttBeginExFW beginEx = beginExRW.build();
@@ -198,6 +215,23 @@ public final class MqttFunctions
             String info)
         {
             dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes(StandardCharsets.UTF_8))));
+            return this;
+        }
+
+        public MqttDataExBuilder userProperty(
+            String name,
+            String value)
+        {
+            if (value == null)
+            {
+                dataExRW.propertiesItem(p -> p.key(name)
+                                              .value((String) null));
+            }
+            else
+            {
+                dataExRW.propertiesItem(p -> p.key(name)
+                                              .value(value));
+            }
             return this;
         }
 
