@@ -70,11 +70,6 @@ scope mqtt
             MqttUserProperty[] properties;
         }
 
-        struct MqttEndEx extends core::stream::Extension
-        {
-
-        }
-
         struct MqttAbortEx extends core::stream::Extension
         {
             uint8 reason;

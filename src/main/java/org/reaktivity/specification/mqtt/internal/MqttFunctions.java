@@ -28,7 +28,6 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
-import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
 
 public final class MqttFunctions
 {
@@ -48,12 +47,6 @@ public final class MqttFunctions
     public static MqttDataExBuilder dataEx()
     {
         return new MqttDataExBuilder();
-    }
-
-    @Function
-    public static MqttEndExBuilder endEx()
-    {
-        return new MqttEndExBuilder();
     }
 
     @Function
@@ -240,32 +233,6 @@ public final class MqttFunctions
             final MqttDataExFW dataEx = dataExRW.build();
             final byte[] array = new byte[dataEx.sizeof()];
             dataEx.buffer().getBytes(dataEx.offset(), array);
-            return array;
-        }
-    }
-
-    public static final class MqttEndExBuilder
-    {
-        private final MqttEndExFW.Builder endExRW;
-
-        private MqttEndExBuilder()
-        {
-            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
-            this.endExRW = new MqttEndExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
-        }
-
-        public MqttEndExBuilder typeId(
-            int typeId)
-        {
-            endExRW.typeId(typeId);
-            return this;
-        }
-
-        public byte[] build()
-        {
-            final MqttEndExFW endEx = endExRW.build();
-            final byte[] array = new byte[endEx.sizeof()];
-            endEx.buffer().getBytes(endEx.offset(), array);
             return array;
         }
     }

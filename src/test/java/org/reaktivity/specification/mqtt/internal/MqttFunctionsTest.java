@@ -33,7 +33,6 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
-import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
 
 public class MqttFunctionsTest
 {
@@ -194,18 +193,6 @@ public class MqttFunctionsTest
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
                                                     Objects.isNull(h.value())) != null);
-    }
-
-    @Test
-    public void shouldEncodeMqttEndExAsUnsubscribe()
-    {
-        final byte[] array = MqttFunctions.endEx()
-                .typeId(0)
-                .build();
-
-        DirectBuffer buffer = new UnsafeBuffer(array);
-        MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
-        assertEquals(0, mqttEndEx.typeId());
     }
 
     @Test
