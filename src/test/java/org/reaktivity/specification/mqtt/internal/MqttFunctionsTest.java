@@ -15,10 +15,13 @@
  */
 package org.reaktivity.specification.mqtt.internal;
 
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.kaazing.k3po.lang.internal.el.ExpressionFactoryUtils.newExpressionFactory;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.el.ELContext;
@@ -33,6 +36,8 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
+
+import junit.framework.TestCase;
 
 public class MqttFunctionsTest
 {
@@ -51,6 +56,14 @@ public class MqttFunctionsTest
     {
         MqttFunctions.Mapper mapper = new MqttFunctions.Mapper();
         assertEquals("mqtt", mapper.getPrefixName());
+    }
+
+    @Test
+    public void shouldGetPayloadFormat()
+    {
+        final byte[] bytes = MqttFunctions.payloadFormat("TEXT");
+        final byte[] expected = new byte[]{1};
+        assertArrayEquals(bytes, expected);
     }
 
     @Test

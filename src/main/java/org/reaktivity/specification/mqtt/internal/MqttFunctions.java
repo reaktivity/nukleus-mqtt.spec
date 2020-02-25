@@ -18,11 +18,13 @@ package org.reaktivity.specification.mqtt.internal;
 
 import java.nio.charset.StandardCharsets;
 
+import org.agrona.DirectBuffer;
 import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
+import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormatFW;
 import org.reaktivity.specification.mqtt.internal.types.MqttRole;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
@@ -31,6 +33,18 @@ import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
 
 public final class MqttFunctions
 {
+    @Function
+    public static byte[] payloadFormat(String format)
+    {
+        final MqttPayloadFormat mqttPayloadFormat = MqttPayloadFormat.valueOf(format);
+        final MqttPayloadFormatFW formatFW = new MqttPayloadFormatFW.Builder().wrap(new UnsafeBuffer(new byte[1]), 0 , 1)
+                                                                              .set(mqttPayloadFormat)
+                                                                              .build();
+        final DirectBuffer buffer = formatFW.buffer();
+
+        return buffer.byteArray();
+    }
+
     @Function
     public static MqttRouteExBuilder routeEx()
     {
