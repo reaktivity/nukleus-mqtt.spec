@@ -18,7 +18,6 @@ package org.reaktivity.specification.mqtt.internal;
 
 import java.nio.charset.StandardCharsets;
 
-import org.agrona.DirectBuffer;
 import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
@@ -37,12 +36,13 @@ public final class MqttFunctions
     public static byte[] payloadFormat(String format)
     {
         final MqttPayloadFormat mqttPayloadFormat = MqttPayloadFormat.valueOf(format);
-        final MqttPayloadFormatFW formatFW = new MqttPayloadFormatFW.Builder().wrap(new UnsafeBuffer(new byte[1]), 0 , 1)
+        final MqttPayloadFormatFW formatFW = new MqttPayloadFormatFW.Builder().wrap(new UnsafeBuffer(new byte[1]), 0, 1)
                                                                               .set(mqttPayloadFormat)
                                                                               .build();
-        final DirectBuffer buffer = formatFW.buffer();
+        final byte[] array = new byte[formatFW.sizeof()];
+        formatFW.buffer().getBytes(formatFW.offset(), array);
 
-        return buffer.byteArray();
+        return array;
     }
 
     @Function
