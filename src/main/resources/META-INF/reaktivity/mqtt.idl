@@ -44,7 +44,7 @@ scope mqtt
     {
         struct MqttRouteEx
         {
-            string topic;
+            string16 topic;
         }
     }
 
@@ -54,14 +54,14 @@ scope mqtt
         {
             MqttRole role;
             string clientId;
-            string topic;
+            string16 topic;
             varbyteuint32 subscriptionId;
             MqttUserProperty[] properties;
         }
 
         struct MqttDataEx extends core::stream::Extension
         {
-            string topic;
+            string16 topic;
             int32 expiryInterval;
             string contentType;
             MqttPayloadFormat format;
