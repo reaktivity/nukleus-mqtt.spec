@@ -40,10 +40,4 @@ write nukleus:begin.ext ${mqtt:beginEx()
 
 connected
 
-read nukleus:end.ext ${mqtt:endEx()
-                           .typeId(nukleus:id("mqtt"))
-                           .build()}
-
-read closed
-
 write close
