@@ -55,7 +55,7 @@ public class MqttFunctionsTest
     }
 
     @Test
-    public void shouldGetPayloadFormat()
+    public void shouldEncodePayloadFormat()
     {
         final byte[] bytes = MqttFunctions.payloadFormat("TEXT");
         final byte[] expected = new byte[]{1};

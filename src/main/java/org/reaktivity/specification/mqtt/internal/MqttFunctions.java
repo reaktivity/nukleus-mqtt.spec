@@ -229,16 +229,8 @@ public final class MqttFunctions
             String name,
             String value)
         {
-            if (value == null)
-            {
-                dataExRW.propertiesItem(p -> p.key(name)
-                                              .value((String) null));
-            }
-            else
-            {
-                dataExRW.propertiesItem(p -> p.key(name)
-                                              .value(value));
-            }
+            dataExRW.propertiesItem(p -> p.key(name)
+                                          .value(value));
             return this;
         }
 
