@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 The Reaktivity Project
+ * Copyright 2016-2020 The Reaktivity Project
  *
  * The Reaktivity Project licenses this file to you under the Apache License,
  * version 2.0 (the "License"); you may not use this file except in compliance
@@ -15,8 +15,12 @@
  */
 package org.reaktivity.specification.mqtt.internal;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.kaazing.k3po.lang.internal.el.ExpressionFactoryUtils.newExpressionFactory;
+
+import java.util.Objects;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -30,7 +34,6 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
-import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
 
 public class MqttFunctionsTest
 {
@@ -49,6 +52,14 @@ public class MqttFunctionsTest
     {
         MqttFunctions.Mapper mapper = new MqttFunctions.Mapper();
         assertEquals("mqtt", mapper.getPrefixName());
+    }
+
+    @Test
+    public void shouldEncodePayloadFormat()
+    {
+        final byte[] bytes = MqttFunctions.payloadFormat("TEXT");
+        final byte[] expected = new byte[]{1};
+        assertArrayEquals(bytes, expected);
     }
 
     @Test
@@ -92,6 +103,7 @@ public class MqttFunctionsTest
                 .clientId("client")
                 .topic("sensor/one")
                 .subscriptionId(1)
+                .userProperty("name", "value")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -101,6 +113,35 @@ public class MqttFunctionsTest
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
         assertEquals(1, mqttBeginEx.subscriptionId());
+        assertNotNull(mqttBeginEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
+    public void shouldEncodeMqttBeginExAsSubackWithNullUserPropertyValue()
+    {
+        final byte[] array = MqttFunctions.beginEx()
+                .typeId(0)
+                .role("SENDER")
+                .clientId("client")
+                .topic("sensor/one")
+                .subscriptionId(1)
+                .userProperty("name", null)
+                .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals("SENDER", mqttBeginEx.role().toString());
+        assertEquals("client", mqttBeginEx.clientId().asString());
+        assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(1, mqttBeginEx.subscriptionId());
+        assertNotNull(mqttBeginEx.properties()
+                                 .matchFirst(h ->
+                                                 "name".equals(h.key().asString()) &&
+                                                     Objects.isNull(h.value())) != null);
     }
 
     @Test
@@ -114,6 +155,7 @@ public class MqttFunctionsTest
                 .format("TEXT")
                 .responseTopic("sensor/one")
                 .correlationInfo("info")
+                .userProperty("name", "value")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
@@ -126,18 +168,40 @@ public class MqttFunctionsTest
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationInfo().toString());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    "value".equals(h.value().asString())) != null);
     }
 
     @Test
-    public void shouldEncodeMqttEndExAsUnsubscribe()
+    public void shouldEncodeMqttDataExWithNullUserPropertyValue()
     {
-        final byte[] array = MqttFunctions.endEx()
-                .typeId(0)
-                .build();
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .topic("sensor/one")
+                                          .expiryInterval(15)
+                                          .contentType("message")
+                                          .format("TEXT")
+                                          .responseTopic("sensor/one")
+                                          .correlationInfo("info")
+                                          .userProperty("name", null)
+                                          .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
-        MqttEndExFW mqttEndEx = new MqttEndExFW().wrap(buffer, 0, buffer.capacity());
-        assertEquals(0, mqttEndEx.typeId());
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
+        assertEquals(15, mqttDataEx.expiryInterval());
+        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("TEXT", mqttDataEx.format().toString());
+        assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
+        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationInfo().toString());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    Objects.isNull(h.value())) != null);
     }
 
     @Test

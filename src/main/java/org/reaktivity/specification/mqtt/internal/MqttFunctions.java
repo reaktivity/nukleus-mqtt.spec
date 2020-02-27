@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 The Reaktivity Project
+ * Copyright 2016-2020 The Reaktivity Project
  *
  * The Reaktivity Project licenses this file to you under the Apache License,
  * version 2.0 (the "License"); you may not use this file except in compliance
@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package org.reaktivity.specification.mqtt.internal;
 
 import java.nio.charset.StandardCharsets;
@@ -23,15 +22,28 @@ import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
+import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormatFW;
 import org.reaktivity.specification.mqtt.internal.types.MqttRole;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
-import org.reaktivity.specification.mqtt.internal.types.stream.MqttEndExFW;
 
 public final class MqttFunctions
 {
+    @Function
+    public static byte[] payloadFormat(String format)
+    {
+        final MqttPayloadFormat mqttPayloadFormat = MqttPayloadFormat.valueOf(format);
+        final MqttPayloadFormatFW formatFW = new MqttPayloadFormatFW.Builder().wrap(new UnsafeBuffer(new byte[1]), 0, 1)
+                                                                              .set(mqttPayloadFormat)
+                                                                              .build();
+        final byte[] array = new byte[formatFW.sizeof()];
+        formatFW.buffer().getBytes(formatFW.offset(), array);
+
+        return array;
+    }
+
     @Function
     public static MqttRouteExBuilder routeEx()
     {
@@ -48,12 +60,6 @@ public final class MqttFunctions
     public static MqttDataExBuilder dataEx()
     {
         return new MqttDataExBuilder();
-    }
-
-    @Function
-    public static MqttEndExBuilder endEx()
-    {
-        return new MqttEndExBuilder();
     }
 
     @Function
@@ -133,6 +139,23 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttBeginExBuilder userProperty(
+            String name,
+            String value)
+        {
+            if (value == null)
+            {
+                beginExRW.propertiesItem(p -> p.key(name)
+                                               .value((String) null));
+            }
+            else
+            {
+                beginExRW.propertiesItem(p -> p.key(name)
+                                               .value(value));
+            }
+            return this;
+        }
+
         public byte[] build()
         {
             final MqttBeginExFW beginEx = beginExRW.build();
@@ -201,37 +224,20 @@ public final class MqttFunctions
             return this;
         }
 
-        public byte[] build()
+        public MqttDataExBuilder userProperty(
+            String name,
+            String value)
         {
-            final MqttDataExFW dataEx = dataExRW.build();
-            final byte[] array = new byte[dataEx.sizeof()];
-            dataEx.buffer().getBytes(dataEx.offset(), array);
-            return array;
-        }
-    }
-
-    public static final class MqttEndExBuilder
-    {
-        private final MqttEndExFW.Builder endExRW;
-
-        private MqttEndExBuilder()
-        {
-            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
-            this.endExRW = new MqttEndExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
-        }
-
-        public MqttEndExBuilder typeId(
-            int typeId)
-        {
-            endExRW.typeId(typeId);
+            dataExRW.propertiesItem(p -> p.key(name)
+                                          .value(value));
             return this;
         }
 
         public byte[] build()
         {
-            final MqttEndExFW endEx = endExRW.build();
-            final byte[] array = new byte[endEx.sizeof()];
-            endEx.buffer().getBytes(endEx.offset(), array);
+            final MqttDataExFW dataEx = dataExRW.build();
+            final byte[] array = new byte[dataEx.sizeof()];
+            dataEx.buffer().getBytes(dataEx.offset(), array);
             return array;
         }
     }

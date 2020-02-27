@@ -1,5 +1,5 @@
 #
-# Copyright 2016-2019 The Reaktivity Project
+# Copyright 2016-2020 The Reaktivity Project
 #
 # The Reaktivity Project licenses this file to you under the Apache License,
 # version 2.0 (the "License"); you may not use this file except in compliance
@@ -35,10 +35,6 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .subscriptionId(1)
                              .build()}
 connected
-
-write nukleus:end.ext ${mqtt:endEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .build()}
 
 write close
 
