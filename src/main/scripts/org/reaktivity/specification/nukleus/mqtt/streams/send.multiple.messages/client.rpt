@@ -28,7 +28,7 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .contentType("message")
                              .format("TEXT")
                              .responseTopic("sensor/one")
-                             .correlationInfo("info")
+                             .correlationData("info")
                              .build()}
 
 write "message1"
@@ -40,7 +40,7 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .contentType("message")
                              .format("TEXT")
                              .responseTopic("sensor/one")
-                             .correlationInfo("info")
+                             .correlationData("info")
                              .build()}
 
 write "message2"
@@ -52,7 +52,7 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .contentType("message")
                              .format("TEXT")
                              .responseTopic("sensor/one")
-                             .correlationInfo("info")
+                             .correlationData("info")
                              .build()}
 
 write "message3"

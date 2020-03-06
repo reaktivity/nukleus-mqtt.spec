@@ -31,7 +31,7 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .contentType("message")
                             .format("TEXT")
                             .responseTopic("sensor/one")
-                            .correlationInfo("info")
+                            .correlationData("info")
                             .build()}
 
 read "update"

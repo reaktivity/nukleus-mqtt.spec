@@ -16,7 +16,9 @@
 
 package org.reaktivity.specification.mqtt.internal;
 
-import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.util.Random;
 
 import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
@@ -41,6 +43,16 @@ public final class MqttFunctions
                                                                               .build();
         final byte[] array = new byte[formatFW.sizeof()];
         formatFW.buffer().getBytes(formatFW.offset(), array);
+
+        return array;
+    }
+
+    @Function
+    public static byte[] randomBytes(int length)
+    {
+        final byte[] array = new byte[length];
+        final Random random = new Random();
+        random.nextBytes(array);
 
         return array;
     }
@@ -218,10 +230,17 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder correlationInfo(
+        public MqttDataExBuilder correlationData(
             String info)
         {
-            dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes(StandardCharsets.UTF_8))));
+            dataExRW.correlationData(c -> c.bytes(b -> b.set(info.getBytes(UTF_8))));
+            return this;
+        }
+
+        public MqttDataExBuilder correlationBytes(
+            byte[] data)
+        {
+            dataExRW.correlationData(c -> c.bytes(b -> b.set(data)));
             return this;
         }
 
