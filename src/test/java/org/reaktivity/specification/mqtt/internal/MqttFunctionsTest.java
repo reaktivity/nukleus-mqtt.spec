@@ -64,14 +64,6 @@ public class MqttFunctionsTest
     }
 
     @Test
-    public void shouldEncodeRandomBytes()
-    {
-        final int length = 16;
-        final byte[] bytes = MqttFunctions.randomBytes(length);
-        assertEquals(bytes.length, length);
-    }
-
-    @Test
     public void shouldEncodeMqttRouteEx()
     {
         final byte[] array = MqttFunctions.routeEx()
@@ -163,7 +155,7 @@ public class MqttFunctionsTest
                 .contentType("message")
                 .format("TEXT")
                 .responseTopic("sensor/one")
-                .correlationData("info")
+                .correlation("request-id-1")
                 .userProperty("name", "value")
                 .build();
 
@@ -176,7 +168,7 @@ public class MqttFunctionsTest
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
-        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationData().toString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
         assertNotNull(mqttDataEx.properties()
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
@@ -193,7 +185,7 @@ public class MqttFunctionsTest
                                           .contentType("message")
                                           .format("TEXT")
                                           .responseTopic("sensor/one")
-                                          .correlationBytes("info".getBytes(UTF_8))
+                                          .correlationBytes("request-id-1".getBytes(UTF_8))
                                           .userProperty("name", "value")
                                           .build();
 
@@ -206,7 +198,7 @@ public class MqttFunctionsTest
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
-        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationData().toString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
         assertNotNull(mqttDataEx.properties()
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
@@ -223,7 +215,7 @@ public class MqttFunctionsTest
                                           .contentType("message")
                                           .format("TEXT")
                                           .responseTopic("sensor/one")
-                                          .correlationData("info")
+                                          .correlation("request-id-1")
                                           .userProperty("name", null)
                                           .build();
 
@@ -236,7 +228,7 @@ public class MqttFunctionsTest
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
-        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationData().toString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
         assertNotNull(mqttDataEx.properties()
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&

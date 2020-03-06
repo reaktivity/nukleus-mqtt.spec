@@ -39,7 +39,7 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .contentType("message")
                             .format("TEXT")
                             .responseTopic("sensor/one")
-                            .correlationData("info")
+                            .correlation("request-id-1")
                             .build()}
 
 read "message1"
@@ -51,7 +51,7 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .contentType("message")
                             .format("TEXT")
                             .responseTopic("sensor/one")
-                            .correlationData("info")
+                            .correlation("request-id-1")
                             .build()}
 
 read "message2"
@@ -77,7 +77,7 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .contentType("message")
                             .format("TEXT")
                             .responseTopic("sensor/one")
-                            .correlationData("info")
+                            .correlation("request-id-1")
                             .build()}
 
 read "message3"
