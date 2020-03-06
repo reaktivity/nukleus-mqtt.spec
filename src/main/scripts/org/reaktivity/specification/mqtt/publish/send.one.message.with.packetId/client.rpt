@@ -42,7 +42,7 @@ write [0x30 0x3b]                    # PUBLISH header
       [0x03 0x07] "message"          # content type
       [0x01 0x01]                    # payload format indicator: 0 = unspecified bytes, 1 = UTF-8 TEXT
       [0x08 0x0a] "sensor/one"       # response topic
-      [0x09 0x00 0x0C] "request-id-1"        # correlation data
+      [0x09 0x00 0x0C] "request-id-1"   # correlation data
       "message"                      # payload
 
 read  [0xE0 0x02]                    # disconnect header
