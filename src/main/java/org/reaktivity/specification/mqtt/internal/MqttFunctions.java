@@ -15,7 +15,7 @@
  */
 package org.reaktivity.specification.mqtt.internal;
 
-import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
@@ -217,10 +217,17 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder correlationInfo(
-            String info)
+        public MqttDataExBuilder correlation(
+            String correlation)
         {
-            dataExRW.correlationInfo(c -> c.bytes(b -> b.set(info.getBytes(StandardCharsets.UTF_8))));
+            dataExRW.correlation(c -> c.bytes(b -> b.set(correlation.getBytes(UTF_8))));
+            return this;
+        }
+
+        public MqttDataExBuilder correlationBytes(
+            byte[] correlation)
+        {
+            dataExRW.correlation(c -> c.bytes(b -> b.set(correlation)));
             return this;
         }
 

@@ -15,6 +15,7 @@
  */
 package org.reaktivity.specification.mqtt.internal;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -154,7 +155,7 @@ public class MqttFunctionsTest
                 .contentType("message")
                 .format("TEXT")
                 .responseTopic("sensor/one")
-                .correlationInfo("info")
+                .correlation("request-id-1")
                 .userProperty("name", "value")
                 .build();
 
@@ -167,7 +168,37 @@ public class MqttFunctionsTest
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
-        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationInfo().toString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
+    public void shouldEncodeMqttDataExWithBytes()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .topic("sensor/one")
+                                          .expiryInterval(15)
+                                          .contentType("message")
+                                          .format("TEXT")
+                                          .responseTopic("sensor/one")
+                                          .correlationBytes("request-id-1".getBytes(UTF_8))
+                                          .userProperty("name", "value")
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
+        assertEquals(15, mqttDataEx.expiryInterval());
+        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("TEXT", mqttDataEx.format().toString());
+        assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
         assertNotNull(mqttDataEx.properties()
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
@@ -184,7 +215,7 @@ public class MqttFunctionsTest
                                           .contentType("message")
                                           .format("TEXT")
                                           .responseTopic("sensor/one")
-                                          .correlationInfo("info")
+                                          .correlation("request-id-1")
                                           .userProperty("name", null)
                                           .build();
 
@@ -197,7 +228,7 @@ public class MqttFunctionsTest
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
-        assertEquals("MQTT_BINARY [length=4, bytes=octets[4]]",  mqttDataEx.correlationInfo().toString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
         assertNotNull(mqttDataEx.properties()
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
