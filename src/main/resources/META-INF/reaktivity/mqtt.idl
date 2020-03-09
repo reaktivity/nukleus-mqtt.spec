@@ -65,7 +65,7 @@ scope mqtt
             string8 contentType;
             MqttPayloadFormat format;
             string8 responseTopic;
-            MqttBinary correlationInfo;
+            MqttBinary correlation;
             MqttUserProperty[] properties;
         }
 
