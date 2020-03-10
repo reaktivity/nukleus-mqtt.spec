@@ -30,8 +30,8 @@ scope mqtt
 
     struct MqttBinary
     {
-        uint16 length;
-        octets[length] bytes;
+        int32 length;
+        octets[length] bytes = null;
     }
 
     struct MqttUserProperty

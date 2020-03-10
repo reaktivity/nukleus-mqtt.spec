@@ -170,6 +170,8 @@ public final class MqttFunctions
     {
         private final MqttDataExFW.Builder dataExRW;
 
+        private boolean responseTopicSet;
+
         private MqttDataExBuilder()
         {
             MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
@@ -214,6 +216,7 @@ public final class MqttFunctions
         public MqttDataExBuilder responseTopic(
             String topic)
         {
+            responseTopicSet = true;
             dataExRW.responseTopic(topic);
             return this;
         }
@@ -221,6 +224,8 @@ public final class MqttFunctions
         public MqttDataExBuilder correlation(
             String correlation)
         {
+            ensureResponseTopicSet();
+
             dataExRW.correlation(c -> c.bytes(b -> b.set(correlation.getBytes(UTF_8))));
             return this;
         }
@@ -228,6 +233,8 @@ public final class MqttFunctions
         public MqttDataExBuilder correlationBytes(
             byte[] correlation)
         {
+            ensureResponseTopicSet();
+
             dataExRW.correlation(c -> c.bytes(b -> b.set(correlation)));
             return this;
         }
@@ -243,10 +250,20 @@ public final class MqttFunctions
 
         public byte[] build()
         {
+            ensureResponseTopicSet();
+
             final MqttDataExFW dataEx = dataExRW.build();
             final byte[] array = new byte[dataEx.sizeof()];
             dataEx.buffer().getBytes(dataEx.offset(), array);
             return array;
+        }
+
+        private void ensureResponseTopicSet()
+        {
+            if (!responseTopicSet)
+            {
+                responseTopic(null);
+            }
         }
     }
 
