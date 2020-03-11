@@ -45,3 +45,4 @@ read  [0x30 0x37]                    # PUBLISH header
       [0x08 0x0a] "sensor/one"       # response topic
       [0x09 0x00 0x04] "info"        # correlation data
       "message"                      # payload
+
