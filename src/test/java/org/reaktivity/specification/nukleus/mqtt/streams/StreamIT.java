@@ -171,6 +171,18 @@ public class StreamIT
 
     @Test
     @Specification({
+        "${scripts}/send.message.and.receive.correlated.message/client",
+        "${scripts}/send.message.and.receive.correlated.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSendAndReceiveCorrelatedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/send.one.message/client",
         "${scripts}/send.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")

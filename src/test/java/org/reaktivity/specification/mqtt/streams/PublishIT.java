@@ -87,6 +87,18 @@ public class PublishIT
 
     @Test
     @Specification({
+        "${scripts}/send.message.and.receive.correlated.message/client",
+        "${scripts}/send.message.and.receive.correlated.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSendAndReceiveCorrelatedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/receive.one.message.with.invalid.subscription.id/client",
         "${scripts}/receive.one.message.with.invalid.subscription.id/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")

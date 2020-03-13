@@ -14,7 +14,7 @@
 # under the License.
 #
 
- connect await ROUTED_SERVER
+connect await ROUTED_SERVER
          "nukleus://streams/mqtt#0"
    option nukleus:window 8192
    option nukleus:transmission "duplex"
@@ -62,4 +62,4 @@ write [0x30 0x38]                    # PUBLISH header
       [0x01 0x01]                    # payload format indicator: 0 = unspecified bytes, 1 = UTF-8 TEXT
       [0x08 0x0a] "sensor/one"       # response topic
       [0x09 0x00 0x04] "info"        # correlation data
-      "message3"                      # payload
+      "message3"                     # payload
