@@ -54,7 +54,7 @@ scope mqtt
             MqttRole role;
             string clientId;
             string16 topic;
-            varbyteuint32 subscriptionId;
+            varbyteuint32 subscriptionId = 0;
             MqttUserProperty[] properties;
         }
 
