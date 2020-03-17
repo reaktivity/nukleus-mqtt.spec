@@ -60,8 +60,9 @@ scope mqtt
 
         struct MqttDataEx extends core::stream::Extension
         {
+            int32 deferred = 0;             // INIT only (TODO: move to DATA frame)
             string16 topic;
-            int32 expiryInterval;
+            int32 expiryInterval = -1;
             string contentType;
             MqttPayloadFormat format;
             string responseTopic;
