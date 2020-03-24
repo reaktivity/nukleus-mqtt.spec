@@ -54,14 +54,15 @@ scope mqtt
             MqttRole role;
             string8 clientId;
             string16 topic;
-            varbyteuint32 subscriptionId;
+            varbyteuint32 subscriptionId = 0;
             MqttUserProperty[] properties;
         }
 
         struct MqttDataEx extends core::stream::Extension
         {
+            int32 deferred = 0;             // INIT only (TODO: move to DATA frame)
             string16 topic;
-            int32 expiryInterval;
+            int32 expiryInterval = -1;
             string8 contentType;
             MqttPayloadFormat format;
             string8 responseTopic;

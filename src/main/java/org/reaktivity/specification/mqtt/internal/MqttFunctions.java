@@ -169,6 +169,7 @@ public final class MqttFunctions
     {
         private final MqttDataExFW.Builder dataExRW;
 
+        private boolean topicSet;
         private boolean responseTopicSet;
 
         private MqttDataExBuilder()
@@ -187,6 +188,7 @@ public final class MqttFunctions
         public MqttDataExBuilder topic(
             String topic)
         {
+            topicSet = true;
             dataExRW.topic(topic);
             return this;
         }
@@ -194,6 +196,8 @@ public final class MqttFunctions
         public MqttDataExBuilder expiryInterval(
             int msgExp)
         {
+            ensureTopicSet();
+
             dataExRW.expiryInterval(msgExp);
             return this;
         }
@@ -249,12 +253,22 @@ public final class MqttFunctions
 
         public byte[] build()
         {
+            ensureTopicSet();
             ensureResponseTopicSet();
 
             final MqttDataExFW dataEx = dataExRW.build();
             final byte[] array = new byte[dataEx.sizeof()];
             dataEx.buffer().getBytes(dataEx.offset(), array);
             return array;
+        }
+
+        private void ensureTopicSet()
+        {
+            if (!topicSet)
+            {
+                topic(null);
+            }
+
         }
 
         private void ensureResponseTopicSet()
