@@ -15,10 +15,11 @@
  */
 scope mqtt
 {
-    enum MqttRole
+    enum MqttCapabilities
     {
-        SENDER,
-        RECEIVER
+        PUBLISH,
+        SUBSCRIBE,
+        PUBLISH_AND_SUBSCRIBE
     }
 
     enum MqttPayloadFormat
@@ -51,7 +52,7 @@ scope mqtt
     {
         struct MqttBeginEx extends core::stream::Extension
         {
-            MqttRole role;
+            MqttCapabilities role;
             string8 clientId;
             string16 topic;
             varbyteuint32 subscriptionId = 0;

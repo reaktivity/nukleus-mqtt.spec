@@ -21,9 +21,9 @@ import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
+import org.reaktivity.specification.mqtt.internal.types.MqttCapabilities;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormatFW;
-import org.reaktivity.specification.mqtt.internal.types.MqttRole;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
@@ -128,7 +128,7 @@ public final class MqttFunctions
         public MqttBeginExBuilder role(
             String role)
         {
-            beginExRW.role(p -> p.set(MqttRole.valueOf(role)));
+            beginExRW.role(p -> p.set(MqttCapabilities.valueOf(role)));
             return this;
         }
 
