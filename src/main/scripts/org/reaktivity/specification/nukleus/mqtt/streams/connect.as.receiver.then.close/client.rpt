@@ -29,7 +29,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .capabilities("PUBLISH")
+                             .capabilities("SUBSCRIBE")
                              .clientId("client")
                              .topic("sensor/one")
                              .subscriptionId(1)
