@@ -78,7 +78,7 @@ scope mqtt
 
         struct MqttFlushEx extends core::stream::Extension
         {
-            MqttCapabilities capabilities;
+            MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
         }
     }
 }
