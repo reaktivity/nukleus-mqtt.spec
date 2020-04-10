@@ -125,10 +125,10 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttBeginExBuilder role(
-            String role)
+        public MqttBeginExBuilder capabilities(
+            String capabilities)
         {
-            beginExRW.role(p -> p.set(MqttCapabilities.valueOf(role)));
+            beginExRW.capabilities(p -> p.set(MqttCapabilities.valueOf(capabilities)));
             return this;
         }
 
