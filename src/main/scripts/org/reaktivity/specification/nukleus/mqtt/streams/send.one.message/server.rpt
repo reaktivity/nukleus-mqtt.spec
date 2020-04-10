@@ -25,7 +25,7 @@ accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
-                              .capabilities("PUBLISH")
+                              .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
                               .subscriptionId(0)

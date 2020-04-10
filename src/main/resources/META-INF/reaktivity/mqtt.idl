@@ -17,8 +17,8 @@ scope mqtt
 {
     enum MqttCapabilities
     {
-        PUBLISH,
-        SUBSCRIBE,
+        PUBLISH_ONLY,
+        SUBSCRIBE_ONLY,
         PUBLISH_AND_SUBSCRIBE
     }
 

@@ -81,7 +81,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
-                .capabilities("SUBSCRIBE")
+                .capabilities("SUBSCRIBE_ONLY")
                 .clientId("client")
                 .topic("sensor/one")
                 .subscriptionId(1)
@@ -90,7 +90,7 @@ public class MqttFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
 
-        assertEquals("SUBSCRIBE", mqttBeginEx.capabilities().toString());
+        assertEquals("SUBSCRIBE_ONLY", mqttBeginEx.capabilities().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
         assertEquals(1, mqttBeginEx.subscriptionId());
@@ -101,7 +101,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
-                .capabilities("PUBLISH")
+                .capabilities("PUBLISH_ONLY")
                 .clientId("client")
                 .topic("sensor/one")
                 .subscriptionId(1)
@@ -111,7 +111,7 @@ public class MqttFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
 
-        assertEquals("PUBLISH", mqttBeginEx.capabilities().toString());
+        assertEquals("PUBLISH_ONLY", mqttBeginEx.capabilities().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
         assertEquals(1, mqttBeginEx.subscriptionId());
@@ -126,7 +126,7 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.beginEx()
                 .typeId(0)
-                .capabilities("PUBLISH")
+                .capabilities("PUBLISH_ONLY")
                 .clientId("client")
                 .topic("sensor/one")
                 .subscriptionId(1)
@@ -136,7 +136,7 @@ public class MqttFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(array);
         MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
 
-        assertEquals("PUBLISH", mqttBeginEx.capabilities().toString());
+        assertEquals("PUBLISH_ONLY", mqttBeginEx.capabilities().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
         assertEquals(1, mqttBeginEx.subscriptionId());
