@@ -153,7 +153,7 @@ public class MqttFunctionsTest
                 .typeId(0)
                 .topic("sensor/one")
                 .expiryInterval(15)
-                .contentType("message")
+                .contentType("publish.one.message")
                 .format("TEXT")
                 .responseTopic("sensor/one")
                 .correlation("request-id-1")
@@ -166,7 +166,7 @@ public class MqttFunctionsTest
         assertEquals(0, mqttDataEx.typeId());
         assertEquals("sensor/one", mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.expiryInterval());
-        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("publish.one.message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
@@ -182,7 +182,7 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
                                           .expiryInterval(15)
-                                          .contentType("message")
+                                          .contentType("publish.one.message")
                                           .format("TEXT")
                                           .responseTopic("sensor/one")
                                           .correlation("request-id-1")
@@ -195,7 +195,7 @@ public class MqttFunctionsTest
         assertEquals(0, mqttDataEx.typeId());
         assertNull(mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.expiryInterval());
-        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("publish.one.message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
@@ -212,7 +212,7 @@ public class MqttFunctionsTest
                                           .typeId(0)
                                           .topic("sensor/one")
                                           .expiryInterval(15)
-                                          .contentType("message")
+                                          .contentType("publish.one.message")
                                           .format("TEXT")
                                           .correlation("request-id-1")
                                           .userProperty("name", "value")
@@ -224,7 +224,7 @@ public class MqttFunctionsTest
         assertEquals(0, mqttDataEx.typeId());
         assertEquals("sensor/one", mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.expiryInterval());
-        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("publish.one.message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertNull(mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
@@ -241,7 +241,7 @@ public class MqttFunctionsTest
                                           .typeId(0)
                                           .topic("sensor/one")
                                           .expiryInterval(15)
-                                          .contentType("message")
+                                          .contentType("publish.one.message")
                                           .format("TEXT")
                                           .responseTopic("sensor/one")
                                           .correlationBytes("request-id-1".getBytes(UTF_8))
@@ -254,7 +254,7 @@ public class MqttFunctionsTest
         assertEquals(0, mqttDataEx.typeId());
         assertEquals("sensor/one", mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.expiryInterval());
-        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("publish.one.message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
@@ -271,7 +271,7 @@ public class MqttFunctionsTest
                                           .typeId(0)
                                           .topic("sensor/one")
                                           .expiryInterval(15)
-                                          .contentType("message")
+                                          .contentType("publish.one.message")
                                           .format("TEXT")
                                           .responseTopic("sensor/one")
                                           .correlation("request-id-1")
@@ -284,7 +284,7 @@ public class MqttFunctionsTest
         assertEquals(0, mqttDataEx.typeId());
         assertEquals("sensor/one", mqttDataEx.topic().asString());
         assertEquals(15, mqttDataEx.expiryInterval());
-        assertEquals("message", mqttDataEx.contentType().asString());
+        assertEquals("publish.one.message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());

@@ -30,7 +30,7 @@ import org.kaazing.k3po.junit.rules.K3poRule;
 public class PublishIT
 {
     private final K3poRule k3po = new K3poRule()
-            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt/publish");
+            .addScriptRoot("scripts", "org/reaktivity/specification/mqtt");
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     @Rule
@@ -38,10 +38,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/send.one.message/client",
-        "${scripts}/send.one.message/server"})
+        "${scripts}/publish.one.message/client",
+        "${scripts}/publish.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendPublishOneMessage() throws Exception
+    public void shouldpublishPublishOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -50,10 +50,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/send.multiple.messages/client",
-        "${scripts}/send.multiple.messages/server"})
+        "${scripts}/publish.multiple.messages/client",
+        "${scripts}/publish.multiple.messages/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendMultiplePublishMessages() throws Exception
+    public void shouldpublishMultiplePublishMessages() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -62,10 +62,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/send.multiple.messages.with.delay/client",
-        "${scripts}/send.multiple.messages.with.delay/server"})
+        "${scripts}/publish.multiple.messages.with.delay/client",
+        "${scripts}/publish.multiple.messages.with.delay/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendMultipleMessagesWithDelay() throws Exception
+    public void shouldpublishMultipleMessagesWithDelay() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -75,10 +75,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/receive.one.message/client",
-        "${scripts}/receive.one.message/server"})
+        "${scripts}/subscribe.one.message/client",
+        "${scripts}/subscribe.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldReceiveOnePublishMessage() throws Exception
+    public void shouldsubscribeOnePublishMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -87,10 +87,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/receive.one.message.with.pattern.topic/client",
-        "${scripts}/receive.one.message.with.pattern.topic/server"})
+        "${scripts}/subscribe.one.message.with.pattern.topic/client",
+        "${scripts}/subscribe.one.message.with.pattern.topic/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldReceiveOnePublishMessageWithPatternTopic() throws Exception
+    public void shouldsubscribeOnePublishMessageWithPatternTopic() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -99,10 +99,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/send.message.and.receive.correlated.message/client",
-        "${scripts}/send.message.and.receive.correlated.message/server"})
+        "${scripts}/publish.message.and.subscribe.correlated.message/client",
+        "${scripts}/publish.message.and.subscribe.correlated.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSendAndReceiveCorrelatedMessage() throws Exception
+    public void shouldpublishAndsubscribeCorrelatedMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -111,10 +111,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/receive.one.message.with.invalid.subscription.id/client",
-        "${scripts}/receive.one.message.with.invalid.subscription.id/server"})
+        "${scripts}/subscribe.one.message.with.invalid.subscription.id/client",
+        "${scripts}/subscribe.one.message.with.invalid.subscription.id/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldReceiveOnePublishMessageWithInvalidSubscriptionId() throws Exception
+    public void shouldsubscribeOnePublishMessageWithInvalidSubscriptionId() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -123,8 +123,8 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/receive.one.message.with.packetId/client",
-        "${scripts}/receive.one.message.with.packetId/server"})
+        "${scripts}/subscribe.one.message.with.packetId/client",
+        "${scripts}/subscribe.one.message.with.packetId/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectOneMessagePublishPacketWithPacketId() throws Exception
     {
