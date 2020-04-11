@@ -123,10 +123,10 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/subscribe.one.message.with.packetId/client",
-        "${scripts}/subscribe.one.message.with.packetId/server"})
+        "${scripts}/reject.publish.one.message.with.packet.id/client",
+        "${scripts}/reject.publish.one.message.with.packet.id/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectSubscribeOneMessageWithPacketId() throws Exception
+    public void shouldRejectPublishOneMessageWithPacketId() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
