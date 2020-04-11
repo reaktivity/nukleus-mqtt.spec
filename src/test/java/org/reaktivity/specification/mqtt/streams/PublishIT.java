@@ -41,7 +41,7 @@ public class PublishIT
         "${scripts}/publish.one.message/client",
         "${scripts}/publish.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldpublishPublishOneMessage() throws Exception
+    public void shouldPublishPublishOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -53,7 +53,7 @@ public class PublishIT
         "${scripts}/publish.multiple.messages/client",
         "${scripts}/publish.multiple.messages/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldpublishMultiplePublishMessages() throws Exception
+    public void shouldPublishMultiplePublishMessages() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -65,7 +65,7 @@ public class PublishIT
         "${scripts}/publish.multiple.messages.with.delay/client",
         "${scripts}/publish.multiple.messages.with.delay/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldpublishMultipleMessagesWithDelay() throws Exception
+    public void shouldPublishMultipleMessagesWithDelay() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -78,7 +78,7 @@ public class PublishIT
         "${scripts}/subscribe.one.message/client",
         "${scripts}/subscribe.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldsubscribeOnePublishMessage() throws Exception
+    public void shouldSubscribeOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -90,7 +90,7 @@ public class PublishIT
         "${scripts}/subscribe.one.message.with.pattern.topic/client",
         "${scripts}/subscribe.one.message.with.pattern.topic/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldsubscribeOnePublishMessageWithPatternTopic() throws Exception
+    public void shouldSubscribeOneMessageWithPatternTopic() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -102,7 +102,7 @@ public class PublishIT
         "${scripts}/publish.message.and.subscribe.correlated.message/client",
         "${scripts}/publish.message.and.subscribe.correlated.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldpublishAndsubscribeCorrelatedMessage() throws Exception
+    public void shouldPublishMessageAndSubscribeCorrelatedMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -114,7 +114,7 @@ public class PublishIT
         "${scripts}/subscribe.one.message.with.invalid.subscription.id/client",
         "${scripts}/subscribe.one.message.with.invalid.subscription.id/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldsubscribeOnePublishMessageWithInvalidSubscriptionId() throws Exception
+    public void shouldSubscribeOneMessageWithInvalidSubscriptionId() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -126,7 +126,7 @@ public class PublishIT
         "${scripts}/subscribe.one.message.with.packetId/client",
         "${scripts}/subscribe.one.message.with.packetId/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectOneMessagePublishPacketWithPacketId() throws Exception
+    public void shouldRejectSubscribeOneMessageWithPacketId() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
