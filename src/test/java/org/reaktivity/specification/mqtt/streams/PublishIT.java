@@ -41,7 +41,7 @@ public class PublishIT
         "${scripts}/publish.one.message/client",
         "${scripts}/publish.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishPublishOneMessage() throws Exception
+    public void shouldPublishOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -53,7 +53,7 @@ public class PublishIT
         "${scripts}/publish.multiple.messages/client",
         "${scripts}/publish.multiple.messages/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishMultiplePublishMessages() throws Exception
+    public void shouldPublishMultipleMessages() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

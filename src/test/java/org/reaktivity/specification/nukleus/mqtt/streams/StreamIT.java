@@ -186,7 +186,7 @@ public class StreamIT
         "${scripts}/publish.message.and.subscribe.correlated.message/client",
         "${scripts}/publish.message.and.subscribe.correlated.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishAndSubscribeCorrelatedMessage() throws Exception
+    public void shouldPublishMessageAndSubscribeCorrelatedMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
