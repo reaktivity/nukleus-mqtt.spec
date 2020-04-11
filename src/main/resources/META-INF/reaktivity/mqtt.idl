@@ -45,6 +45,7 @@ scope mqtt
         struct MqttRouteEx
         {
             string16 topic;
+            MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
         }
     }
 
