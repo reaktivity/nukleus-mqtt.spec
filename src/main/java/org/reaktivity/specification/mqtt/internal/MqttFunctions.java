@@ -85,6 +85,13 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttRouteExBuilder capabilities(
+            String capabilities)
+        {
+            routeExRW.capabilities(c -> c.set(MqttCapabilities.valueOf(capabilities)));
+            return this;
+        }
+
         public byte[] build()
         {
             final MqttRouteExFW routeEx = routeExRW.build();
