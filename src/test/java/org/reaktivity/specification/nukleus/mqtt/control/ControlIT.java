@@ -39,8 +39,8 @@ public class ControlIT
 
     @Test
     @Specification({
-            "${scripts}/route/server/nukleus",
-            "${scripts}/route/server/controller"
+        "${scripts}/route/server/nukleus",
+        "${scripts}/route/server/controller"
     })
     public void shouldRouteServer() throws Exception
     {
@@ -49,8 +49,8 @@ public class ControlIT
 
     @Test
     @Specification({
-            "${scripts}/route/client/nukleus",
-            "${scripts}/route/client/controller"
+        "${scripts}/route/client/nukleus",
+        "${scripts}/route/client/controller"
     })
     public void shouldRouteClient() throws Exception
     {
@@ -59,8 +59,8 @@ public class ControlIT
 
     @Test
     @Specification({
-            "${scripts}/unroute/server/nukleus",
-            "${scripts}/unroute/server/controller"
+        "${scripts}/unroute/server/nukleus",
+        "${scripts}/unroute/server/controller"
     })
     public void shouldUnrouteServer() throws Exception
     {
@@ -71,8 +71,8 @@ public class ControlIT
 
     @Test
     @Specification({
-            "${scripts}/unroute/client/nukleus",
-            "${scripts}/unroute/client/controller"
+        "${scripts}/unroute/client/nukleus",
+        "${scripts}/unroute/client/controller"
     })
     public void shouldUnrouteClient() throws Exception
     {
@@ -83,8 +83,8 @@ public class ControlIT
 
     @Test
     @Specification({
-            "${scripts}/route.ext/client/nukleus",
-            "${scripts}/route.ext/client/controller"
+        "${scripts}/route.ext/client/nukleus",
+        "${scripts}/route.ext/client/controller"
     })
     public void shouldRouteClientWithExtentionWithOneTopic() throws Exception
     {
@@ -95,8 +95,8 @@ public class ControlIT
 
     @Test
     @Specification({
-            "${scripts}/route.ext/server/nukleus",
-            "${scripts}/route.ext/server/controller"
+        "${scripts}/route.ext/server/nukleus",
+        "${scripts}/route.ext/server/controller"
     })
     public void shouldRouteServerWithExtentionWithOneTopic() throws Exception
     {
@@ -105,4 +105,75 @@ public class ControlIT
         k3po.finish();
     }
 
+    @Test
+    @Specification({
+        "${scripts}/route.ext/publish.only/client/nukleus",
+        "${scripts}/route.ext/publish.only/client/controller"
+    })
+    public void shouldRouteClientWithPublishOnlyCapabilities() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/route.ext/publish.only/server/nukleus",
+        "${scripts}/route.ext/publish.only/server/controller"
+    })
+    public void shouldRouteServerWithPublishOnlyCapabilities() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/route.ext/subscribe.only/client/nukleus",
+        "${scripts}/route.ext/subscribe.only/client/controller"
+    })
+    public void shouldRouteClientWithSubscribeOnlyCapabilities() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/route.ext/subscribe.only/server/nukleus",
+        "${scripts}/route.ext/subscribe.only/server/controller"
+    })
+    public void shouldRouteServerWithSubscribeOnlyCapabilities() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/route.ext/publish.and.subscribe/client/nukleus",
+        "${scripts}/route.ext/publish.and.subscribe/client/controller"
+    })
+    public void shouldRouteClientWithPublishAndSubscribeCapabilities() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/route.ext/publish.and.subscribe/server/nukleus",
+        "${scripts}/route.ext/publish.and.subscribe/server/controller"
+    })
+    public void shouldRouteServerWithPublishAndSubscribeCapabilities() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
 }
