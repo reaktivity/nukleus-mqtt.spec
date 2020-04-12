@@ -38,8 +38,8 @@ public class ConnectionIT
 
     @Test
     @Specification({
-            "${scripts}/connect/successful/client",
-            "${scripts}/connect/successful/server"})
+        "${scripts}/connect/successful/client",
+        "${scripts}/connect/successful/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnect() throws Exception
     {
@@ -119,5 +119,4 @@ public class ConnectionIT
         k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
-
 }
