@@ -54,7 +54,7 @@ write  [0xa2 0x0f]                   # UNSUBSCRIBE header
        [0x00 0x0a] "sensor/one"      # topic filter
        [0x00 0x0a] "sensor/two"      # topic filter
 
-read   [0xa0 0x04]                   # UNSUBACK header
+read   [0xa0 0x05]                   # UNSUBACK header
        [0x00 0x01]                   # packetId = 1
        [0x00]                        # properties = none
-       [0x00]                        # unsubscribe = success
+       [0x00 0x00]                   # reason codes

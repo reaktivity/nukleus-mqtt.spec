@@ -54,7 +54,8 @@ write [0x30 0x38]                    # PUBLISH header
       [0x09 0x00 0x04] "info"        # correlation data
       "message2"                     # payload
 
-write await PUBLISH_CLOSE
+write notify PUBLISHED_MESSAGE_TWO
+write await PUBLISH_MESSAGE_THREE
 
 write [0x30 0x38]                    # PUBLISH header
       [0x00 0x0a] "sensor/one"       # topic name
