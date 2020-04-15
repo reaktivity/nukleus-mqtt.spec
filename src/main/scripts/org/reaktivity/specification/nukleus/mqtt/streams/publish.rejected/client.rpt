@@ -19,8 +19,4 @@ connect await ROUTED_CLIENT
          option nukleus:window 8192
          option nukleus:transmission "duplex"
 
-connected
-
-write [0x7C 0x00]             # disconnect = normal
-
-write close
+connect aborted

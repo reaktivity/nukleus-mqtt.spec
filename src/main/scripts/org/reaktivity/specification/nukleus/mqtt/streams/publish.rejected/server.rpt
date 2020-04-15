@@ -20,10 +20,4 @@ accept ${serverTransport}
         option nukleus:window 8192
         option nukleus:transmission "duplex"
 
-accepted
-
-connected
-
-read [0x7C 0x00]              # disconnect = normal
-
-read closed
+rejected
