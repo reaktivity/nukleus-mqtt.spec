@@ -34,8 +34,8 @@ read  [0x20 0x03]                    # CONNACK header
       [0x00]                         # reason code
       [0x00]                         # properties = none
 
-write [0x30 0x15]                    # PUBLISH header
-      [0x00 0x0b] "sensor/none"      # topic name
+write [0x30 0x14]                    # PUBLISH header
+      [0x00 0x0a] "sensor/one"       # topic name
       [0x00]                         # properties
       "message"                      # payload
 
