@@ -125,7 +125,7 @@ public class ConnectionIT
         "${scripts}/client.sent.close/client",
         "${scripts}/client.sent.close/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldDoClientSentClose() throws Exception
+    public void shouldReceiveClientSentClose() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -137,7 +137,7 @@ public class ConnectionIT
         "${scripts}/client.sent.abort/client",
         "${scripts}/client.sent.abort/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldDoClientSentAbort() throws Exception
+    public void shouldReceiveClientSentAbort() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -149,7 +149,7 @@ public class ConnectionIT
         "${scripts}/client.sent.reset/client",
         "${scripts}/client.sent.reset/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldDoClientSentReset() throws Exception
+    public void shouldReceiveClientSentReset() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

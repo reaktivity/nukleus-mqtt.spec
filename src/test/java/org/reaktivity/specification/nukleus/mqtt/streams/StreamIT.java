@@ -258,7 +258,7 @@ public class StreamIT
         "${scripts}/client.sent.abort/client",
         "${scripts}/client.sent.abort/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldDoClientSentAbort() throws Exception
+    public void shouldReceiveClientSentAbort() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
