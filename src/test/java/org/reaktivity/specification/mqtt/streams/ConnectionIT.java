@@ -122,10 +122,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/close.reply/client",
-        "${scripts}/close.reply/server"})
+        "${scripts}/client.sent.close/client",
+        "${scripts}/client.sent.close/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldCloseReply() throws Exception
+    public void shouldDoClientSentClose() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -134,10 +134,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/abort.reply/client",
-        "${scripts}/abort.reply/server"})
+        "${scripts}/client.sent.abort/client",
+        "${scripts}/client.sent.abort/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldAbortReply() throws Exception
+    public void shouldDoClientSentAbort() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -146,10 +146,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/reset.reply/client",
-        "${scripts}/reset.reply/server"})
+        "${scripts}/client.sent.reset/client",
+        "${scripts}/client.sent.reset/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldResetReply() throws Exception
+    public void shouldDoClientSentReset() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
