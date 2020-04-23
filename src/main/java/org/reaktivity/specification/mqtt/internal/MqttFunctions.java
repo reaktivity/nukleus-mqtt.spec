@@ -177,6 +177,7 @@ public final class MqttFunctions
         private final MqttDataExFW.Builder dataExRW;
 
         private boolean topicSet;
+        private boolean contentTypeSet;
         private boolean responseTopicSet;
 
         private MqttDataExBuilder()
@@ -212,6 +213,7 @@ public final class MqttFunctions
         public MqttDataExBuilder contentType(
             String contentType)
         {
+            contentTypeSet = true;
             dataExRW.contentType(contentType);
             return this;
         }
@@ -219,6 +221,8 @@ public final class MqttFunctions
         public MqttDataExBuilder format(
             String format)
         {
+            ensureContentTypeSet();
+
             dataExRW.format(p -> p.set(MqttPayloadFormat.valueOf(format)));
             return this;
         }
@@ -226,6 +230,8 @@ public final class MqttFunctions
         public MqttDataExBuilder responseTopic(
             String topic)
         {
+            ensureContentTypeSet();
+
             responseTopicSet = true;
             dataExRW.responseTopic(topic);
             return this;
@@ -253,6 +259,8 @@ public final class MqttFunctions
             String name,
             String value)
         {
+            ensureResponseTopicSet();
+
             dataExRW.propertiesItem(p -> p.key(name)
                                           .value(value));
             return this;
@@ -261,6 +269,7 @@ public final class MqttFunctions
         public byte[] build()
         {
             ensureTopicSet();
+            ensureContentTypeSet();
             ensureResponseTopicSet();
 
             final MqttDataExFW dataEx = dataExRW.build();
@@ -275,7 +284,14 @@ public final class MqttFunctions
             {
                 topic(null);
             }
+        }
 
+        private void ensureContentTypeSet()
+        {
+            if (!contentTypeSet)
+            {
+                contentType(null);
+            }
         }
 
         private void ensureResponseTopicSet()
