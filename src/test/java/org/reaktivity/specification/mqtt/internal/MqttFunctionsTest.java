@@ -193,6 +193,51 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldEncodeMqttDataExWithUserProperty()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .topic("sensor/one")
+                                          .userProperty("name", "value")
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
+    public void shouldEncodeMqttDataExWithUserProperties()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .topic("sensor/one")
+                                          .userProperty("name1", "value1")
+                                          .userProperty("name2", "value2")
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name1".equals(h.key().asString()) &&
+                                                    "value1".equals(h.value().asString())) != null);
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name2".equals(h.key().asString()) &&
+                                                    "value2".equals(h.value().asString())) != null);
+    }
+
+    @Test
     public void shouldEncodeMqttDataExWithoutTopic()
     {
         final byte[] array = MqttFunctions.dataEx()

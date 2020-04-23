@@ -36,8 +36,8 @@ scope mqtt
 
     struct MqttUserProperty
     {
-        string8 key;
-        string8 value;
+        string16 key;
+        string16 value;
     }
 
     scope control
