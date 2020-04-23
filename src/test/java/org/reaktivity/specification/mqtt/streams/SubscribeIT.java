@@ -86,8 +86,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/aggregated.topic.filters.both.exact/client",
-            "${scripts}/aggregated.topic.filters.both.exact/server"})
+        "${scripts}/aggregated.topic.filters.both.exact/client",
+        "${scripts}/aggregated.topic.filters.both.exact/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToAggregatedTopicFiltersBothExact() throws Exception
     {
@@ -98,8 +98,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/isolated.topic.filters.both.exact/client",
-            "${scripts}/isolated.topic.filters.both.exact/server"})
+        "${scripts}/isolated.topic.filters.both.exact/client",
+        "${scripts}/isolated.topic.filters.both.exact/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToIsolatedTopicFiltersBothExact() throws Exception
     {
@@ -110,8 +110,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/aggregated.topic.filters.both.wildcard/client",
-            "${scripts}/aggregated.topic.filters.both.wildcard/server"})
+        "${scripts}/aggregated.topic.filters.both.wildcard/client",
+        "${scripts}/aggregated.topic.filters.both.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToAggregatedTopicFiltersBothWildcard() throws Exception
     {
@@ -122,8 +122,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/isolated.topic.filters.both.wildcard/client",
-            "${scripts}/isolated.topic.filters.both.wildcard/server"})
+        "${scripts}/isolated.topic.filters.both.wildcard/client",
+        "${scripts}/isolated.topic.filters.both.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToIsolatedTopicFiltersBothWildcard() throws Exception
     {
@@ -134,8 +134,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/aggregated.topic.filters.exact.and.wildcard/client",
-            "${scripts}/aggregated.topic.filters.exact.and.wildcard/server"})
+        "${scripts}/aggregated.topic.filters.exact.and.wildcard/client",
+        "${scripts}/aggregated.topic.filters.exact.and.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToAggregatedExactAndWildcardTopicFilters() throws Exception
     {
@@ -146,8 +146,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/isolated.topic.filters.exact.and.wildcard/client",
-            "${scripts}/isolated.topic.filters.exact.and.wildcard/server"})
+        "${scripts}/isolated.topic.filters.exact.and.wildcard/client",
+        "${scripts}/isolated.topic.filters.exact.and.wildcard/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldSubscribeToIsolatedExactAndWildcardTopicFilters() throws Exception
     {
@@ -158,8 +158,8 @@ public class SubscribeIT
 
     @Test
     @Specification({
-            "${scripts}/invalid.fixed.header.flags/client",
-            "${scripts}/invalid.fixed.header.flags/server"})
+        "${scripts}/invalid.fixed.header.flags/client",
+        "${scripts}/invalid.fixed.header.flags/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectMalformedSubscribePacket() throws Exception
     {
