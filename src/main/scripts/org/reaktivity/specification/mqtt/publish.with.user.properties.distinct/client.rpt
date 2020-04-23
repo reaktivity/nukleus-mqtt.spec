@@ -38,10 +38,10 @@ write [0x30 0x4a]                                 # PUBLISH header
       [0x00 0x0a] "/sensors/1"                    # topic name
       [0x14]                                      # properties
       [0x26]                                      # user property id
-      [0x00 0x03] "row1"                          # user property key
+      [0x00 0x04] "row1"                          # user property key
       [0x00 0x01] "1"                             # user property value
       [0x26]                                      # user property id
-      [0x00 0x03] "row2"                          # user property key
+      [0x00 0x04] "row2"                          # user property key
       [0x00 0x01] "2"                             # user property value
       "{\"id\":\"1\",\"unit\":\"CELSIUS\",\"value\":\"189\"}" # payload
 
