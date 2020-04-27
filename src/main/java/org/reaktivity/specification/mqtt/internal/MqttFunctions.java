@@ -35,10 +35,12 @@ public final class MqttFunctions
     @Function
     public static byte[] userProperty(String key, String value)
     {
-        final MqttUserPropertyFW mqttUserProperty = new MqttUserPropertyFW.Builder().wrap(new UnsafeBuffer(new byte[1024]), 0, 1024)
-                                                                                    .key(key)
-                                                                                    .value(value)
-                                                                                    .build();
+        final MqttUserPropertyFW mqttUserProperty =
+            new MqttUserPropertyFW.Builder().wrap(new UnsafeBuffer(new byte[1024]), 0, 1024)
+                                            .key(key)
+                                            .value(value)
+                                            .build();
+
         final byte[] array = new byte[mqttUserProperty.sizeof()];
         mqttUserProperty.buffer().getBytes(mqttUserProperty.offset(), array);
 
