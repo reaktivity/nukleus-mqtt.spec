@@ -66,7 +66,12 @@ public class MqttFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(bytes);
         MqttUserPropertyFW userProperty = new MqttUserPropertyFW().wrap(buffer, 0, buffer.capacity());
 
-        assertArrayEquals(userProperty.buffer().byteArray(), bytes);
+        MqttUserPropertyFW expected = new MqttUserPropertyFW.Builder().wrap(new UnsafeBuffer(new byte[1024]),0, 1024)
+                                                                      .key("name")
+                                                                      .value("value")
+                                                                      .build();
+        assertEquals(expected.key(), userProperty.key());
+        assertEquals(expected.value(), userProperty.value());
     }
 
     @Test
