@@ -24,6 +24,7 @@ import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 import org.reaktivity.specification.mqtt.internal.types.MqttCapabilities;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormatFW;
+import org.reaktivity.specification.mqtt.internal.types.MqttUserPropertyFW;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
@@ -31,6 +32,19 @@ import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
 
 public final class MqttFunctions
 {
+    @Function
+    public static byte[] userProperty(String key, String value)
+    {
+        final MqttUserPropertyFW mqttUserProperty = new MqttUserPropertyFW.Builder().wrap(new UnsafeBuffer(new byte[1024]), 0, 1024)
+                                                                                    .key(key)
+                                                                                    .value(value)
+                                                                                    .build();
+        final byte[] array = new byte[mqttUserProperty.sizeof()];
+        mqttUserProperty.buffer().getBytes(mqttUserProperty.offset(), array);
+
+        return array;
+    }
+
     @Function
     public static byte[] payloadFormat(String format)
     {

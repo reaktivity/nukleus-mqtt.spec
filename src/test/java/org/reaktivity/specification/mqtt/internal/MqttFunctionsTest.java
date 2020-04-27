@@ -33,6 +33,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.kaazing.k3po.lang.internal.el.ExpressionContext;
 import org.reaktivity.specification.mqtt.internal.types.MqttCapabilities;
+import org.reaktivity.specification.mqtt.internal.types.MqttUserPropertyFW;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
@@ -55,6 +56,17 @@ public class MqttFunctionsTest
     {
         MqttFunctions.Mapper mapper = new MqttFunctions.Mapper();
         assertEquals("mqtt", mapper.getPrefixName());
+    }
+
+    @Test
+    public void shouldEncodeUserProperty()
+    {
+        final byte[] bytes = MqttFunctions.userProperty("name", "value");
+
+        DirectBuffer buffer = new UnsafeBuffer(bytes);
+        MqttUserPropertyFW userProperty = new MqttUserPropertyFW().wrap(buffer, 0, buffer.capacity());
+
+        assertArrayEquals(userProperty.buffer().byteArray(), bytes);
     }
 
     @Test
