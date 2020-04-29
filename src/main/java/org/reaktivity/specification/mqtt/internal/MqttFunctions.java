@@ -259,6 +259,7 @@ public final class MqttFunctions
             String name,
             String value)
         {
+            ensureTopicSet();
             ensureResponseTopicSet();
 
             dataExRW.propertiesItem(p -> p.key(name)
