@@ -213,6 +213,24 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldEncodeMqttDataExWithUserPropertyNoTopic()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .userProperty("name", "value")
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
     public void shouldEncodeMqttDataExWithUserProperties()
     {
         final byte[] array = MqttFunctions.dataEx()
