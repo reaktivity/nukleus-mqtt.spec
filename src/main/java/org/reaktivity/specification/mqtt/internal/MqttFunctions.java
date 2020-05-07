@@ -204,8 +204,6 @@ public final class MqttFunctions
         public MqttDataExBuilder expiryInterval(
             int msgExp)
         {
-            ensureTopicSet();
-
             dataExRW.expiryInterval(msgExp);
             return this;
         }
@@ -221,8 +219,6 @@ public final class MqttFunctions
         public MqttDataExBuilder format(
             String format)
         {
-            ensureContentTypeSet();
-
             dataExRW.format(p -> p.set(MqttPayloadFormat.valueOf(format)));
             return this;
         }
@@ -230,8 +226,6 @@ public final class MqttFunctions
         public MqttDataExBuilder responseTopic(
             String topic)
         {
-            ensureContentTypeSet();
-
             responseTopicSet = true;
             dataExRW.responseTopic(topic);
             return this;
@@ -240,8 +234,6 @@ public final class MqttFunctions
         public MqttDataExBuilder correlation(
             String correlation)
         {
-            ensureResponseTopicSet();
-
             dataExRW.correlation(c -> c.bytes(b -> b.set(correlation.getBytes(UTF_8))));
             return this;
         }
@@ -249,8 +241,6 @@ public final class MqttFunctions
         public MqttDataExBuilder correlationBytes(
             byte[] correlation)
         {
-            ensureResponseTopicSet();
-
             dataExRW.correlation(c -> c.bytes(b -> b.set(correlation)));
             return this;
         }
@@ -259,9 +249,6 @@ public final class MqttFunctions
             String name,
             String value)
         {
-            ensureTopicSet();
-            ensureResponseTopicSet();
-
             dataExRW.propertiesItem(p -> p.key(name)
                                           .value(value));
             return this;
@@ -269,38 +256,10 @@ public final class MqttFunctions
 
         public byte[] build()
         {
-            ensureTopicSet();
-            ensureContentTypeSet();
-            ensureResponseTopicSet();
-
             final MqttDataExFW dataEx = dataExRW.build();
             final byte[] array = new byte[dataEx.sizeof()];
             dataEx.buffer().getBytes(dataEx.offset(), array);
             return array;
-        }
-
-        private void ensureTopicSet()
-        {
-            if (!topicSet)
-            {
-                topic(null);
-            }
-        }
-
-        private void ensureContentTypeSet()
-        {
-            if (!contentTypeSet)
-            {
-                contentType(null);
-            }
-        }
-
-        private void ensureResponseTopicSet()
-        {
-            if (!responseTopicSet)
-            {
-                responseTopic(null);
-            }
         }
     }
 

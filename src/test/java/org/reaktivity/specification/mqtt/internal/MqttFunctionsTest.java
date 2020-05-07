@@ -314,6 +314,33 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldEncodeMqttDataExWithNullDefaults()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .expiryInterval(15)
+                                          .format("TEXT")
+                                          .correlation("request-id-1")
+                                          .userProperty("name", "value")
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertNull(mqttDataEx.topic().asString());
+        assertEquals(15, mqttDataEx.expiryInterval());
+        assertNull(mqttDataEx.contentType().asString());
+        assertEquals("TEXT", mqttDataEx.format().toString());
+        assertNull(mqttDataEx.responseTopic().asString());
+        assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
+        assertNotNull(mqttDataEx.properties()
+                                .matchFirst(h ->
+                                                "name".equals(h.key().asString()) &&
+                                                    "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
     public void shouldEncodeMqttDataExWithBytes()
     {
         final byte[] array = MqttFunctions.dataEx()

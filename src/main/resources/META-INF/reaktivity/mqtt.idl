@@ -63,11 +63,11 @@ scope mqtt
         struct MqttDataEx extends core::stream::Extension
         {
             int32 deferred = 0;             // INIT only (TODO: move to DATA frame)
-            string16 topic;
+            string16 topic = null;
             int32 expiryInterval = -1;
-            string8 contentType;
+            string8 contentType = null;
             MqttPayloadFormat format = BINARY;
-            string8 responseTopic;
+            string8 responseTopic = null;
             MqttBinary correlation;
             MqttUserProperty[] properties;
         }
