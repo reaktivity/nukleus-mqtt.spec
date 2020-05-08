@@ -28,7 +28,6 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .build()}
 connected
 
-write flush
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/one")
@@ -38,3 +37,4 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .build()}
 
 write "message"
+write flush
