@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.reaktivity</groupId>
   <artifactId>nukleus-mqtt.spec</artifactId>
-  <version>develop-SNAPSHOT</version>
+  <version>0.38</version>
   <name>Mqtt Nukleus Specification</name>
   <description>Mqtt Nukleus Specification</description>
   <url>https://github.com/reaktivity/nukleus-mqtt.spec</url>
