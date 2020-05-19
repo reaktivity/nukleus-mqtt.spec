@@ -183,6 +183,18 @@ public class StreamIT
 
     @Test
     @Specification({
+        "${scripts}/subscribe.one.message.with.null.payload/client",
+        "${scripts}/subscribe.one.message.with.null.payload/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishWithNullPayloadToSubscriber() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/subscribe.one.message.then.publish.message/client",
         "${scripts}/subscribe.one.message.then.publish.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
