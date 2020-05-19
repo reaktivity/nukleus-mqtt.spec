@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.reaktivity</groupId>
   <artifactId>nukleus-mqtt.spec</artifactId>
-  <version>0.38</version>
+  <version>0.39</version>
   <name>Mqtt Nukleus Specification</name>
   <description>Mqtt Nukleus Specification</description>
   <url>https://github.com/reaktivity/nukleus-mqtt.spec</url>
@@ -207,6 +207,9 @@
         <version>2.22.1</version>
         <configuration>
           <argLine>@{argLine}</argLine>
+          <excludes>
+            <exclude/>
+          </excludes>
         </configuration>
       </plugin>
       <plugin>
