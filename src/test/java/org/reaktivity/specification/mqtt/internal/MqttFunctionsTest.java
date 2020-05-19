@@ -171,7 +171,6 @@ public class MqttFunctionsTest
                 .expiryInterval(15)
                 .contentType("message")
                 .format("TEXT")
-                .topicAlias(1)
                 .responseTopic("sensor/one")
                 .correlation("request-id-1")
                 .userProperty("name", "value")
@@ -185,7 +184,6 @@ public class MqttFunctionsTest
         assertEquals(15, mqttDataEx.expiryInterval());
         assertEquals("message", mqttDataEx.contentType().asString());
         assertEquals("TEXT", mqttDataEx.format().toString());
-        assertEquals(1,  mqttDataEx.topicAlias());
         assertEquals("sensor/one",  mqttDataEx.responseTopic().asString());
         assertEquals("MQTT_BINARY [length=12, bytes=octets[12]]",  mqttDataEx.correlation().toString());
         assertNotNull(mqttDataEx.properties()
