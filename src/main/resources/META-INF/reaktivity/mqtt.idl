@@ -67,6 +67,7 @@ scope mqtt
             int32 expiryInterval = -1;
             string8 contentType = null;
             MqttPayloadFormat format = BINARY;
+            uint16 topicAlias = 0;
             string8 responseTopic = null;
             MqttBinary correlation;
             MqttUserProperty[] properties;
