@@ -40,8 +40,6 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .contentType("message")
                             .format("TEXT")
                             .topicAlias(1)
-                            .responseTopic("sensor/one")
-                            .correlation("info")
                             .build()}
 
 read "message"
