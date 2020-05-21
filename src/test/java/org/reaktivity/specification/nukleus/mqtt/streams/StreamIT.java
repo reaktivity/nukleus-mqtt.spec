@@ -348,4 +348,40 @@ public class StreamIT
         k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.multiple.messages.with.topic.alias.distinct/client",
+        "${scripts}/publish.multiple.messages.with.topic.alias.distinct/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMultiplesMessagesWithTopicAliasDistinct() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.multiple.messages.with.topic.alias.repeated/client",
+        "${scripts}/publish.multiple.messages.with.topic.alias.repeated/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMultiplesMessagesWithTopicAliasRepeated() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.messages.with.topic.aliases.overwrite.one/client",
+        "${scripts}/publish.messages.with.topic.aliases.overwrite.one/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMultiplesMessagesWithTopicAliasesAndOverwriteOne() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
 }
