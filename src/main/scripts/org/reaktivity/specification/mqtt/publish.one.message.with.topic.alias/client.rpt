@@ -44,4 +44,3 @@ write [0x30 0x27]                    # PUBLISH header
       [0x01 0x01]                    # payload format indicator: 0 = unspecified bytes, 1 = UTF-8 TEXT
       [0x23 0x00 0x01]               # topic alias = 1
       "message"                      # payload
-

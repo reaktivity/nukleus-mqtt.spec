@@ -279,6 +279,18 @@ public class StreamIT
 
     @Test
     @Specification({
+        "${scripts}/reject.publish.with.topic.alias.more.than.maximum/client",
+        "${scripts}/reject.publish.with.topic.alias.more.than.maximum/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectPublishWithTopicAliasMoreThanMaximum() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/client.sent.abort/client",
         "${scripts}/client.sent.abort/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
