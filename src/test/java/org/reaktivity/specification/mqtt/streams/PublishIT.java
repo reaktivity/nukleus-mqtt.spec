@@ -161,7 +161,7 @@ public class PublishIT
     @Test
     @Specification({
         "${scripts}/reject.publish.with.multiple.topic.alias/client",
-        "${scripts}/reject.publish.when.multiple.topic.alias/server"})
+        "${scripts}/reject.publish.with.multiple.topic.alias/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectPublishWithMultipleTopicAlias() throws Exception
     {
