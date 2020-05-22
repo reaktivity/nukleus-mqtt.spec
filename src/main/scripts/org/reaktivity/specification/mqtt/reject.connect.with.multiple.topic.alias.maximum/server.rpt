@@ -35,5 +35,4 @@ read  [0x10 0x16]                    # CONNECT header
 
 write [0x20 0x03]                    # CONNACK header
       [0x00]                         # connect flags = none
-      [0x82]                         # reason code
-      [0x00]                         # properties
+      [0x82]                         # reason code = protocol error[0x00]                         # properties

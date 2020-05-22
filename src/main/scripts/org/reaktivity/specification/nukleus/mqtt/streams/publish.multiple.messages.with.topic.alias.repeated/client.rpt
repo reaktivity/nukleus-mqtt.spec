@@ -32,9 +32,6 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/one")
-                             .expiryInterval(15)
-                             .contentType("message")
-                             .format("TEXT")
                              .build()}
 
 write "message1"
@@ -57,9 +54,6 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/two")
-                             .expiryInterval(15)
-                             .contentType("message")
-                             .format("TEXT")
                              .build()}
 
 write "message2"

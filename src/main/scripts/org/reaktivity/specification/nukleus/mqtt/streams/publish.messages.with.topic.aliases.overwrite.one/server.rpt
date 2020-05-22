@@ -36,9 +36,6 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
-                            .expiryInterval(15)
-                            .contentType("message")
-                            .format("TEXT")
                             .build()}
 
 read "message1"
@@ -58,9 +55,6 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/two")
-                            .expiryInterval(15)
-                            .contentType("message")
-                            .format("TEXT")
                             .build()}
 
 read "message2"
@@ -80,9 +74,6 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/three")
-                            .expiryInterval(15)
-                            .contentType("message")
-                            .format("TEXT")
                             .build()}
 
 read "message3"
