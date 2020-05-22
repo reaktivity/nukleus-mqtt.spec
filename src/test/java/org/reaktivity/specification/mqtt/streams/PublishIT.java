@@ -148,10 +148,22 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/reject.publish.with.topic.alias.more.than.maximum/client",
-        "${scripts}/reject.publish.with.topic.alias.more.than.maximum/server"})
+        "${scripts}/reject.publish.when.topic.alias.exceeds.maximum/client",
+        "${scripts}/reject.publish.when.topic.alias.exceeds.maximum/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectPublishWithTopicAliasMoreThanMaximum() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/reject.publish.with.multiple.topic.alias/client",
+        "${scripts}/reject.publish.when.multiple.topic.alias/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectPublishWithMultipleTopicAlias() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

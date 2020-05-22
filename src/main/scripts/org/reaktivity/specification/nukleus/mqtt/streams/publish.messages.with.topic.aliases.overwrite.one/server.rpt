@@ -40,36 +40,12 @@ read nukleus:data.ext ${mqtt:dataEx()
 
 read "message1"
 
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("PUBLISH_ONLY")
-                             .clientId("client")
-                             .topic("sensor/two")
-                             .subscriptionId(0)
-                             .build()}
-
-connected
-
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/two")
                             .build()}
 
 read "message2"
-
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("PUBLISH_ONLY")
-                             .clientId("client")
-                             .topic("sensor/three")
-                             .subscriptionId(0)
-                             .build()}
-
-connected
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))

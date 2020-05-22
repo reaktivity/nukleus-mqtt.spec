@@ -45,7 +45,13 @@ read  [0x30 0x18]                    # PUBLISH header
       "message1"                     # payload
 
 read  [0x30 0x18]                    # PUBLISH header
-      [0x00 0x0a] "sensor/two"       # topic name
+      [0x00 0x0a] "sensor/one"       # topic name
       [0x03]                         # properties
       [0x23 0x00 0x01]               # topic alias = 1
       "message2"                     # payload
+
+read  [0x30 0x0e]                    # PUBLISH header
+      [0x00 0x00]                    # topic name
+      [0x03]                         # properties
+      [0x23 0x00 0x01]               # topic alias = 1
+      "message3"                     # payload

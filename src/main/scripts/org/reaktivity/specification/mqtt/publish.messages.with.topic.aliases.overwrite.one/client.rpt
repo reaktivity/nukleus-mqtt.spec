@@ -27,14 +27,14 @@ write [0x10 0x16]                    # CONNECT header
       [0x02]                         # connect flags = clean start
       [0x00 0x3c]                    # keep alive = 60s
       [0x03]                         # properties
-      [0x22 0x00 0x02]               # topic alias maximum = 2
+      [0x22 0x00 0x01]               # topic alias maximum = 1
       [0x00 0x06] "client"           # clientId
 
 read  [0x20 0x06]                    # CONNACK header
       [0x00]                         # connect flags = none
       [0x00]                         # reason code
       [0x03]                         # properties
-      [0x22] 2s                      # topic alias maximum = 2
+      [0x22] 1s                      # topic alias maximum = 1
 
 write [0x30 0x18]                    # PUBLISH header
       [0x00 0x0a] "sensor/one"       # topic name
@@ -45,11 +45,11 @@ write [0x30 0x18]                    # PUBLISH header
 write [0x30 0x18]                    # PUBLISH header
       [0x00 0x0a] "sensor/two"       # topic name
       [0x03]                         # properties
-      [0x23 0x00 0x02]               # topic alias = 2
+      [0x23 0x00 0x01]               # topic alias = 1
       "message2"                     # payload
 
-write [0x30 0x1a]                    # PUBLISH header
-      [0x00 0x0c] "sensor/three"     # topic name
+write [0x30 0x0e]                    # PUBLISH header
+      [0x00 0x00]                    # empty topic name
       [0x03]                         # properties
-      [0x23 0x00 0x02]               # topic alias = 2
+      [0x23 0x00 0x01]               # topic alias = 1
       "message3"                     # payload

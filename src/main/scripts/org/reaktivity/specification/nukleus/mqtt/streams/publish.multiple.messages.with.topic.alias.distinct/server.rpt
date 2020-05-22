@@ -40,6 +40,13 @@ read nukleus:data.ext ${mqtt:dataEx()
 
 read "message1"
 
+read nukleus:data.ext ${mqtt:dataEx()
+                            .typeId(nukleus:id("mqtt"))
+                            .topic("sensor/one")
+                            .build()}
+
+read "message3"
+
 accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
@@ -58,3 +65,10 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .build()}
 
 read "message2"
+
+read nukleus:data.ext ${mqtt:dataEx()
+                            .typeId(nukleus:id("mqtt"))
+                            .topic("sensor/two")
+                            .build()}
+
+read "message4"

@@ -49,3 +49,15 @@ read  [0x30 0x18]                    # PUBLISH header
       [0x03]                         # properties
       [0x23 0x00 0x02]               # topic alias = 2
       "message2"                     # payload
+
+read  [0x30 0x0e]                    # PUBLISH header
+      [0x00 0x00]                    # topic name
+      [0x03]                         # properties
+      [0x23 0x00 0x01]               # topic alias = 1
+      "message3"                     # payload
+
+read  [0x30 0x0e]                    # PUBLISH header
+      [0x00 0x00]                    # topic name
+      [0x03]                         # properties
+      [0x23 0x00 0x02]               # topic alias = 2
+      "message4"                     # payload
