@@ -39,7 +39,6 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .expiryInterval(15)
                             .contentType("message")
                             .format("TEXT")
-                            .topicAlias(1)
                             .build()}
 
 read "message1"
@@ -62,7 +61,6 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .expiryInterval(15)
                             .contentType("message")
                             .format("TEXT")
-                            .topicAlias(2)
                             .build()}
 
 read "message2"

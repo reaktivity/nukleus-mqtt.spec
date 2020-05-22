@@ -35,7 +35,6 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .expiryInterval(15)
                              .contentType("message")
                              .format("TEXT")
-                             .topicAlias(1)
                              .build()}
 
 write "message1"
@@ -46,7 +45,6 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .expiryInterval(15)
                              .contentType("message")
                              .format("TEXT")
-                             .topicAlias(1)
                              .build()}
 
 write "message2"

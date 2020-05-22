@@ -223,13 +223,6 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttDataExBuilder topicAlias(
-            int topicAlias)
-        {
-            dataExRW.topicAlias(topicAlias);
-            return this;
-        }
-
         public MqttDataExBuilder responseTopic(
             String topic)
         {
