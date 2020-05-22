@@ -38,6 +38,6 @@ write  [0xE1 0x02]                   # malformed DISCONNECT header
        [0x00]                        # normal disconnect
        [0x00]                        # properties = none
 
-read   [0xE0 0x02]                   # malformed DISCONNECT header
+read   [0xe0 0x02]                   # malformed DISCONNECT header
        [0x81]                        # malformed packet
        [0x00]                        # properties = none

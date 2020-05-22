@@ -45,7 +45,7 @@ read  [0x30 0x27]                    # PUBLISH header
       [0x23 0x00 0x01]               # topic alias = 1
       "message"                      # payload
 
-write [0xE0 0x02]                    # disconnect header
+write [0xe0 0x02]                    # disconnect header
       [0x94]                         # disconnect = topic alias invalid
       [0x00]                         # properties = none
 
