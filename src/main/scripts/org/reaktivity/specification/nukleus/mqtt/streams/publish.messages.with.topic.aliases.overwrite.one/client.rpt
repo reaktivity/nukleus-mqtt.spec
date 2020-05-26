@@ -36,6 +36,21 @@ write nukleus:data.ext ${mqtt:dataEx()
 
 write "message1"
 
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
+
+write nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .capabilities("PUBLISH_ONLY")
+                              .clientId("client")
+                              .topic("sensor/two")
+                              .subscriptionId(0)
+                              .build()}
+
+connected
+
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/two")
@@ -45,7 +60,7 @@ write "message2"
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("sensor/three")
+                             .topic("sensor/two")
                              .build()}
 
 write "message3"
