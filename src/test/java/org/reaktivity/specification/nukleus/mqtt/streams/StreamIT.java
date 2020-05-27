@@ -339,10 +339,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/publish.one.message.with.topic.alias/client",
-        "${scripts}/publish.one.message.with.topic.alias/server"})
+        "${scripts}/publish.message.with.topic.alias/client",
+        "${scripts}/publish.message.with.topic.alias/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishOneMessageWithTopicAlias() throws Exception
+    public void shouldPublishMessageWithTopicAlias() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -351,10 +351,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/publish.multiple.messages.with.topic.alias.distinct/client",
-        "${scripts}/publish.multiple.messages.with.topic.alias.distinct/server"})
+        "${scripts}/publish.messages.with.topic.alias.distinct/client",
+        "${scripts}/publish.messages.with.topic.alias.distinct/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishMultiplesMessagesWithTopicAliasDistinct() throws Exception
+    public void shouldPublishMessagesWithTopicAliasDistinct() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -363,10 +363,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/publish.multiple.messages.with.topic.alias.repeated/client",
-        "${scripts}/publish.multiple.messages.with.topic.alias.repeated/server"})
+        "${scripts}/publish.messages.with.topic.alias.repeated/client",
+        "${scripts}/publish.messages.with.topic.alias.repeated/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishMultiplesMessagesWithTopicAliasRepeated() throws Exception
+    public void shouldPublishMessagesWithTopicAliasRepeated() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -375,10 +375,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/publish.messages.with.topic.aliases.overwrite.one/client",
-        "${scripts}/publish.messages.with.topic.aliases.overwrite.one/server"})
+        "${scripts}/publish.messages.with.topic.alias.replaced/client",
+        "${scripts}/publish.messages.with.topic.alias.replaced/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishMultiplesMessagesWithTopicAliasesAndOverwriteOne() throws Exception
+    public void shouldPublishMessagesWithTopicAliasesReplaced() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -387,10 +387,10 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/publish.one.message.with.existing.topic.alias/client",
-        "${scripts}/publish.one.message.with.existing.topic.alias/server"})
+        "${scripts}/publish.message.with.existing.topic.alias/client",
+        "${scripts}/publish.message.with.existing.topic.alias/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishOneMessageWithExistingTopicAlias() throws Exception
+    public void shouldPublishMessageWithExistingTopicAlias() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
