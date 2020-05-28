@@ -289,16 +289,4 @@ public class PublishIT
         k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
-
-    @Test
-    @Specification({
-        "${scripts}/publish.message.with.existing.topic.alias/client",
-        "${scripts}/publish.message.with.existing.topic.alias/server"})
-    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishMessageWithExistingTopicAlias() throws Exception
-    {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
-        k3po.finish();
-    }
 }
