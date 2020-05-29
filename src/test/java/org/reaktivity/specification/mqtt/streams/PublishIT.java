@@ -148,6 +148,30 @@ public class PublishIT
 
     @Test
     @Specification({
+        "${scripts}/reject.publish.when.topic.alias.exceeds.maximum/client",
+        "${scripts}/reject.publish.when.topic.alias.exceeds.maximum/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectPublishWhenTopicAliasExceedsThanMaximum() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/reject.publish.when.topic.alias.repeated/client",
+        "${scripts}/reject.publish.when.topic.alias.repeated/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectPublishWhenTopicAliasRepeated() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/publish.rejected/client",
         "${scripts}/publish.rejected/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
@@ -212,6 +236,54 @@ public class PublishIT
         "${scripts}/subscribe.fails.then.publish.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldFailSubscribeThenPublishMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.message.with.topic.alias/client",
+        "${scripts}/publish.message.with.topic.alias/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMessageWithTopicAlias() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.messages.with.topic.alias.distinct/client",
+        "${scripts}/publish.messages.with.topic.alias.distinct/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMessagesWithTopicAliasDistinct() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.messages.with.topic.alias.repeated/client",
+        "${scripts}/publish.messages.with.topic.alias.repeated/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMessagesWithTopicAliasRepeated() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.messages.with.topic.alias.replaced/client",
+        "${scripts}/publish.messages.with.topic.alias.replaced/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishMessagesWithTopicAliasReplaced() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

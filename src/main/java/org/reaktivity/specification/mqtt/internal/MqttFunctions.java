@@ -176,10 +176,6 @@ public final class MqttFunctions
     {
         private final MqttDataExFW.Builder dataExRW;
 
-        private boolean topicSet;
-        private boolean contentTypeSet;
-        private boolean responseTopicSet;
-
         private MqttDataExBuilder()
         {
             MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
@@ -196,7 +192,6 @@ public final class MqttFunctions
         public MqttDataExBuilder topic(
             String topic)
         {
-            topicSet = true;
             dataExRW.topic(topic);
             return this;
         }
@@ -211,7 +206,6 @@ public final class MqttFunctions
         public MqttDataExBuilder contentType(
             String contentType)
         {
-            contentTypeSet = true;
             dataExRW.contentType(contentType);
             return this;
         }
@@ -226,7 +220,6 @@ public final class MqttFunctions
         public MqttDataExBuilder responseTopic(
             String topic)
         {
-            responseTopicSet = true;
             dataExRW.responseTopic(topic);
             return this;
         }
