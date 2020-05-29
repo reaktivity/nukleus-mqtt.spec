@@ -56,7 +56,7 @@ read  [0x30 0x39]                    # PUBLISH header
       [0x09 0x00 0x04] "info"        # correlation data
       "message"                      # payload
 
-write [0xE0 0x02]                    # disconnect header
+write [0xe0 0x02]                    # disconnect header
       [0x82]                         # disconnect = protocol error
       [0x00]                         # properties = none
 

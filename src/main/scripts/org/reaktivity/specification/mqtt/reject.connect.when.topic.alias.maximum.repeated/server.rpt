@@ -14,33 +14,25 @@
 # under the License.
 #
 
- connect await ROUTED_SERVER
-         "nukleus://streams/mqtt#0"
-   option nukleus:window 8192
-   option nukleus:transmission "duplex"
+property serverTransport "nukleus://streams/target#0"
 
- connected
+accept ${serverTransport}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
 
-write [0x10 0x13]                    # CONNECT header
+accepted
+connected
+
+read  [0x10 0x16]                    # CONNECT header
       [0x00 0x04] "MQTT"             # protocol name
       [0x05]                         # protocol version
       [0x02]                         # connect flags = clean start
       [0x00 0x3c]                    # keep alive = 60s
-      [0x00]                         # properties = none
+      [0x06]                         # properties
+      [0x22 0x00 0x01]               # topic alias maximum = 1
+      [0x22 0x00 0x01]               # topic alias maximum = 1
       [0x00 0x06] "client"           # clientId
 
-read  [0x20 0x03]                    # CONNACK header
+write [0x20 0x03]                    # CONNACK header
       [0x00]                         # connect flags = none
-      [0x00]                         # reason code
-      [0x00]                         # properties = none
-
-write [0x30 0x15]                    # PUBLISH header
-      [0x00 0x0b] "sensor/none"      # topic name
-      [0x00]                         # properties
-      "message"                      # payload
-
-read  [0xe0 0x02]                    # disconnect header
-      [0x90]                         # DISCONNECT = topic name invalid
-      [0x00]                         # properties = none
-
-read closed
+      [0x82]                         # reason code = protocol error[0x00]                         # properties

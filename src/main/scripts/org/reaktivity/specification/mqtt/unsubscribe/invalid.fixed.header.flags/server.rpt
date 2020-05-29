@@ -53,6 +53,6 @@ read   [0xa3 0x0f]                   # malformed UNSUBSCRIBE header
        [0x00]                        # properties = none
        [0x00 0x0a] "sensor/one"      # topic filter
 
-write  [0xE0 0x02]                   # disconnect = normal
+write  [0xe0 0x02]                   # disconnect = normal
        [0x81]                        # malformed packet
        [0x00]                        # properties = none
