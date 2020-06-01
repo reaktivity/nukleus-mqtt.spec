@@ -134,6 +134,18 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/reject.connect.when.topic.alias.maximum.repeated/client",
+        "${scripts}/reject.connect.when.topic.alias.maximum.repeated/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectConnectWhenTopicAliasMaximumRepeated() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/connect/successful.fragmented/client",
         "${scripts}/connect/successful.fragmented/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
