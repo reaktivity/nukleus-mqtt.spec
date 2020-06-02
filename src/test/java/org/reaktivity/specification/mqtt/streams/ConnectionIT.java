@@ -50,6 +50,30 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/connect/server.assigned.client.id/client",
+        "${scripts}/connect/server.assigned.client.id/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectWithServerAssignedClientId() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect/reject.missing.client.id/client",
+        "${scripts}/connect/reject.missing.client.id/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectMissingClientId() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/disconnect/client",
         "${scripts}/disconnect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
