@@ -56,6 +56,7 @@ scope mqtt
             MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
             string16 clientId;
             string16 topic;
+            uint8 subscribeOptions = 0;
             varbyteuint32 subscriptionId = 0;
             MqttUserProperty[] properties;
         }
@@ -79,6 +80,7 @@ scope mqtt
 
         struct MqttFlushEx extends core::stream::Extension
         {
+            uint8 subscribeOptions = 0;
             MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
         }
     }

@@ -132,6 +132,13 @@ public final class MqttFunctions
             return this;
         }
 
+        public MqttBeginExBuilder subscribeOptions(
+            int subscribeOptions)
+        {
+            beginExRW.subscribeOptions(subscribeOptions);
+            return this;
+        }
+
         public MqttBeginExBuilder capabilities(
             String capabilities)
         {

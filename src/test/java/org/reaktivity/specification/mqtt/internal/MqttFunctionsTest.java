@@ -113,6 +113,28 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldEncodeMqttBeginExtAsSubscribeWithOptions()
+    {
+        final byte[] array = MqttFunctions.beginEx()
+                                          .typeId(0)
+                                          .capabilities("SUBSCRIBE_ONLY")
+                                          .clientId("client")
+                                          .topic("sensor/one")
+                                          .subscribeOptions(0b0010_0000)
+                                          .subscriptionId(1)
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals("SUBSCRIBE_ONLY", mqttBeginEx.capabilities().toString());
+        assertEquals("client", mqttBeginEx.clientId().asString());
+        assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(0b0010_0000, mqttBeginEx.subscribeOptions());
+        assertEquals(1, mqttBeginEx.subscriptionId());
+    }
+
+    @Test
     public void shouldEncodeMqttBeginExAsSuback()
     {
         final byte[] array = MqttFunctions.beginEx()
