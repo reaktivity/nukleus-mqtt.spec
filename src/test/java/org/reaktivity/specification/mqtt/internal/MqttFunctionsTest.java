@@ -120,7 +120,7 @@ public class MqttFunctionsTest
                                           .capabilities("SUBSCRIBE_ONLY")
                                           .clientId("client")
                                           .topic("sensor/one")
-                                          .subscribeOptions(0b0010_0000)
+                                          .options(0b0010_0000)
                                           .subscriptionId(1)
                                           .build();
 
@@ -130,7 +130,7 @@ public class MqttFunctionsTest
         assertEquals("SUBSCRIBE_ONLY", mqttBeginEx.capabilities().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
-        assertEquals(0b0010_0000, mqttBeginEx.subscribeOptions());
+        assertEquals(0b0010_0000, mqttBeginEx.options());
         assertEquals(1, mqttBeginEx.subscriptionId());
     }
 
