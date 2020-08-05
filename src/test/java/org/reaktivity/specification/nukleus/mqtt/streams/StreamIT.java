@@ -198,7 +198,7 @@ public class StreamIT
         "${scripts}/subscribe.one.message.then.publish.message/client",
         "${scripts}/subscribe.one.message.then.publish.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscriberOneMessageThenPublishMessage() throws Exception
+    public void shouldSubscribeOneMessageThenPublishMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -222,7 +222,7 @@ public class StreamIT
         "${scripts}/subscribe.retained/client",
         "${scripts}/subscribe.retained/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishToSubscribeRetainedMessage() throws Exception
+    public void shouldSubscribeRetainedMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");

@@ -307,7 +307,7 @@ public class PublishIT
         "${scripts}/publish.retained/client",
         "${scripts}/publish.retained/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldPublishRetainedMessages() throws Exception
+    public void shouldPublishRetainedMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
