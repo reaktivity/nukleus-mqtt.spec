@@ -113,7 +113,7 @@ public class MqttFunctionsTest
     }
 
     @Test
-    public void shouldEncodeMqttBeginExtAsSubscribeWithOptions()
+    public void shouldEncodeMqttBeginExtAsSubscribeWithFlags()
     {
         final byte[] array = MqttFunctions.beginEx()
                                           .typeId(0)
@@ -235,7 +235,7 @@ public class MqttFunctionsTest
     }
 
     @Test
-    public void shouldEncodeMqttDataExWithRetainedFlag()
+    public void shouldEncodeMqttDataExWithFlags()
     {
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
