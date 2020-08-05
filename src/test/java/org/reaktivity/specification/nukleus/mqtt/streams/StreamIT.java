@@ -219,6 +219,18 @@ public class StreamIT
 
     @Test
     @Specification({
+        "${scripts}/subscribe.retained/client",
+        "${scripts}/subscribe.retained/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishToSubscribeRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/publish.one.message/client",
         "${scripts}/publish.one.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")

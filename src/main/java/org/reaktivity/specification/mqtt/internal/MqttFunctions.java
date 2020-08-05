@@ -132,10 +132,10 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttBeginExBuilder options(
-            int options)
+        public MqttBeginExBuilder flags(
+            int flags)
         {
-            beginExRW.options(options);
+            beginExRW.flags(flags);
             return this;
         }
 
@@ -200,6 +200,13 @@ public final class MqttFunctions
             String topic)
         {
             dataExRW.topic(topic);
+            return this;
+        }
+
+        public MqttDataExBuilder flags(
+            int flags)
+        {
+            dataExRW.flags(flags);
             return this;
         }
 

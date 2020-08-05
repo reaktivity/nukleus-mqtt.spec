@@ -120,7 +120,7 @@ public class MqttFunctionsTest
                                           .capabilities("SUBSCRIBE_ONLY")
                                           .clientId("client")
                                           .topic("sensor/one")
-                                          .options(0b0010_0000)
+                                          .flags(0b01)
                                           .subscriptionId(1)
                                           .build();
 
@@ -130,7 +130,7 @@ public class MqttFunctionsTest
         assertEquals("SUBSCRIBE_ONLY", mqttBeginEx.capabilities().toString());
         assertEquals("client", mqttBeginEx.clientId().asString());
         assertEquals("sensor/one", mqttBeginEx.topic().asString());
-        assertEquals(0b0010_0000, mqttBeginEx.options());
+        assertEquals(0b01, mqttBeginEx.flags());
         assertEquals(1, mqttBeginEx.subscriptionId());
     }
 
@@ -232,6 +232,23 @@ public class MqttFunctionsTest
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
                                                     "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
+    public void shouldEncodeMqttDataExWithRetainedFlag()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .topic("sensor/one")
+                                          .flags(0b01)
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
+        assertEquals(0b01, mqttDataEx.flags());
     }
 
     @Test
