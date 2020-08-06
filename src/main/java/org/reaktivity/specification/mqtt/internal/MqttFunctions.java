@@ -24,6 +24,8 @@ import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
 import org.reaktivity.specification.mqtt.internal.types.MqttCapabilities;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormatFW;
+import org.reaktivity.specification.mqtt.internal.types.MqttPublishFlags;
+import org.reaktivity.specification.mqtt.internal.types.MqttSubscribeFlags;
 import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
@@ -133,9 +135,14 @@ public final class MqttFunctions
         }
 
         public MqttBeginExBuilder flags(
-            int flags)
+            String... flags)
         {
-            beginExRW.flags(flags);
+            int subscribeFlags = 0;
+            for (int i = 0; i < flags.length; i++)
+            {
+                subscribeFlags |= 1 << MqttSubscribeFlags.valueOf(flags[i]).ordinal();
+            }
+            beginExRW.flags(subscribeFlags);
             return this;
         }
 
@@ -204,9 +211,14 @@ public final class MqttFunctions
         }
 
         public MqttDataExBuilder flags(
-            int flags)
+            String... flags)
         {
-            dataExRW.flags(flags);
+            int publishFlags = 0;
+            for (int i = 0; i < flags.length; i++)
+            {
+                publishFlags |= 1 << MqttPublishFlags.valueOf(flags[i]).ordinal();
+            }
+            dataExRW.flags(publishFlags);
             return this;
         }
 
