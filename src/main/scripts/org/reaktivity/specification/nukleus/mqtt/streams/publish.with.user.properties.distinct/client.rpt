@@ -24,6 +24,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("755452d5-e2ef-4113-b9c6-2f53de96fd76")
                               .topic("/sensors/1")
+                              .flags()
                               .subscriptionId(0)
                               .build()}
 connected
@@ -31,6 +32,7 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("/sensors/1")
+                             .flags()
                              .userProperty("row1", "1")
                              .userProperty("row2", "2")
                              .build()}
@@ -47,6 +49,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("SUBSCRIBE_ONLY")
                               .clientId("755452d5-e2ef-4113-b9c6-2f53de96fd76")
                               .topic("/control/1")
+                              .flags()
                               .subscriptionId(1)
                               .build()}
 connected

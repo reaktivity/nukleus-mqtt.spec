@@ -28,28 +28,32 @@ read nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
+                              .flags()
                               .subscriptionId(0)
                               .build()}
 
 connected
 
 read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("sensor/one")
-                            .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("sensor/one")
+                             .flags()
+                             .build()}
 
 read "message1"
 
 read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("sensor/one")
-                            .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("sensor/one")
+                             .flags()
+                             .build()}
 
 read "message2"
 
 read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("sensor/one")
-                            .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("sensor/one")
+                             .flags()
+                             .build()}
 
 read "message3"

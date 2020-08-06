@@ -32,6 +32,7 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
+                            .flags()
                             .expiryInterval(15)
                             .contentType("message")
                             .format("TEXT")

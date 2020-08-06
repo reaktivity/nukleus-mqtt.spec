@@ -31,6 +31,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("/control/1")
+                              .flags()
                               .subscriptionId(0)
                               .build()}
 
@@ -39,7 +40,8 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("/control/1")
-                             .expiryInterval(15)
+                             .flags()
+                            .expiryInterval(15)
                              .contentType("message")
                              .format("TEXT")
                              .build()}

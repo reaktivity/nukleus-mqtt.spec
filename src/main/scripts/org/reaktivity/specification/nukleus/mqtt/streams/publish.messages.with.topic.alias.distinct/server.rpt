@@ -28,6 +28,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
+                              .flags()
                               .subscriptionId(0)
                               .build()}
 
@@ -36,6 +37,7 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
+                            .flags()
                             .build()}
 
 read "message1"
@@ -43,6 +45,7 @@ read "message1"
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
+                            .flags()
                             .build()}
 
 read "message3"
@@ -54,6 +57,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/two")
+                              .flags()
                               .subscriptionId(0)
                               .build()}
 
@@ -62,6 +66,7 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/two")
+                            .flags()
                             .build()}
 
 read "message2"
@@ -69,6 +74,7 @@ read "message2"
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/two")
+                            .flags()
                             .build()}
 
 read "message4"
