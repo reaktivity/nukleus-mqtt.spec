@@ -27,7 +27,7 @@ write [0x10 0x11]           # fixed header
       [0x02]                # flags = clean start
       [0x00 0x3c]           # keep alive = 60s
       [0x00]                # properties = none
-      [0x00 0x04] "abcd"    # clientId
+      [0x00 0x04] "abcd"    # client id
 
 read [0x20 0x03]            # fixed header
      [0x00]                 # flags = none

@@ -31,8 +31,8 @@ read  [0x10 0x16]                    # CONNECT
       [0x06]                         # properties
       [0x22 0x00 0x01]               # topic alias maximum = 1
       [0x22 0x00 0x01]               # topic alias maximum = 1
-      [0x00 0x06] "client"           # clientId
+      [0x00 0x06] "client"           # client id
 
 write [0x20 0x03]                    # CONNACK
       [0x00]                         # flags = none
-      [0x82]                         # reason code = protocol error[0x00]                         # properties
+      [0x82]                         # reason = protocol error[0x00]                         # properties

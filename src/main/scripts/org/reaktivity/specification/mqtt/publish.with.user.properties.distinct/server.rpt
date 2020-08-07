@@ -29,7 +29,7 @@ read   [0x10 0x13]                   # CONNECT
        [0x02]                        # flags = clean start
        [0x00 0x3c]                   # keep alive = 60s
        [0x00]                        # properties = none
-       [0x00 0x24] "755452d5-e2ef-4113-b9c6-2f53de96fd76"          # clientId
+       [0x00 0x24] "755452d5-e2ef-4113-b9c6-2f53de96fd76"          # client id
 
 write  [0x20 0x03]                   # CONNACK
        [0x00]                        # flags = none

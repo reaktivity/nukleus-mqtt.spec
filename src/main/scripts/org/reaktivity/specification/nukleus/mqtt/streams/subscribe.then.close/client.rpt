@@ -20,19 +20,19 @@ connect await ROUTED_CLIENT
          option nukleus:transmission "duplex"
 
 write nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("SUBSCRIBE_ONLY")
-                             .clientId("client")
+                              .typeId(nukleus:id("mqtt"))
+                              .capabilities("SUBSCRIBE_ONLY")
+                              .clientId("client")
                               .topic("sensor/one")
                               .subscriptionId(1)
-                             .build()}
+                              .build()}
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
-                              .topic("sensor/one")
-                              .subscriptionId(1)
+                             .topic("sensor/one")
+                             .subscriptionId(1)
                              .build()}
 connected
 

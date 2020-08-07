@@ -29,7 +29,7 @@ read   [0x10 0x13]                   # CONNECT
        [0x02]                        # flags = clean start
        [0x00 0x3c]                   # keep alive = 60s
        [0x00]                        # properties = none
-       [0x00 0x06] "client"          # clientId
+       [0x00 0x06] "client"          # client id
 
 write  [0x20 0x03]                   # CONNACK
        [0x00]                        # flags = none
@@ -46,6 +46,6 @@ read   [0x82 0x1d]                   # SUBSCRIBE
        [0x00]                        # options = at-most-once
 
 write  [0x90 0x05]                   # SUBACK
-      [0x00 0x01]                   # packet id = 1
-      [0x00]                        # property length
-      [0x00 0x00]                   # reason codes
+       [0x00 0x01]                   # packet id = 1
+       [0x00]                        # property length
+       [0x00 0x00]                   # reason codes
