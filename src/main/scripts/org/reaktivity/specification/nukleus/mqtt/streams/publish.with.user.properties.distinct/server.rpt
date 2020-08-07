@@ -34,6 +34,7 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("/sensors/1")
+                            .flags("RETAIN")
                             .userProperty("row1", "1")
                             .userProperty("row2", "2")
                             .build()}
@@ -47,6 +48,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("755452d5-e2ef-4113-b9c6-2f53de96fd76")
                              .topic("/control/1")
+                             .flags("RETAIN")
                              .subscriptionId(1)
                              .build()}
 connected
