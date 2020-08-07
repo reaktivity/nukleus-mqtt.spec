@@ -35,4 +35,5 @@ read  [0x10 0x16]                    # CONNECT
 
 write [0x20 0x03]                    # CONNACK
       [0x00]                         # flags = none
-      [0x82]                         # reason = protocol error[0x00]                         # properties
+      [0x82]                         # reason = protocol error
+      [0x00]                         # properties = none

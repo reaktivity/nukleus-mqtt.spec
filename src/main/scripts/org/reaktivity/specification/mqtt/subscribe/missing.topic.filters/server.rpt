@@ -41,7 +41,7 @@ read   [0x82 0x03]                   # SUBSCRIBE
        [0x00]                        # properties = none
 
 write  [0xe0 0x02]                   # SUBACK
-       [0x00]                        # property length
+       [0x00]                        # properties = none
        [0x82]                        # reason code
 
 write close                          # close network connection

@@ -44,7 +44,7 @@ read  [0x82 0x12]                    # SUBSCRIBE
       [0x00]                         # options = at-most-once
 
 write [0x90 0x02]                    # SUBACK
-      [0x00]                         # property length
+      [0x00]                         # properties = none
       [0x00]                         # reason code
 
 write [0x30 0x3b]                    # PUBLISH
