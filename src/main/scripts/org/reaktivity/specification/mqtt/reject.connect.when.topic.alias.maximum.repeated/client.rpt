@@ -21,7 +21,7 @@
 
  connected
 
-write [0x10 0x16]                    # CONNECT header
+write [0x10 0x16]                    # CONNECT
       [0x00 0x04] "MQTT"             # protocol name
       [0x05]                         # protocol version
       [0x02]                         # flags = clean start
@@ -31,6 +31,6 @@ write [0x10 0x16]                    # CONNECT header
       [0x22 0x00 0x01]               # topic alias maximum = 1
       [0x00 0x06] "client"           # clientId
 
-read  [0x20 0x03]                    # CONNACK header
+read  [0x20 0x03]                    # CONNACK
       [0x00]                         # flags = none
       [0x82]                         # reason code = protocol error[0x00]                         # properties

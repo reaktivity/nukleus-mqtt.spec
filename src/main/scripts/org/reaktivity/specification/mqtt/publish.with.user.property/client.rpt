@@ -21,7 +21,7 @@ connect await ROUTED_SERVER
 
 connected
 
-write [0x10 0x13]                   # CONNECT header
+write [0x10 0x13]                   # CONNECT
       [0x00 0x04] "MQTT"            # protocol name
       [0x05]                        # protocol version
       [0x02]                        # flags = clean start
@@ -29,12 +29,12 @@ write [0x10 0x13]                   # CONNECT header
       [0x00]                        # properties = none
       [0x00 0x24] "755452d5-e2ef-4113-b9c6-2f53de96fd76"          # clientId
 
-read  [0x20 0x03]                   # CONNACK header
+read  [0x20 0x03]                   # CONNACK
       [0x00]                        # flags = none
       [0x00]                        # reason code
       [0x00]                        # properties = none
 
-write [0x30 0x3f]                                 # PUBLISH header
+write [0x30 0x3f]                                 # PUBLISH
       [0x00 0x0a] "/sensors/1"                    # topic name
       [0x09]                                      # properties
       [0x26]                                      # user property id
@@ -42,14 +42,14 @@ write [0x30 0x3f]                                 # PUBLISH header
       [0x00 0x01] "1"                             # user property value
       "{\"id\":\"1\",\"unit\":\"CELSIUS\",\"value\":\"189\"}" # payload
 
-write [0x82 0x12]                   # SUBSCRIBE header
+write [0x82 0x12]                   # SUBSCRIBE
       [0xff 0xf6]                   # packet id = 66526
       [0x02]                        # properties
-      [0x0b 0x01]                   # subscriptionId = 1
+      [0x0b 0x01]                   # subscription id = 1
       [0x00 0x0a] "/control/1"      # topic filter
-      [0x00]                        # subscription opts = QoS 0
+      [0x00]                        # options = at-most-once
 
-read  [0x90 0x04]                   # SUBACK header
+read  [0x90 0x04]                   # SUBACK
       [0xff 0xf6]                   # packet id = 66526
       [0x00]                        # properties = none
       [0x00]                        # reason code

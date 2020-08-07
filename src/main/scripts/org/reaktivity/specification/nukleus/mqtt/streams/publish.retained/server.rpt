@@ -28,7 +28,6 @@ read nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
-                              .flags()
                               .subscriptionId(0)
                               .build()}
 
@@ -37,8 +36,7 @@ connected
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
-                            .flags(1)
-                            .flags()
+                            .flags("RETAIN")
                             .expiryInterval(15)
                             .contentType("text/plain")
                             .build()}

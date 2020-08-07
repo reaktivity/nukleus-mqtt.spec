@@ -23,9 +23,8 @@ write nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
-                              .topic("sensor/one")
-                              .flags()
-                              .subscriptionId(1)
+                             .topic("sensor/one")
+                             .subscriptionId(1)
                              .build()}
 
 connected                             

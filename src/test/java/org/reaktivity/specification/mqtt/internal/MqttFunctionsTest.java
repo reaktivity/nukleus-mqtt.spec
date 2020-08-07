@@ -100,7 +100,6 @@ public class MqttFunctionsTest
                 .capabilities("SUBSCRIBE_ONLY")
                 .clientId("client")
                 .topic("sensor/one")
-                .flags()
                 .subscriptionId(1)
                 .build();
 
@@ -143,7 +142,6 @@ public class MqttFunctionsTest
                 .capabilities("PUBLISH_ONLY")
                 .clientId("client")
                 .topic("sensor/one")
-                .flags()
                 .subscriptionId(1)
                 .userProperty("name", "value")
                 .build();
@@ -169,7 +167,6 @@ public class MqttFunctionsTest
                 .capabilities("PUBLISH_ONLY")
                 .clientId("client")
                 .topic("sensor/one")
-                .flags()
                 .subscriptionId(1)
                 .userProperty("name", null)
                 .build();
@@ -193,7 +190,6 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                 .typeId(0)
                 .topic("sensor/one")
-                .flags()
                 .expiryInterval(15)
                 .contentType("message")
                 .format("TEXT")
@@ -224,7 +220,6 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
                                           .topic("sensor/one")
-                                          .flags()
                                           .userProperty("name", "value")
                                           .build();
 
@@ -261,7 +256,6 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
-                                          .flags()
                                           .userProperty("name", "value")
                                           .build();
 
@@ -281,7 +275,6 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
                                           .topic("sensor/one")
-                                          .flags()
                                           .userProperty("name1", "value1")
                                           .userProperty("name2", "value2")
                                           .build();
@@ -306,7 +299,6 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
-                                          .flags()
                                           .expiryInterval(15)
                                           .contentType("message")
                                           .format("TEXT")
@@ -337,7 +329,6 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
                                           .topic("sensor/one")
-                                          .flags()
                                           .expiryInterval(15)
                                           .contentType("message")
                                           .format("TEXT")
@@ -366,7 +357,6 @@ public class MqttFunctionsTest
     {
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
-                                          .flags()
                                           .expiryInterval(15)
                                           .format("TEXT")
                                           .correlation("request-id-1")
@@ -395,7 +385,6 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
                                           .topic("sensor/one")
-                                          .flags()
                                           .expiryInterval(15)
                                           .contentType("message")
                                           .format("TEXT")
@@ -426,7 +415,6 @@ public class MqttFunctionsTest
         final byte[] array = MqttFunctions.dataEx()
                                           .typeId(0)
                                           .topic("sensor/one")
-                                          .flags()
                                           .expiryInterval(15)
                                           .contentType("message")
                                           .format("TEXT")

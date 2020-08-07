@@ -21,7 +21,7 @@
 
  connected
 
-write [0x10 0x13]                    # CONNECT header
+write [0x10 0x13]                    # CONNECT
       [0x00 0x04] "MQTT"             # protocol name
       [0x05]                         # protocol version
       [0x02]                         # flags = clean start
@@ -29,12 +29,12 @@ write [0x10 0x13]                    # CONNECT header
       [0x00]                         # properties = none
       [0x00 0x06] "client"           # clientId
 
-read  [0x20 0x03]                    # CONNACK header
+read  [0x20 0x03]                    # CONNACK
       [0x00]                         # flags = none
       [0x00]                         # reason code
       [0x00]                         # properties = none
 
-write [0x30 0x14]                    # PUBLISH header
+write [0x30 0x14]                    # PUBLISH
       [0x00 0x0a] "sensor/one"       # topic name
       [0x00]                         # properties
       "message"                      # payload

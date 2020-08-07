@@ -24,7 +24,6 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
-                              .flags()
                               .subscriptionId(0)
                               .build()}
 
@@ -33,7 +32,6 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/one")
-                             .flags()
                              .build()}
 
 write "message1"
@@ -41,7 +39,6 @@ write "message1"
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/one")
-                             .flags()
                              .build()}
 
 write "message3"
@@ -56,7 +53,6 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("PUBLISH_ONLY")
                               .clientId("client")
                               .topic("sensor/two")
-                              .flags()
                               .subscriptionId(0)
                               .build()}
 
@@ -65,7 +61,6 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/two")
-                             .flags()
                              .build()}
 
 write "message2"
@@ -73,7 +68,6 @@ write "message2"
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("sensor/two")
-                             .flags()
                              .build()}
 
 write "message4"
