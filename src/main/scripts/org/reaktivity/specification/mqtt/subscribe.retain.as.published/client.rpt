@@ -39,14 +39,14 @@ write [0x82 0x12]                   # SUBSCRIBE
       [0x02]                        # properties
       [0x0b 0x01]                   # subscription id = 1
       [0x00 0x0a] "sensor/one"      # topic filter
-      [0x00]                        # options = at-most-once
+      [0x08]                        # options = at-most-once, retain as published
 
 read  [0x90 0x04]                   # SUBACK
       [0x00 0x01]                   # packet id = 1
       [0x00]                        # properties = none
       [0x00]                        # reason code
 
-read  [0x30 0x27]                   # PUBLISH
+read  [0x31 0x27]                   # PUBLISH
       [0x00 0x0a] "sensor/one"      # topic name
       [0x13]                        # properties
       [0x0b 0x01]                   # subscription id = 1
