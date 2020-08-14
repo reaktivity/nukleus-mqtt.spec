@@ -24,7 +24,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
                              .topic("sensor/one")
-                             .flags("RETAIN")
+                             .flags("SEND_RETAINED")
                              .subscriptionId(1)
                              .build()}
 
@@ -40,7 +40,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
                              .topic("device/#")
-                             .flags("RETAIN")
+                             .flags("SEND_RETAINED")
                              .subscriptionId(1)
                              .build()}
 

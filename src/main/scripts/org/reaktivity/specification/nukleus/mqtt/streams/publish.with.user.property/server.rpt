@@ -47,7 +47,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("755452d5-e2ef-4113-b9c6-2f53de96fd76")
                              .topic("/control/1")
-                             .flags("RETAIN")
+                             .flags("SEND_RETAINED")
                              .subscriptionId(1)
                              .build()}
 connected

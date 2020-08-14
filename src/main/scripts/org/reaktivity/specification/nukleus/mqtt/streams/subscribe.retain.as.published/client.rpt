@@ -24,7 +24,7 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("SUBSCRIBE_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
-                              .flags("RETAIN", "RETAIN_AS_PUBLISHED")
+                              .flags("SEND_RETAINED", "RETAIN_AS_PUBLISHED")
                               .subscriptionId(1)
                               .build()}
 

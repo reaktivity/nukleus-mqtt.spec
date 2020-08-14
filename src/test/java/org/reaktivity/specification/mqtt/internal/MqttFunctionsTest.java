@@ -120,7 +120,7 @@ public class MqttFunctionsTest
                                           .capabilities("SUBSCRIBE_ONLY")
                                           .clientId("client")
                                           .topic("sensor/one")
-                                          .flags("RETAIN")
+                                          .flags("SEND_RETAINED")
                                           .subscriptionId(1)
                                           .build();
 
