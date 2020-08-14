@@ -39,5 +39,3 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .expiryInterval(15)
                             .contentType("text/plain")
                             .build()}
-
-read ""

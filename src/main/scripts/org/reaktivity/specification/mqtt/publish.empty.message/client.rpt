@@ -14,12 +14,12 @@
 # under the License.
 #
 
- connect await ROUTED_SERVER
-         "nukleus://streams/mqtt#0"
-   option nukleus:window 8192
-   option nukleus:transmission "duplex"
+connect await ROUTED_SERVER
+       "nukleus://streams/mqtt#0"
+ option nukleus:window 8192
+ option nukleus:transmission "duplex"
 
- connected
+connected
 
 write [0x10 0x13]                    # CONNECT
       [0x00 0x04] "MQTT"             # protocol name
@@ -39,5 +39,4 @@ write [0x30 0x1f]                    # PUBLISH flags = at-most-once
       [0x12]                         # properties
       [0x02] 0x0f                    # expiry = 15 seconds
       [0x03 0x00 0x0a] "text/plain"  # content type
-      ""                             # payload
 
