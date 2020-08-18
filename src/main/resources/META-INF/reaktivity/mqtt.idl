@@ -54,7 +54,7 @@ scope mqtt
         struct MqttBeginEx extends core::stream::Extension
         {
             MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
-            string8 clientId;
+            string16 clientId;
             string16 topic;
             varbyteuint32 subscriptionId = 0;
             MqttUserProperty[] properties;
@@ -65,9 +65,9 @@ scope mqtt
             int32 deferred = 0;             // INIT only (TODO: move to DATA frame)
             string16 topic = null;
             int32 expiryInterval = -1;
-            string8 contentType = null;
+            string16 contentType = null;
             MqttPayloadFormat format = BINARY;
-            string8 responseTopic = null;
+            string16 responseTopic = null;
             MqttBinary correlation;
             MqttUserProperty[] properties;
         }

@@ -50,6 +50,30 @@ public class ConnectionIT
 
     @Test
     @Specification({
+        "${scripts}/connect/server.assigned.client.id/client",
+        "${scripts}/connect/server.assigned.client.id/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectWithServerAssignedClientId() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect/reject.missing.client.id/client",
+        "${scripts}/connect/reject.missing.client.id/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectMissingClientId() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/disconnect/client",
         "${scripts}/disconnect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
@@ -102,6 +126,18 @@ public class ConnectionIT
         "${scripts}/connect/reject.second.connect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldRejectSecondConnectPacket() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/reject.connect.when.topic.alias.maximum.repeated/client",
+        "${scripts}/reject.connect.when.topic.alias.maximum.repeated/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectConnectWhenTopicAliasMaximumRepeated() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -186,18 +222,6 @@ public class ConnectionIT
         "${scripts}/timeout.before.connect/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldTimeoutBeforeConnect() throws Exception
-    {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
-        k3po.finish();
-    }
-
-    @Test
-    @Specification({
-        "${scripts}/window.test/client",
-        "${scripts}/window.test/server"})
-    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void windowTest() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

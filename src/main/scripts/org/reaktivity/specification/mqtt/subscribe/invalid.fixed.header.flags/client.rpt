@@ -41,6 +41,6 @@ write  [0x83 0x12]                   # malformed SUBSCRIBE header
        [0x00 0x0a] "sensor/one"      # topic filter
        [0x00]                        # subscription opts = QoS 0
 
-read   [0xE0 0x02]                   # disconnect = normal
+read   [0xe0 0x02]                   # disconnect = normal
        [0x81]                        # malformed packet
        [0x00]                        # properties = none

@@ -39,7 +39,7 @@ write [0x30 0x15]                    # PUBLISH header
       [0x00]                         # properties
       "message"                      # payload
 
-read  [0xE0 0x02]                    # disconnect header
+read  [0xe0 0x02]                    # disconnect header
       [0x90]                         # DISCONNECT = topic name invalid
       [0x00]                         # properties = none
 

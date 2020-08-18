@@ -41,6 +41,6 @@ write  [0x82 0x12]                   # SUBSCRIBE header
        [0x00 0x0c] "#/sensor/one"    # invalid topic filter
        [0x00]                        # subscription opts = QoS 0
 
-read   [0xE0 0x02]                   # disconnect = normal
+read   [0xe0 0x02]                   # disconnect = normal
        [0x82]                        # protocol error
        [0x00]                        # properties = none
