@@ -36,4 +36,5 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .expiryInterval(15)
                              .contentType("text/plain")
                              .build()}
+write nukleus:data.empty
 write flush

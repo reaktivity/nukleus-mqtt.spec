@@ -408,4 +408,28 @@ public class StreamIT
         k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.empty.retained.message/client",
+        "${scripts}/publish.empty.retained.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishEmptyRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.empty.message/client",
+        "${scripts}/publish.empty.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishEmptyMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
 }

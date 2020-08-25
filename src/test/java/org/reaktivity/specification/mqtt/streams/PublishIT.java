@@ -316,8 +316,8 @@ public class PublishIT
 
     @Test
     @Specification({
-        "${scripts}/publish.remove.retained/client",
-        "${scripts}/publish.remove.retained/server"})
+        "${scripts}/publish.empty.retained.message/client",
+        "${scripts}/publish.empty.retained.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldPublishToRemoveRetainedMessage() throws Exception
     {
