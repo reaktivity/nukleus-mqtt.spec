@@ -29,10 +29,16 @@ write [0x10 0x13]                    # CONNECT
       [0x00]                         # properties = none
       [0x00 0x06] "client"           # client id
 
-read  [0x20 0x03]                    # CONNACK
+read  [0x20 0x12]                    # CONNACK
       [0x00]                         # flags = none
       [0x00]                         # reason code
-      [0x00]                         # properties = none
+      [0x0f]                         # properties
+      [0x11] 0                       # session expiry interval
+      [0x24 0x00]                    # maximum QoS
+      [0x25 0x01]                    # retain available
+      [0x28 0x00]                    # wildcard subscription unavailable
+      [0x29 0x01]                    # subscription identifiers available
+      [0x2a 0x00]                    # shared subscription unavailable
 
 write [0x30 0x39]                    # PUBLISH
       [0x00 0x0a] "sensor/one"       # topic name
