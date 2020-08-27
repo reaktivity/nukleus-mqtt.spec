@@ -112,6 +112,18 @@ public class PublishIT
 
     @Test
     @Specification({
+        "${scripts}/subscribe.retained/client",
+        "${scripts}/subscribe.retained/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "${scripts}/publish.message.and.subscribe.correlated.message/client",
         "${scripts}/publish.message.and.subscribe.correlated.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
@@ -284,6 +296,42 @@ public class PublishIT
         "${scripts}/publish.messages.with.topic.alias.replaced/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldPublishMessagesWithTopicAliasReplaced() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.retained/client",
+        "${scripts}/publish.retained/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.empty.retained.message/client",
+        "${scripts}/publish.empty.retained.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishToRemoveRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.empty.message/client",
+        "${scripts}/publish.empty.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishEmptyMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
