@@ -113,6 +113,28 @@ public class MqttFunctionsTest
     }
 
     @Test
+    public void shouldEncodeMqttBeginExtAsSubscribeWithFlags()
+    {
+        final byte[] array = MqttFunctions.beginEx()
+                                          .typeId(0)
+                                          .capabilities("SUBSCRIBE_ONLY")
+                                          .clientId("client")
+                                          .topic("sensor/one")
+                                          .flags("SEND_RETAINED")
+                                          .subscriptionId(1)
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttBeginExFW mqttBeginEx = new MqttBeginExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals("SUBSCRIBE_ONLY", mqttBeginEx.capabilities().toString());
+        assertEquals("client", mqttBeginEx.clientId().asString());
+        assertEquals("sensor/one", mqttBeginEx.topic().asString());
+        assertEquals(0b01, mqttBeginEx.flags());
+        assertEquals(1, mqttBeginEx.subscriptionId());
+    }
+
+    @Test
     public void shouldEncodeMqttBeginExAsSuback()
     {
         final byte[] array = MqttFunctions.beginEx()
@@ -210,6 +232,23 @@ public class MqttFunctionsTest
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
                                                     "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
+    public void shouldEncodeMqttDataExWithFlags()
+    {
+        final byte[] array = MqttFunctions.dataEx()
+                                          .typeId(0)
+                                          .topic("sensor/one")
+                                          .flags("RETAIN")
+                                          .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttDataExFW mqttDataEx = new MqttDataExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttDataEx.typeId());
+        assertEquals("sensor/one", mqttDataEx.topic().asString());
+        assertEquals(0b01, mqttDataEx.flags());
     }
 
     @Test

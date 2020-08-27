@@ -23,22 +23,22 @@ accept ${serverTransport}
 accepted
 connected
 
-read  [0x10 0x13]                    # CONNECT header
+read  [0x10 0x13]                    # CONNECT
       [0x00 0x04] "MQTT"             # protocol name
       [0x05]                         # protocol version
-      [0x02]                         # connect flags = clean start
+      [0x02]                         # flags = clean start
       [0x00 0x3c]                    # keep alive = 60s
       [0x00]                         # properties = none
-      [0x00 0x06] "client"           # clientId
+      [0x00 0x06] "client"           # client id
 
-write [0x20 0x03]                    # CONNACK header
-      [0x00]                         # connect flags = none
+write [0x20 0x03]                    # CONNACK
+      [0x00]                         # flags = none
       [0x00]                         # reason code
       [0x00]                         # properties = none
 
-read  [0x30 0x15]                    # PUBLISH header
+read  [0x30 0x15]                    # PUBLISH
       [0x00 0x0b] "sensor/none"      # topic name
-      [0x00]                         # properties
+      [0x00]                         # properties = none
       "message"                      # payload
 
 write [0xe0 0x02]                    # disconnect header

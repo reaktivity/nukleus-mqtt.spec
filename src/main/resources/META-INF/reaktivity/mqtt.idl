@@ -15,6 +15,17 @@
  */
 scope mqtt
 {
+    enum MqttSubscribeFlags (uint8)
+    {
+        SEND_RETAINED(0),
+        RETAIN_AS_PUBLISHED(1)
+    }
+
+    enum MqttPublishFlags (uint8)
+    {
+        RETAIN(0)
+    }
+
     enum MqttCapabilities (uint8)
     {
         PUBLISH_ONLY(1),
@@ -56,6 +67,7 @@ scope mqtt
             MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
             string16 clientId;
             string16 topic;
+            uint8 flags = 0;
             varbyteuint32 subscriptionId = 0;
             MqttUserProperty[] properties;
         }
@@ -64,6 +76,7 @@ scope mqtt
         {
             int32 deferred = 0;             // INIT only (TODO: move to DATA frame)
             string16 topic = null;
+            uint8 flags = 0;
             int32 expiryInterval = -1;
             string16 contentType = null;
             MqttPayloadFormat format = BINARY;
@@ -79,6 +92,7 @@ scope mqtt
 
         struct MqttFlushEx extends core::stream::Extension
         {
+            uint8 flags = 0;
             MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
         }
     }
