@@ -30,12 +30,9 @@ write [0x10 0x21]                    # CONNECT header
       [0x15 0x00 0x0b] "SCRAM-SHA-1" # authentication method
       [0x00 0x06] "client"           # clientId
 
-read  [0x20 0x0c]                    # CONNACK
+read  [0x20 0x03]                    # CONNACK
       [0x00]                         # flags = none
       [0x8c]                         # reason code = bad authentication method
-      [0x09]                         # properties
-      [0x11] 0x00                    # session expiry interval
-      [0x24 0x00]                    # maximum QoS
-      [0x28 0x00]                    # wildcard subscription unavailable
+      [0x00]                         # properties = none
 
 read closed      
