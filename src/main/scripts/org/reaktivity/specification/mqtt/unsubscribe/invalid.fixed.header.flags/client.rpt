@@ -21,33 +21,33 @@ connect await ROUTED_SERVER
 
 connected
 
-write  [0x10 0x13]                   # CONNECT header
+write  [0x10 0x13]                   # CONNECT
        [0x00 0x04] "MQTT"            # protocol name
        [0x05]                        # protocol version
-       [0x02]                        # connect flags = clean start
+       [0x02]                        # flags = clean start
        [0x00 0x3C]                   # keep alive = 60s
        [0x00]                        # properties = none
-       [0x00 0x06] "client"          # clientId
+       [0x00 0x06] "client"          # client id
 
-read   [0x20 0x03]                   # CONNACK header
-       [0x00]                        # connect flags = none
+read   [0x20 0x03]                   # CONNACK
+       [0x00]                        # flags = none
        [0x00]                        # reason code
        [0x00]                        # properties = none
 
-write  [0x82 0x12]                   # SUBSCRIBE header
-       [0x00 0x01]                   # packetId = 1
+write  [0x82 0x12]                   # SUBSCRIBE
+       [0x00 0x01]                   # packet id = 1
        [0x02]                        # properties
-       [0x0b 0x01]                   # subscriptionId = 1
+       [0x0b 0x01]                   # subscription id = 1
        [0x00 0x0a] "sensor/one"      # topic filter
-       [0x00]                        # subscription opts = QoS 0
+       [0x00]                        # options = at-most-once, send retained
 
-read   [0x90 0x04]                   # SUBACK header
-       [0x00 0x01]                   # packetId = 1
+read   [0x90 0x04]                   # SUBACK
+       [0x00 0x01]                   # packet id = 1
        [0x00]                        # properties = none
        [0x00]                        # reason code
 
-write  [0xa3 0x0f]                   # malformed UNSUBSCRIBE header
-       [0x00 0x01]                   # packetId = 1
+write  [0xa3 0x0f]                   # malformed UNSUBSCRIBE
+       [0x00 0x01]                   # packet id = 1
        [0x00]                        # properties = none
        [0x00 0x0a] "sensor/one"      # topic filter
 

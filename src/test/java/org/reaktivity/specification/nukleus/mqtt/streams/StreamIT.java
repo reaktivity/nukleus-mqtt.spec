@@ -198,7 +198,7 @@ public class StreamIT
         "${scripts}/subscribe.one.message.then.publish.message/client",
         "${scripts}/subscribe.one.message.then.publish.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldSubscriberOneMessageThenPublishMessage() throws Exception
+    public void shouldSubscribeOneMessageThenPublishMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -211,6 +211,18 @@ public class StreamIT
         "${scripts}/publish.message.and.subscribe.correlated.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldPublishMessageAndSubscribeCorrelatedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/subscribe.retained/client",
+        "${scripts}/subscribe.retained/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeRetainedMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
@@ -379,6 +391,42 @@ public class StreamIT
         "${scripts}/publish.messages.with.topic.alias.replaced/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldPublishMessagesWithTopicAliasesReplaced() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.retained/client",
+        "${scripts}/publish.retained/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.empty.retained.message/client",
+        "${scripts}/publish.empty.retained.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishEmptyRetainedMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/publish.empty.message/client",
+        "${scripts}/publish.empty.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldPublishEmptyMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
