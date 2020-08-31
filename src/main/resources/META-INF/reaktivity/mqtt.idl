@@ -18,7 +18,8 @@ scope mqtt
     enum MqttSubscribeFlags (uint8)
     {
         SEND_RETAINED(0),
-        RETAIN_AS_PUBLISHED(1)
+        RETAIN_AS_PUBLISHED(1),
+        NO_LOCAL(2)
     }
 
     enum MqttPublishFlags (uint8)
