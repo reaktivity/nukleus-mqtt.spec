@@ -21,7 +21,7 @@ connect await ROUTED_SERVER
 
 connected
 
-write [0x10 0x1f]                   # CONNECT
+write [0x10 0x15]                   # CONNECT
       [0x00 0x04] "MQTT"            # protocol name
       [0x05]                        # protocol version
       [0x42]                        # flags = password, clean start
