@@ -230,18 +230,6 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/session.expires.on.close/client",
-        "${scripts}/connect/session.expires.on.close/server"})
-    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithSessionExpireOnNetworkClose() throws Exception
-    {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
-        k3po.finish();
-    }
-
-    @Test
-    @Specification({
         "${scripts}/connect/maximum.qos.0/client",
         "${scripts}/connect/maximum.qos.0/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
