@@ -26,11 +26,10 @@ connected
 read  [0x10 0x1f]                   # CONNECT
       [0x00 0x04] "MQTT"            # protocol name
       [0x05]                        # protocol version
-      [0xc2]                        # flags = username, password, clean start
+      [0x42]                        # flags = password, clean start
       [0x00 0x3c]                   # keep alive = 60s
       [0x00]                        # properties = none
       [0x00 0x06] "client"          # client id
-      [0x00 0x08] "username"        # username
       [0x00 0x08] "password"        # password
 
 write [0x20 0x03]                   # CONNACK

@@ -242,10 +242,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/no.qos/client",
-        "${scripts}/connect/no.qos/server"})
+        "${scripts}/connect/maximum.qos.0/client",
+        "${scripts}/connect/maximum.qos.0/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithNoQos() throws Exception
+    public void shouldConnectWithMaximumQos0() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -254,10 +254,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/no.retain/client",
-        "${scripts}/connect/no.retain/server"})
+        "${scripts}/connect/retain.unavailable/client",
+        "${scripts}/connect/retain.unavailable/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithNoRetain() throws Exception
+    public void shouldConnectWithRetainUnavailable() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -266,10 +266,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/no.wildcard.subscriptions/client",
-        "${scripts}/connect/no.wildcard.subscriptions/server"})
+        "${scripts}/connect/wildcard.subscriptions.unavailable/client",
+        "${scripts}/connect/wildcard.subscriptions.unavailable/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithNoWildcardSubscriptions() throws Exception
+    public void shouldConnectWithWildcardSubscriptionsUnavailable() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -278,10 +278,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/no.subscription.identifiers/client",
-        "${scripts}/connect/no.subscription.identifiers/server"})
+        "${scripts}/connect/subscription.identifiers.unavailable/client",
+        "${scripts}/connect/subscription.identifiers.unavailable/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithNoSubscriptionIdentifiers() throws Exception
+    public void shouldConnectWithSubscriptionIdentifiersUnavailable() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -290,10 +290,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/no.shared.subscriptions/client",
-        "${scripts}/connect/no.shared.subscriptions/server"})
+        "${scripts}/connect/shared.subscriptions.unavailable/client",
+        "${scripts}/connect/shared.subscriptions.unavailable/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithNoSharedSubscriptions() throws Exception
+    public void shouldConnectWithSharedSubscriptionsUnavailable() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -302,10 +302,22 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect/reject.username.and.password/client",
-        "${scripts}/connect/reject.username.and.password/server"})
+        "${scripts}/connect/reject.username/client",
+        "${scripts}/connect/reject.username/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldRejectConnectWithUsernameAndPassword() throws Exception
+    public void shouldRejectConnectWithUsername() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect/reject.password/client",
+        "${scripts}/connect/reject.password/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldRejectConnectWithPassword() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
