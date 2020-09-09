@@ -24,12 +24,12 @@ accept ${serverTransport}
 accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .capabilities("PUBLISH_ONLY")
-                              .clientId("client")
-                              .topic("sensor/one")
-                              .subscriptionId(0)
-                              .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .capabilities("PUBLISH_ONLY")
+                             .clientId("client")
+                             .topic("sensor/one")
+                             .subscriptionId(0)
+                             .build()}
 
 connected
 
