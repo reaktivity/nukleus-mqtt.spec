@@ -24,8 +24,7 @@ scope mqtt
 
     enum MqttPublishFlags (uint8)
     {
-        RETAIN(0),
-        WILL(1)
+        RETAIN(0)
     }
 
     enum MqttCapabilities (uint8)
