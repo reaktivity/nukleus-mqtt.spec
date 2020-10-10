@@ -21,7 +21,7 @@ connect await ROUTED_SERVER
 
 connected
 
-write [0x10 0x34]                                      # CONNECT
+write [0x10 0x3a]                                      # CONNECT
       [0x00 0x04] "MQTT"                               # protocol name
       [0x05]                                           # protocol version
       [0x06]                                           # flags = will flag, clean start
@@ -31,7 +31,7 @@ write [0x10 0x34]                                      # CONNECT
       [0x00 0x06] "client"                             # client id
       [0x00]                                           # properties = none
       [0x00 0x18] "$SYS/clients/client/will"           # will topic
-      [0x00 0x07] "payload"                            # will payload
+      "payload"                                        # will payload
 
 read  [0x20 0x08]                   # CONNACK
       [0x00]                        # flags = none
