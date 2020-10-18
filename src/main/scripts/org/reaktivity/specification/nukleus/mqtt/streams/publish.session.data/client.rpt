@@ -47,6 +47,7 @@ read '{"expiresAt":'/\d+/'}'
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/clients/one/will")
+                             .format("TEXT")
                              .build()}
 
 write "client one session expired"
@@ -55,6 +56,7 @@ write flush
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("$SYS/clients/one/will")
+                            .format("TEXT")
                             .build()}
 
 read "client one session expired"
