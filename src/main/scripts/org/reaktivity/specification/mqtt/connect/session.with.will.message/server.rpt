@@ -23,20 +23,19 @@ accept ${serverTransport}
 accepted
 connected
 
-read  [0x10 0x3a]                                      # CONNECT
+read  [0x10 0x47]                                      # CONNECT
       [0x00 0x04] "MQTT"                               # protocol name
       [0x05]                                           # protocol version
       [0x06]                                           # flags = will flag, clean start
       [0x00 0x3c]                                      # keep alive = 60s
       [0x05]                                           # properties
-      [0x11] 10                                        # session expiry interval
-      [0x00 0x06] "client"                             # client id
+      [0x11] 0                                         # session expiry interval
+      [0x00 0x03] "one"                                # client id
       [0x00]                                           # properties = none
-      [0x00 0x18] "$SYS/clients/client/will"           # will topic
-      payload"                                         # will payload
+      [0x00 0x15] "$SYS/clients/one/will"              # will topic
+      "client one session expired"                     # will payload
 
-write [0x20 0x08]                   # CONNACK
+write [0x20 0x03]                   # CONNACK
       [0x00]                        # flags = none
       [0x00]                        # reason code
-      [0x05]                        # properties
-      [0x11] 10                     # session expiry interval
+      [0x00]                        # properties = none

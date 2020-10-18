@@ -52,7 +52,7 @@ write ${routeAuthorization}
 write ${core:string("mqtt#0")}
 write ${core:string("target#0")}
 write ${mqtt:routeEx()
-            .topic("$SYS/clients/client/#")
+            .topic("$SYS/clients/one/#")
             .capabilities("PUBLISH_AND_SUBSCRIBE")
             .build()}
 
