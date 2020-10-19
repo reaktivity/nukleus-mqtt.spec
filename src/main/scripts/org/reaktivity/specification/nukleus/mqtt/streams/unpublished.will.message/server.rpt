@@ -24,7 +24,7 @@ accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .capabilities("PUBLISH_AND_SUBSCRIBE")
+                             .capabilities("PUBLISH_ONLY")
                              .clientId("one")
                              .topic("$SYS/clients/one/#")
                              .subscriptionId(0)
@@ -39,14 +39,6 @@ read nukleus:data.ext ${mqtt:dataEx()
 
 read '{"expiresAt":'/(?<expiresAt>\d+)/'}'
 
-write nukleus:data.ext ${mqtt:dataEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/clients/one")
-                             .build()}
-
-write '{"expiresAt":'${expiresAt}'}'
-write flush
-
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("$SYS/clients/one/will")
@@ -54,12 +46,3 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .build()}
 
 read "client one session expired"
-
-write nukleus:data.ext ${mqtt:dataEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/clients/one/will")
-                             .format("TEXT")
-                             .build()}
-
-write "client one session expired"
-write flush
