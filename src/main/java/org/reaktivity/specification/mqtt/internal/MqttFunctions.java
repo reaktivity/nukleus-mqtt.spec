@@ -30,6 +30,7 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttFlushExFW;
 
 public final class MqttFunctions
 {
@@ -62,6 +63,12 @@ public final class MqttFunctions
     public static MqttDataExBuilder dataEx()
     {
         return new MqttDataExBuilder();
+    }
+
+    @Function
+    public static MqttFlushExBuilder flushEx()
+    {
+        return new MqttFlushExBuilder();
     }
 
     @Function
@@ -278,6 +285,51 @@ public final class MqttFunctions
             final MqttDataExFW dataEx = dataExRW.build();
             final byte[] array = new byte[dataEx.sizeof()];
             dataEx.buffer().getBytes(dataEx.offset(), array);
+            return array;
+        }
+    }
+
+    public static final class MqttFlushExBuilder
+    {
+        private final MqttFlushExFW.Builder flushExRW;
+
+        private MqttFlushExBuilder()
+        {
+            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
+            this.flushExRW = new MqttFlushExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
+        }
+
+        public MqttFlushExBuilder typeId(
+            int typeId)
+        {
+            flushExRW.typeId(typeId);
+            return this;
+        }
+
+        public MqttFlushExBuilder flags(
+            String... flags)
+        {
+            int subscribeFlags = 0;
+            for (int i = 0; i < flags.length; i++)
+            {
+                subscribeFlags |= 1 << MqttSubscribeFlags.valueOf(flags[i]).ordinal();
+            }
+            flushExRW.flags(subscribeFlags);
+            return this;
+        }
+
+        public MqttFlushExBuilder capabilities(
+            String capabilities)
+        {
+            flushExRW.capabilities(c -> c.set(MqttCapabilities.valueOf(capabilities)));
+            return this;
+        }
+
+        public byte[] build()
+        {
+            final MqttFlushExFW flushEx = flushExRW.build();
+            final byte[] array = new byte[flushEx.sizeof()];
+            flushEx.buffer().getBytes(flushEx.offset(), array);
             return array;
         }
     }
