@@ -37,6 +37,7 @@ import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
+import org.reaktivity.specification.mqtt.internal.types.stream.MqttFlushExFW;
 
 public class MqttFunctionsTest
 {
@@ -212,6 +213,23 @@ public class MqttFunctionsTest
                                 .matchFirst(h ->
                                                 "name".equals(h.key().asString()) &&
                                                     "value".equals(h.value().asString())) != null);
+    }
+
+    @Test
+    public void shouldEncodeMqttFlushEx()
+    {
+        final byte[] array = MqttFunctions.flushEx()
+                .typeId(0)
+                .flags("SEND_RETAINED")
+                .capabilities("SUBSCRIBE_ONLY")
+                .build();
+
+        DirectBuffer buffer = new UnsafeBuffer(array);
+        MqttFlushExFW mqttFlushEx = new MqttFlushExFW().wrap(buffer, 0, buffer.capacity());
+
+        assertEquals(0, mqttFlushEx.typeId());
+        assertEquals(0b01, mqttFlushEx.flags());
+        assertEquals("SUBSCRIBE_ONLY", mqttFlushEx.capabilities().toString());
     }
 
     @Test
