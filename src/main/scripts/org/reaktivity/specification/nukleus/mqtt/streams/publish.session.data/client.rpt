@@ -60,3 +60,26 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .build()}
 
 read "client one session expired"
+
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
+
+write nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .capabilities("PUBLISH_ONLY")
+                              .clientId("one")
+                              .topic("wills/one")
+                              .subscriptionId(0)
+                              .build()}
+
+connected
+
+write nukleus:data.ext ${mqtt:dataEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("wills/one")
+                             .format("TEXT")
+                             .build()}
+
+write "client one session expired"

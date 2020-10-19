@@ -20,7 +20,6 @@ accept ${serverTransport}
         option nukleus:window 8192
         option nukleus:transmission "duplex"
 
-
 accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
@@ -63,3 +62,24 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .build()}
 
 write "client one session expired"
+write flush
+
+accepted
+
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .capabilities("PUBLISH_ONLY")
+                             .clientId("one")
+                             .topic("wills/one")
+                             .subscriptionId(0)
+                             .build()}
+
+connected
+
+read nukleus:data.ext ${mqtt:dataEx()
+                            .typeId(nukleus:id("mqtt"))
+                            .topic("wills/one")
+                            .format("TEXT")
+                            .build()}
+
+read "client one session expired"
