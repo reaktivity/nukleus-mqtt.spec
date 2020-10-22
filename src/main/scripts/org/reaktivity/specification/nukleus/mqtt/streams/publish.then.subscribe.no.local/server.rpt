@@ -26,7 +26,7 @@ accepted
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("PUBLISH_ONLY")
-                             .clientId("one")
+                             .clientId("client")
                              .topic("sensor/one")
                              .subscriptionId(0)
                              .build()}
@@ -49,5 +49,5 @@ read advised nukleus:flush ${mqtt:flushEx()
                                  .typeId(nukleus:id("mqtt"))
                                  .flags("NO_LOCAL", "SEND_RETAINED")
                                  .capabilities("PUBLISH_AND_SUBSCRIBE")
-                                 .clientId("one")
+                                 .clientId("client")
                                  .build()}
