@@ -20,32 +20,34 @@ accept ${serverTransport}
         option nukleus:window 8192
         option nukleus:transmission "duplex"
 
+
 accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
-                             .capabilities("SUBSCRIBE_ONLY")
+                             .capabilities("PUBLISH_ONLY")
                              .clientId("client")
                              .topic("sensor/one")
-                             .flags("SEND_RETAINED")
-                             .subscriptionId(1)
+                             .subscriptionId(0)
                              .build()}
-connected
 
-read advised nukleus:flush ${mqtt:flushEx()
-                                 .typeId(nukleus:id("mqtt"))
-                                 .flags("SEND_RETAINED")
-                                 .capabilities("PUBLISH_AND_SUBSCRIBE")
-                                 .clientId("client")
-                                 .build()}
+connected
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
-                            .flags("RETAIN")
                             .expiryInterval(15)
                             .contentType("message")
                             .format("TEXT")
+                            .responseTopic("sensor/one")
+                            .correlation("info")
                             .build()}
 
 read "message"
+
+read advised nukleus:flush ${mqtt:flushEx()
+                                 .typeId(nukleus:id("mqtt"))
+                                 .flags("NO_LOCAL", "SEND_RETAINED")
+                                 .capabilities("PUBLISH_AND_SUBSCRIBE")
+                                 .clientId("client")
+                                 .build()}

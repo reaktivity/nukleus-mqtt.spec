@@ -14,25 +14,33 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
 
-accept ${serverTransport}
-        option nukleus:window 8192
-        option nukleus:transmission "duplex"
+write nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .capabilities("PUBLISH_ONLY")
+                              .clientId("client")
+                              .topic("sensor/one")
+                              .subscriptionId(0)
+                              .build()}
 
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("SUBSCRIBE_ONLY")
-                             .clientId("client")
-                             .topic("sensor/one")
-                             .flags("SEND_RETAINED")
-                             .subscriptionId(1)
-                             .build()}
 connected
 
-read advised nukleus:flush ${mqtt:flushEx()
+write nukleus:data.ext ${mqtt:dataEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("sensor/one")
+                             .expiryInterval(15)
+                             .contentType("message")
+                             .format("TEXT")
+                             .responseTopic("sensor/one")
+                             .correlation("info")
+                             .build()}
+write "message"
+
+write advise nukleus:flush ${mqtt:flushEx()
                                  .typeId(nukleus:id("mqtt"))
                                  .flags("SEND_RETAINED")
                                  .capabilities("PUBLISH_AND_SUBSCRIBE")
@@ -42,10 +50,10 @@ read advised nukleus:flush ${mqtt:flushEx()
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("sensor/one")
-                            .flags("RETAIN")
                             .expiryInterval(15)
                             .contentType("message")
                             .format("TEXT")
+                            .responseTopic("sensor/one")
+                            .correlation("info")
                             .build()}
-
 read "message"

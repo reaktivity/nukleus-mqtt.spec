@@ -24,26 +24,15 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .capabilities("SUBSCRIBE_ONLY")
                               .clientId("client")
                               .topic("sensor/one")
-                              .flags("SEND_RETAINED")
+                              .flags("NO_LOCAL", "SEND_RETAINED")
                               .subscriptionId(1)
                               .build()}
+
 connected
 
 write advise nukleus:flush ${mqtt:flushEx()
                                  .typeId(nukleus:id("mqtt"))
-                                 .flags("SEND_RETAINED")
+                                 .flags("NO_LOCAL", "SEND_RETAINED")
                                  .capabilities("PUBLISH_AND_SUBSCRIBE")
                                  .clientId("client")
                                  .build()}
-
-write nukleus:data.ext ${mqtt:dataEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .topic("sensor/one")
-                             .flags("RETAIN")
-                             .expiryInterval(15)
-                             .contentType("message")
-                             .format("TEXT")
-                             .build()}
-
-write "message"
-write flush

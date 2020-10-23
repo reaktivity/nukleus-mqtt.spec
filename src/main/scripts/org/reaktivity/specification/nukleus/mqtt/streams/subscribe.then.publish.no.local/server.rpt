@@ -27,25 +27,15 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
                              .topic("sensor/one")
-                             .flags("SEND_RETAINED")
+                             .flags("NO_LOCAL", "SEND_RETAINED")
                              .subscriptionId(1)
                              .build()}
+
 connected
 
 read advised nukleus:flush ${mqtt:flushEx()
                                  .typeId(nukleus:id("mqtt"))
-                                 .flags("SEND_RETAINED")
+                                 .flags("NO_LOCAL", "SEND_RETAINED")
                                  .capabilities("PUBLISH_AND_SUBSCRIBE")
                                  .clientId("client")
                                  .build()}
-
-read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("sensor/one")
-                            .flags("RETAIN")
-                            .expiryInterval(15)
-                            .contentType("message")
-                            .format("TEXT")
-                            .build()}
-
-read "message"
