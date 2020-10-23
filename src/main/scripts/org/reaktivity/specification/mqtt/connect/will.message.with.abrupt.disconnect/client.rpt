@@ -21,7 +21,7 @@ connect await ROUTED_SERVER
 
 connected
 
-write [0x10 0x3d]                                      # CONNECT
+write [0x10 0x3f]                                      # CONNECT
       [0x00 0x04] "MQTT"                               # protocol name
       [0x05]                                           # protocol version
       [0x06]                                           # flags = will flag, clean start
@@ -32,7 +32,7 @@ write [0x10 0x3d]                                      # CONNECT
       [0x02]                                           # properties
       [0x01 0x01]                                      # format = utf-8
       [0x00 0x09] "wills/one"                          # will topic
-      "client one session expired"                     # will payload
+      [0x00 0x1a] "client one session expired"         # will payload
 
 read  [0x20 0x03]                                      # CONNACK
       [0x00]                                           # flags = none
