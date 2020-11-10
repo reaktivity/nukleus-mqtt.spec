@@ -41,7 +41,7 @@ write [0x20 0x03]                                      # CONNACK
       [0x00]                                           # reason code
       [0x00]                                           # properties = none
 
-read abort
+read aborted
 
 accepted
 connected
@@ -71,11 +71,9 @@ write  [0x90 0x04]                   # SUBACK
        [0x00]                        # properties = none
        [0x00]                        # reason code
 
-write  [0x30 0x26]                   # PUBLISH
+write  [0x30 0x2a]                   # PUBLISH
        [0x00 0x09] "wills/one"       # topic name
-       [0x13]                        # properties
+       [0x04]                        # properties
        [0x0b 0x01]                   # subscription id = 1
-       [0x02] 0x0f                   # expiry = 15 seconds
-       [0x03 0x00 0x07] "message"    # content type
        [0x01 0x01]                   # format = utf-8
-       "message"                     # payload
+       "client one session expired"  # payload
