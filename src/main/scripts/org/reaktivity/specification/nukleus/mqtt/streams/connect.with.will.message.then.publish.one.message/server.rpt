@@ -23,25 +23,6 @@ accept ${serverTransport}
 rejected
 
 accepted
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("PUBLISH_ONLY")
-                             .clientId("client")
-                             .topic("sensor/one")
-                             .subscriptionId(0)
-                             .build()}
-
-connected
-
-read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("sensor/one")
-                            .expiryInterval(15)
-                            .format("TEXT")
-                            .build()}
-read "message"
-
-accepted
 
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
@@ -62,6 +43,19 @@ write nukleus:data.ext ${mqtt:dataEx()
 
 write "client one session expired"
 write flush
+
+accepted
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .capabilities("PUBLISH_ONLY")
+                             .clientId("one")
+                             .topic("sensor/one")
+                             .subscriptionId(0)
+                             .build()}
+
+connected
+
+read aborted
 
 accepted
 

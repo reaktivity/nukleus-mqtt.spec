@@ -28,30 +28,6 @@ connect await ROUTED_CLIENT
 
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
-                              .capabilities("PUBLISH_ONLY")
-                              .clientId("client")
-                              .topic("sensor/one")
-                              .subscriptionId(0)
-                              .build()}
-
-connected
-
-write nukleus:data.ext ${mqtt:dataEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .topic("sensor/one")
-                             .expiryInterval(15)
-                             .format("TEXT")
-                             .build()}
-write "message"
-write flush
-
-connect await ROUTED_CLIENT
-        "nukleus://streams/mqtt#0"
-         option nukleus:window 8192
-         option nukleus:transmission "duplex"
-
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
                               .capabilities("SUBSCRIBE_ONLY")
                               .clientId("one")
                               .topic("wills/one")
@@ -68,6 +44,23 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .build()}
 
 read "client one session expired"
+
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
+
+write nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .capabilities("PUBLISH_ONLY")
+                              .clientId("one")
+                              .topic("sensor/one")
+                              .subscriptionId(0)
+                              .build()}
+
+connected
+
+write abort
 
 connect await ROUTED_CLIENT
         "nukleus://streams/mqtt#0"
