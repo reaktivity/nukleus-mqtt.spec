@@ -36,3 +36,11 @@ write advise nukleus:flush ${mqtt:flushEx()
                                  .capabilities("PUBLISH_AND_SUBSCRIBE")
                                  .clientId("client")
                                  .build()}
+
+write nukleus:data.ext ${mqtt:dataEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("sensor/one")
+                             .expiryInterval(15)
+                             .format("TEXT")
+                             .build()}
+write "message"
