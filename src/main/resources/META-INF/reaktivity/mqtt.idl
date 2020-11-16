@@ -46,7 +46,7 @@ scope mqtt
         octets[length] bytes = null;
     }
 
-    struct MqttProperty
+    struct MqttUserProperty
     {
         string16 key;
         string16 value;
@@ -70,7 +70,7 @@ scope mqtt
             string16 topic;
             uint8 flags = 0;
             varbyteuint32 subscriptionId = 0;
-            MqttProperty[] properties;
+            MqttUserProperty[] properties;
         }
 
         struct MqttDataEx extends core::stream::Extension
@@ -83,7 +83,7 @@ scope mqtt
             MqttPayloadFormat format = BINARY;
             string16 responseTopic = null;
             MqttBinary correlation;
-            MqttProperty[] properties;
+            MqttUserProperty[] properties;
         }
 
         struct MqttAbortEx extends core::stream::Extension
