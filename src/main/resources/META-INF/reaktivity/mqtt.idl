@@ -95,7 +95,6 @@ scope mqtt
         {
             uint8 flags = 0;
             MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
-            string16 clientId;
         }
     }
 }

@@ -325,13 +325,6 @@ public final class MqttFunctions
             return this;
         }
 
-        public MqttFlushExBuilder clientId(
-            String clientId)
-        {
-            flushExRW.clientId(clientId);
-            return this;
-        }
-
         public byte[] build()
         {
             final MqttFlushExFW flushEx = flushExRW.build();

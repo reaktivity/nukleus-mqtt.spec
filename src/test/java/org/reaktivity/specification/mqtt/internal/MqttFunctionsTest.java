@@ -222,7 +222,6 @@ public class MqttFunctionsTest
                 .typeId(0)
                 .flags("SEND_RETAINED")
                 .capabilities("SUBSCRIBE_ONLY")
-                .clientId("one")
                 .build();
 
         DirectBuffer buffer = new UnsafeBuffer(array);
