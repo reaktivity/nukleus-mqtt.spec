@@ -37,7 +37,7 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .topic("$SYS/sessions/one")
                             .build()}
 
-read '{"expiresAt":'/(?<expiresAt>\d+)/'}'
+read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
