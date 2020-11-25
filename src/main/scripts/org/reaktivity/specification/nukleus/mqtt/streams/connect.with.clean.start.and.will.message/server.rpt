@@ -26,26 +26,18 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("PUBLISH_ONLY")
                              .clientId("one")
-                             .topic("$SYS/sessions/one/#")
+                             .topic("$SYS/sessions/one")
                              .subscriptionId(0)
                              .build()}
-
 connected
 
 read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/sessions/one")
-                            .build()}
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("$SYS/sessions/one")
+                             .format("TEXT")
+                             .build()}
 
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
-
-read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/sessions/one/will")
-                            .format("TEXT")
-                            .build()}
-
-read "client one session expired"
 
 accepted
 
@@ -53,7 +45,26 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("PUBLISH_ONLY")
                              .clientId("one")
-                             .topic("wills/one")
+                             .topic("$SYS/sessions/one/will")
+                             .subscriptionId(0)
+                             .build()}
+connected
+
+read nukleus:data.ext ${mqtt:dataEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .topic("$SYS/sessions/one/will")
+                             .format("TEXT")
+                             .build()}
+
+read '{"topic": "/state/1"}'
+
+accepted
+
+read nukleus:begin.ext ${mqtt:beginEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .capabilities("PUBLISH_ONLY")
+                             .clientId("client1")
+                             .topic("$SYS/sessions/one/will/message")
                              .subscriptionId(0)
                              .build()}
 
@@ -61,8 +72,8 @@ connected
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
-                            .topic("wills/one")
+                            .topic("$SYS/sessions/one/will/message")
+                            .expiryInterval(15)
                             .format("TEXT")
                             .build()}
-
-read "client one session expired"
+read "will payload"

@@ -32,6 +32,7 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/sessions/one")
+                             .format("TEXT")
                              .build()}
 
 write '{"expiresAt":10,"deliversAt":10}'
@@ -58,32 +59,8 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .format("TEXT")
                              .build()}
 
-write '{“topic”: “/state/1”}'
+write '{"topic": "/state/1"}'
 write flush
-
-connect await ROUTED_CLIENT
-        "nukleus://streams/mqtt#0"
-         option nukleus:window 8192
-         option nukleus:transmission "duplex"
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("PUBLISH_ONLY")
-                             .clientId("client1")
-                             .topic("$SYS/sessions/one/will/message")
-                             .subscriptionId(0)
-                             .build()}
-
-connected
-
-read nukleus:data.ext ${mqtt:dataEx()
-                            .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/sessions/one/will/message”)
-                            .expiryInterval(15)
-                            .format("TEXT")
-                            .build()}
-read “will payload”
-
 
 connect await ROUTED_CLIENT
         "nukleus://streams/mqtt#0"
@@ -93,8 +70,8 @@ connect await ROUTED_CLIENT
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
                               .capabilities("PUBLISH_ONLY")
-                              .clientId("one")
-                              .topic("wills/one")
+                              .clientId("client1")
+                              .topic("$SYS/sessions/one/will/message")
                               .subscriptionId(0)
                               .build()}
 
@@ -102,8 +79,9 @@ connected
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("wills/one")
+                             .topic("$SYS/sessions/one/will/message")
+                             .expiryInterval(15)
                              .format("TEXT")
                              .build()}
-
-write "client one session expired"
+write "will payload"
+write flush
