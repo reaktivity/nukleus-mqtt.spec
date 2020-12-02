@@ -21,9 +21,10 @@ connect await ROUTED_CLIENT
 
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
-                              .capabilities("PUBLISH_ONLY")
+                              .capabilities("PUBLISH_AND_SUBSCRIBE")
                               .clientId("one")
-                              .topic("$SYS/sessions/one")
+                              .topic("$SYS/sessions/one/#")
+                              .flags("NO_LOCAL")
                               .subscriptionId(0)
                               .build()}
 
@@ -34,48 +35,16 @@ write nukleus:data.ext ${mqtt:dataEx()
                              .topic("$SYS/sessions/one")
                              .format("TEXT")
                              .build()}
-
 write '{"expiresAt":10,"deliversAt":10}'
 write flush
-
-connect await ROUTED_CLIENT
-        "nukleus://streams/mqtt#0"
-         option nukleus:window 8192
-         option nukleus:transmission "duplex"
-
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .capabilities("PUBLISH_ONLY")
-                              .clientId("one")
-                              .topic("$SYS/sessions/one/will")
-                              .subscriptionId(0)
-                              .build()}
-
-connected
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/sessions/one/will")
                              .format("TEXT")
                              .build()}
-
 write '{"topic": "/state/1"}'
 write flush
-
-connect await ROUTED_CLIENT
-        "nukleus://streams/mqtt#0"
-         option nukleus:window 8192
-         option nukleus:transmission "duplex"
-
-write nukleus:begin.ext ${mqtt:beginEx()
-                              .typeId(nukleus:id("mqtt"))
-                              .capabilities("PUBLISH_ONLY")
-                              .clientId("client1")
-                              .topic("$SYS/sessions/one/will/message")
-                              .subscriptionId(0)
-                              .build()}
-
-connected
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
