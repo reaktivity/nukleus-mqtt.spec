@@ -107,7 +107,6 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .topic("/state/1")
                              .subscriptionId(0)
                              .build()}
-
 connected
 
 read nukleus:data.ext ${mqtt:dataEx()
@@ -127,7 +126,6 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .topic("/state/1")
                              .subscriptionId(1)
                              .build()}
-
 connected
 
 write nukleus:data.ext ${mqtt:dataEx()
