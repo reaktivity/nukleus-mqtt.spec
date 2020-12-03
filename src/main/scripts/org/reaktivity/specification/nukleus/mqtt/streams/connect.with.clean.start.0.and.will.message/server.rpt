@@ -116,23 +116,3 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .format("TEXT")
                             .build()}
 read "client one session expired"
-
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("SUBSCRIBE_ONLY")
-                             .clientId("one")
-                             .topic("/state/1")
-                             .subscriptionId(1)
-                             .build()}
-connected
-
-write nukleus:data.ext ${mqtt:dataEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .topic("/state/1")
-                             .expiryInterval(15)
-                             .format("TEXT")
-                             .build()}
-write "client one session expired"
-write flush

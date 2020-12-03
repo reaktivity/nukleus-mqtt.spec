@@ -408,15 +408,27 @@ public class ConnectionIT
         k3po.finish();
     }
 
-    // @Test
-    // @Specification({
-    //     "${scripts}/connect.with.clean.start.and.will.message/client",
-    //     "${scripts}/connect.with.clean.start.and.will.message/server"})
-    // @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    // public void shouldConnectWithCleanStartAndWillMessage() throws Exception
-    // {
-    //     k3po.start();
-    //     k3po.notifyBarrier("ROUTED_SERVER");
-    //     k3po.finish();
-    // }
+    @Test
+    @Specification({
+        "${scripts}/connect.with.clean.start.0.and.will.message/client",
+        "${scripts}/connect.with.clean.start.0.and.will.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectWithCleanStart0AndWillMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect.with.clean.start.1.and.will.message/client",
+        "${scripts}/connect.with.clean.start.1.and.will.message/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectWithCleanStart1AndWillMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
 }

@@ -24,7 +24,7 @@ connected
 write [0x10 0x40]                                      # CONNECT
       [0x00 0x04] "MQTT"                               # protocol name
       [0x05]                                           # protocol version
-      [0x04]                                           # flags = will flag
+      [0x06]                                           # flags = will flag, clean start
       [0x00 0x0a]                                      # keep alive = 10s
       [0x05]                                           # properties
       [0x11] 0                                         # session expiry interval
@@ -38,12 +38,5 @@ read  [0x20 0x03]                                      # CONNACK
       [0x01]                                           # flags = session present
       [0x00]                                           # reason code
       [0x00]                                           # properties = none
-
-read  [0x30 0x2d]                   # PUBLISH
-      [0x00 0x09] "/sensors/1"      # topic name
-      [0x05]                        # properties
-      [0x0b 0x01]                   # subscription id = 1
-      [0x01 0x01]                   # format = utf-8
-      "message"                     # payload
 
 write abort
