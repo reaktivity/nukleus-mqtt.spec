@@ -519,8 +519,8 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/connect.with.clean.start.1.and.will.message/client",
-        "${scripts}/connect.with.clean.start.1.and.will.message/server"})
+        "${scripts}/connect.clean.start.when.session.present.with.will.message/client",
+        "${scripts}/connect.clean.start.when.session.present.with.will.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnectWithCleanStart1AndWillMessage() throws Exception
     {
@@ -531,10 +531,22 @@ public class StreamIT
 
     @Test
     @Specification({
-        "${scripts}/connect.with.clean.start.0.and.will.message/client",
-        "${scripts}/connect.with.clean.start.0.and.will.message/server"})
+        "${scripts}/connect.when.session.present.with.will.message/client",
+        "${scripts}/connect.when.session.present.with.will.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
     public void shouldConnectWithCleanStart0AndWillMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_CLIENT");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/subscribe.one.message.suback.order/client",
+        "${scripts}/subscribe.one.message.suback.order/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldSubscribeOneMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_CLIENT");
