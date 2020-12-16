@@ -30,6 +30,16 @@ write nukleus:begin.ext ${mqtt:beginEx()
 
 connected
 
+read nukleus:data.ext ${mqtt:dataEx()
+                            .typeId(nukleus:id("mqtt"))
+                            .flags("RETAIN")
+                            .expiryInterval(15)
+                            .contentType("message")
+                            .format("TEXT")
+                            .build()}
+
+read "message1"
+
 connect await ROUTED_CLIENT
         "nukleus://streams/mqtt#0"
          option nukleus:window 8192
@@ -45,3 +55,13 @@ write nukleus:begin.ext ${mqtt:beginEx()
                              .build()}
 
 connected
+
+read nukleus:data.ext ${mqtt:dataEx()
+                            .typeId(nukleus:id("mqtt"))
+                            .flags("RETAIN")
+                            .expiryInterval(15)
+                            .contentType("message")
+                            .format("TEXT")
+                            .build()}
+
+read "message2"

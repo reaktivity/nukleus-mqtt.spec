@@ -26,7 +26,7 @@ read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("PUBLISH_ONLY")
                              .clientId("one")
-                             .topic("$SYS/clients/one/#")
+                             .topic("$SYS/sessions/one/#")
                              .subscriptionId(0)
                              .build()}
 
@@ -34,14 +34,14 @@ connected
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/clients/one")
+                            .topic("$SYS/sessions/one")
                             .build()}
 
 read '{"expiresAt":'/(?<expiresAt>\d+)/'}'
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/clients/one/will")
+                            .topic("$SYS/sessions/one/will")
                             .format("TEXT")
                             .build()}
 

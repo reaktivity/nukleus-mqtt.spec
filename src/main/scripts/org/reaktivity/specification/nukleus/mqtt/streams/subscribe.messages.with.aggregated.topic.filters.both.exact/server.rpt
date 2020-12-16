@@ -14,12 +14,15 @@
 # under the License.
 #
 
-connect await ROUTED_CLIENT
-        "nukleus://streams/mqtt#0"
-         option nukleus:window 8192
-         option nukleus:transmission "duplex"      
+property serverTransport "nukleus://streams/target#0"
 
-write nukleus:begin.ext ${mqtt:beginEx()
+accept ${serverTransport}
+        option nukleus:window 8192
+        option nukleus:transmission "duplex"
+
+accepted
+
+read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
@@ -30,12 +33,20 @@ write nukleus:begin.ext ${mqtt:beginEx()
 
 connected
 
-connect await ROUTED_CLIENT
-        "nukleus://streams/mqtt#0"
-         option nukleus:window 8192
-         option nukleus:transmission "duplex"   
-        
-write nukleus:begin.ext ${mqtt:beginEx()
+write nukleus:data.ext ${mqtt:dataEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .flags("RETAIN")
+                             .expiryInterval(15)
+                             .contentType("message")
+                             .format("TEXT")
+                             .build()}
+
+write "message1"
+write flush
+
+accepted
+
+read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
                              .clientId("client")
@@ -45,3 +56,14 @@ write nukleus:begin.ext ${mqtt:beginEx()
                              .build()}
 
 connected
+
+write nukleus:data.ext ${mqtt:dataEx()
+                             .typeId(nukleus:id("mqtt"))
+                             .flags("RETAIN")
+                             .expiryInterval(15)
+                             .contentType("message")
+                             .format("TEXT")
+                             .build()}
+
+write "message2"
+write flush
