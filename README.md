@@ -12,7 +12,7 @@
 mvnw.cmd clean install
 ```
 
-[build-status-image]: https://travis-ci.com/reaktivity/nukleus-mqtt.spec.svg?branch=develop
-[build-status]: https://travis-ci.com/reaktivity/nukleus-mqtt.spec
+[build-status-image]: https://github.com/reaktivity/nukleus-mqtt.spec/workflows/build/badge.svg
+[build-status]: https://github.com/reaktivity/nukleus-mqtt.spec/actions
 [code-coverage-image]: https://codecov.io/gh/reaktivity/nukleus-mqtt.spec/branch/develop/graph/badge.svg
 [code-coverage]: https://codecov.io/gh/reaktivity/nukleus-mqtt.spec

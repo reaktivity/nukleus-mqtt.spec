@@ -49,7 +49,7 @@ read [0..8] # authorization
 read ${core:string("mqtt#0")}
 read ${core:string("target#0")}
 read ${mqtt:routeEx()
-           .topic("$SYS/clients/one/#")
+           .topic("$SYS/sessions/one/#")
            .capabilities("PUBLISH_AND_SUBSCRIBE")
            .build()}
 
