@@ -410,10 +410,10 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect.when.session.present.with.will.message/client",
-        "${scripts}/connect.when.session.present.with.will.message/server"})
+        "${scripts}/connect.clean.start.when.session.present.with.will.message/client",
+        "${scripts}/connect.clean.start.when.session.present.with.will.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithCleanStart0AndWillMessage() throws Exception
+    public void shouldConnectCleanStartWhenSessionPresentWithWillMessage() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");
@@ -422,10 +422,58 @@ public class ConnectionIT
 
     @Test
     @Specification({
-        "${scripts}/connect.clean.start.when.session.present.with.will.message/client",
-        "${scripts}/connect.clean.start.when.session.present.with.will.message/server"})
+        "${scripts}/connect.when.session.present.with.will.message/client",
+        "${scripts}/connect.when.session.present.with.will.message/server"})
     @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
-    public void shouldConnectWithCleanStart1AndWillMessage() throws Exception
+    public void shouldConnectWhenSessionPresentWithWillMessage() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect.clean.start.when.session.present/client",
+        "${scripts}/connect.clean.start.when.session.present/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectCleanStartWhenSessionPresent() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect.clean.start.when.session.not.present/client",
+        "${scripts}/connect.clean.start.when.session.not.present/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectCleanStartWhenSessionNotPresent() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect.when.session.present/client",
+        "${scripts}/connect.when.session.present/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectWhenSessionPresent() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${scripts}/connect.when.session.expired/client",
+        "${scripts}/connect.when.session.expired/server"})
+    @ScriptProperty("serverTransport \"nukleus://streams/mqtt#0\"")
+    public void shouldConnectWhenSessionExpired() throws Exception
     {
         k3po.start();
         k3po.notifyBarrier("ROUTED_SERVER");

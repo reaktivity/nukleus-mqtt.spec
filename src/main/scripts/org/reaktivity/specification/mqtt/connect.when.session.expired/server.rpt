@@ -45,5 +45,3 @@ write [0x30 0x2d]                                      # PUBLISH
       [0x0b 0x01]                                      # subscription id = 1
       [0x01 0x01]                                      # format = utf-8
       "message"                                        # payload
-
-read aborted
