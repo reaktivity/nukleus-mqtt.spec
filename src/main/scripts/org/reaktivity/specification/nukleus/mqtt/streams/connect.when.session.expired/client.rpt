@@ -23,14 +23,14 @@ write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
                               .capabilities("SUBSCRIBE_ONLY")
                               .clientId("one")
-                              .topic("$SYS/sessions/" + assignedClientId + "/#")
+                              .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/#")
                               .subscriptionId(0)
                               .build()}
 connected
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/sessions/" + assignedClientId + "/filters//sensors/1")
+                            .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/filters//sensors/1")
                             .expiryInterval(15)
                             .format("TEXT")
                             .build()}
@@ -38,7 +38,7 @@ read '{"id":1,"options":0}'
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
-                            .topic("$SYS/sessions/" + assignedClientId)
+                            .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
                             .format("TEXT")
                             .build()}
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
@@ -51,7 +51,7 @@ write advise nukleus:flush ${mqtt:flushEx()
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/sessions/" + assignedClientId)
+                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
                              .format("TEXT")
                              .build()}
 write '{"expiresAt":123456789,"deliversAt":123456789}'
@@ -65,7 +65,7 @@ connect await ROUTED_CLIENT
 write nukleus:begin.ext ${mqtt:beginEx()
                               .typeId(nukleus:id("mqtt"))
                               .capabilities("SUBSCRIBE_ONLY")
-                              .clientId(assignedClientId)
+                              .clientId("123e4567-e89b-42d3-a456-556642440000")
                               .topic("/sensors/1")
                               .subscriptionId(1)
                               .build()}

@@ -33,7 +33,7 @@ read  [0x20 0x2a]                                      # CONNACK
       [0x00]                                           # flags = none
       [0x00]                                           # reason code
       [0x27]                                           # properties
-      [0x12 0x00 0x24] [0..36]                         # assigned clientId
+      [0x12 0x00 0x24] ${assignedClientId}             # assigned clientId
 
 read  [0x30 0x2d]                                      # PUBLISH
       [0x00 0x09] "/sensors/1"                         # topic name

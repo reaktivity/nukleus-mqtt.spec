@@ -16,8 +16,6 @@
 
 property serverTransport "nukleus://streams/target#0"
 
-property assignedClientId "123e4567-e89b-42d3-a456-556642440000"
-
 accept ${serverTransport}
         option nukleus:window 8192
         option nukleus:transmission "duplex"
@@ -27,15 +25,15 @@ accepted
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
-                             .clientId(assignedClientId)
-                             .topic("$SYS/sessions/" + assignedClientId + "/#")
+                             .clientId("123e4567-e89b-42d3-a456-556642440000")
+                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/#")
                              .subscriptionId(0)
                              .build()}
 connected
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/sessions/" + assignedClientId + "/filters//sensors/1")
+                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/filters//sensors/1")
                              .expiryInterval(15)
                              .format("TEXT")
                              .build()}
@@ -44,7 +42,7 @@ write flush
 
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/sessions/" + assignedClientId)
+                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
                              .format("TEXT")
                              .build()}
 write '{"expiresAt":123456789,"deliversAt":123456789}'
@@ -58,7 +56,7 @@ read advised nukleus:flush ${mqtt:flushEx()
 
 read nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/sessions/" + assignedClientId)
+                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
                              .format("TEXT")
                              .build()}
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
@@ -68,7 +66,7 @@ accepted
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
-                             .clientId(assignedClientId)
+                             .clientId("123e4567-e89b-42d3-a456-556642440000")
                              .topic("/sensors/1")
                              .subscriptionId(1)
                              .build()}
