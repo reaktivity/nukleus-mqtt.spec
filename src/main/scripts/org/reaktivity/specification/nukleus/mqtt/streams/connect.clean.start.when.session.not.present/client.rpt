@@ -14,32 +14,30 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
+connect await ROUTED_CLIENT
+        "nukleus://streams/mqtt#0"
+         option nukleus:window 8192
+         option nukleus:transmission "duplex"
 
-accept ${serverTransport}
-        option nukleus:window 8192
-        option nukleus:transmission "duplex"
-
-accepted
-
-read nukleus:begin.ext ${mqtt:beginEx()
-                             .typeId(nukleus:id("mqtt"))
-                             .capabilities("SUBSCRIBE_ONLY")
-                             .clientId("123e4567-e89b-42d3-a456-556642440000")
-                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/#")
-                             .subscriptionId(0)
-                             .build()}
+write nukleus:begin.ext ${mqtt:beginEx()
+                              .typeId(nukleus:id("mqtt"))
+                              .capabilities("SUBSCRIBE_ONLY")
+                              .clientId("one")
+                              .topic("$SYS/sessions/one/#")
+                              .subscriptionId(0)
+                              .build()}
 connected
 
-read advised nukleus:flush ${mqtt:flushEx()
+write advise nukleus:flush ${mqtt:flushEx()
                                  .typeId(nukleus:id("mqtt"))
                                  .flags("NO_LOCAL")
                                  .capabilities("PUBLISH_AND_SUBSCRIBE")
                                  .build()}
 
-read nukleus:data.ext ${mqtt:dataEx()
+write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
+                             .topic("$SYS/sessions/one")
                              .format("TEXT")
                              .build()}
-read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
+write '{"expiresAt":123456789,"deliversAt":123456789}'
+write flush

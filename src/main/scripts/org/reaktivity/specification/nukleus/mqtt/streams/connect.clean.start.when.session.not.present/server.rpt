@@ -25,8 +25,8 @@ accepted
 read nukleus:begin.ext ${mqtt:beginEx()
                              .typeId(nukleus:id("mqtt"))
                              .capabilities("SUBSCRIBE_ONLY")
-                             .clientId("123e4567-e89b-42d3-a456-556642440000")
-                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/#")
+                             .clientId("one")
+                             .topic("$SYS/sessions/one/#")
                              .subscriptionId(0)
                              .build()}
 connected
@@ -39,7 +39,7 @@ read advised nukleus:flush ${mqtt:flushEx()
 
 read nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
-                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
+                             .topic("$SYS/sessions/one")
                              .format("TEXT")
                              .build()}
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
