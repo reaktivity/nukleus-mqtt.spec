@@ -32,14 +32,12 @@ read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000/filters//sensors/1")
                             .expiryInterval(15)
-                            .format("TEXT")
                             .build()}
 read '{"id":1,"options":0}'
 
 read nukleus:data.ext ${mqtt:dataEx()
                             .typeId(nukleus:id("mqtt"))
                             .topic("$SYS/sessions/123e4567-e89b-42d3-a456-556642440000")
-                            .format("TEXT")
                             .build()}
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
 
