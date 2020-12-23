@@ -43,7 +43,6 @@ write flush
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/sessions/one")
-                             .format("TEXT")
                              .build()}
 write '{"expiresAt":123456789,"deliversAt":123456789}'
 write flush
@@ -57,7 +56,6 @@ read advised nukleus:flush ${mqtt:flushEx()
 read nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/sessions/one")
-                             .format("TEXT")
                              .build()}
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
 

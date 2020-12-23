@@ -33,7 +33,6 @@ connected
 write nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/sessions/one")
-                             .format("TEXT")
                              .build()}
 write '{"expiresAt":10,"deliversAt":10}'
 write flush

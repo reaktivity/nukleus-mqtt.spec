@@ -40,6 +40,5 @@ read advised nukleus:flush ${mqtt:flushEx()
 read nukleus:data.ext ${mqtt:dataEx()
                              .typeId(nukleus:id("mqtt"))
                              .topic("$SYS/sessions/one")
-                             .format("TEXT")
                              .build()}
 read '{"expiresAt":'/(?<expiresAt>\d+)/',"deliversAt":'/(?<deliversAt>\d+)/'}'
