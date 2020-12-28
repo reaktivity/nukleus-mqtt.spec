@@ -188,4 +188,16 @@ public class ControlIT
         k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
+
+    @Test
+    @Specification({
+        "${scripts}/route.ext/session.present/server/nukleus",
+        "${scripts}/route.ext/session.present/server/controller"
+    })
+    public void shouldRouteServerWithSessionPresent() throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
 }
