@@ -52,15 +52,6 @@ scope mqtt
         string16 value;
     }
 
-    scope control
-    {
-        struct MqttRouteEx
-        {
-            string16 topic;
-            MqttCapabilities capabilities = PUBLISH_AND_SUBSCRIBE;
-        }
-    }
-
     scope stream
     {
         struct MqttBeginEx extends core::stream::Extension
