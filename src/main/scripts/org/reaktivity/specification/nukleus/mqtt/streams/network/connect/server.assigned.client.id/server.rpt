@@ -16,7 +16,7 @@
 
 property assignedClientId "123e4567-e89b-42d3-a456-556642440000"
 
-accept "nukleus://streams/net0"
+accept "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 

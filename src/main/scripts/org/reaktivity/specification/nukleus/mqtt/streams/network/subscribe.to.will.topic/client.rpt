@@ -14,7 +14,7 @@
 # under the License.
 #
 
-connect "nukleus://streams/net0"
+connect "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
@@ -40,8 +40,7 @@ read  [0x20 0x03]                                      # CONNACK
 
 write abort
 
-connect await ROUTED_SERVER
-        "nukleus://streams/mqtt#0"
+connect "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 

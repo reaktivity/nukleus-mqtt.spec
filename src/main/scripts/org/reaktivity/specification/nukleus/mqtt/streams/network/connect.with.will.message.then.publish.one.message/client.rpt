@@ -14,7 +14,7 @@
 # under the License.
 #
 
-connect "nukleus://streams/net0"
+connect "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
@@ -47,7 +47,7 @@ write [0x30 0x1b]                    # PUBLISH
 
 write abort
 
-connect "nukleus://streams/net0"
+connect "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
