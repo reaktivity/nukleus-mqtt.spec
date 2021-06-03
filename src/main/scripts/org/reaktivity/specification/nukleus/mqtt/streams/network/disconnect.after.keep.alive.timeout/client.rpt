@@ -24,7 +24,7 @@ write [0x10 0x13]             # CONNECT
       [0x00 0x04] "MQTT"      # protocol name
       [0x05]                  # protocol version
       [0x02]                  # flags = clean start
-      [0x00 0x0a]             # keep alive = 10s
+      [0x00 0x01]             # keep alive = 1s
       [0x00]                  # properties = none
       [0x00 0x06] "client"    # client id
 
@@ -33,6 +33,9 @@ read  [0x20 0x03]             # CONNACK
       [0x00]                  # reason code
       [0x00]                  # properties = none
 
-read  [0xe0 0x02]             # disconnect header
-      [0x8d]                  # DISCONNECT = keep alive timeout
+read  [0xe0 0x02]             # DISCONNECT
+      [0x8d]                  # reason = keep alive timeout
       [0x00]                  # properties = none
+
+read closed
+write close
