@@ -26,7 +26,6 @@ import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormat;
 import org.reaktivity.specification.mqtt.internal.types.MqttPayloadFormatFW;
 import org.reaktivity.specification.mqtt.internal.types.MqttPublishFlags;
 import org.reaktivity.specification.mqtt.internal.types.MqttSubscribeFlags;
-import org.reaktivity.specification.mqtt.internal.types.control.MqttRouteExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttAbortExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttBeginExFW;
 import org.reaktivity.specification.mqtt.internal.types.stream.MqttDataExFW;
@@ -45,12 +44,6 @@ public final class MqttFunctions
         formatFW.buffer().getBytes(formatFW.offset(), array);
 
         return array;
-    }
-
-    @Function
-    public static MqttRouteExBuilder routeEx()
-    {
-        return new MqttRouteExBuilder();
     }
 
     @Function
@@ -75,39 +68,6 @@ public final class MqttFunctions
     public static MqttAbortExBuilder abortEx()
     {
         return new MqttAbortExBuilder();
-    }
-
-    public static final class MqttRouteExBuilder
-    {
-        private final MqttRouteExFW.Builder routeExRW;
-
-        private MqttRouteExBuilder()
-        {
-            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[1024 * 8]);
-            this.routeExRW = new MqttRouteExFW.Builder().wrap(writeBuffer, 0, writeBuffer.capacity());
-        }
-
-        public MqttRouteExBuilder topic(
-            String topic)
-        {
-            routeExRW.topic(topic);
-            return this;
-        }
-
-        public MqttRouteExBuilder capabilities(
-            String capabilities)
-        {
-            routeExRW.capabilities(c -> c.set(MqttCapabilities.valueOf(capabilities)));
-            return this;
-        }
-
-        public byte[] build()
-        {
-            final MqttRouteExFW routeEx = routeExRW.build();
-            final byte[] array = new byte[routeEx.sizeof()];
-            routeEx.buffer().getBytes(routeEx.offset(), array);
-            return array;
-        }
     }
 
     public static final class MqttBeginExBuilder
